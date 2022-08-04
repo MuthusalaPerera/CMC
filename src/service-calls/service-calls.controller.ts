@@ -7,11 +7,12 @@ import {
   UsePipes,
   ValidationPipe,
   Inject,
-  Query,
   UseInterceptors, ClassSerializerInterceptor, ParseIntPipe, NotFoundException
 } from '@nestjs/common';
 import { CreateServiceCallDto } from './dtos/create-service-call.dto';
 import {ServiceCallsService} from "./service-calls.service";
+import {SerializedService} from "./dtos/serilized.service";
+
 
 @Controller('service-calls')
 export class ServiceCallsController {
@@ -28,9 +29,9 @@ export class ServiceCallsController {
   }
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('service/:id')
-  getServiceCall(@Param('id',ParseIntPipe) id:number){
-    const service =this.serviceCallsService.getServiceById(id);
-    if(service) return service;
+  async getServiceCall(@Param('id',ParseIntPipe) id:number){
+     const service = await this.serviceCallsService.getServiceById(id);
+    if(service) return new SerializedService(service);
     else throw new NotFoundException();
 
   }
