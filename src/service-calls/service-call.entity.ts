@@ -1,13 +1,20 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {IsNotEmpty, IsString} from "class-validator";
 
 @Entity()
 export class ServiceCall {
   @PrimaryGeneratedColumn()
-  id: number;
-
+  ItemCode: number;
   @Column()
-  serialNumber: string;
-
+  ItemDescription: string;
   @Column()
-  itemCode: string;
+  Customer: string;
+  @Column()
+  Status: string;
+  @Column()
+  CreatedDate: Date;
+  @Column()
+  Priority: string;
+  @Column()
+  Subject: string;
 }

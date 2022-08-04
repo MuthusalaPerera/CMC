@@ -7,6 +7,9 @@ import { ServiceCall } from './service-call.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([ServiceCall])],
   controllers: [ServiceCallsController],
-  providers: [ServiceCallsService],
+  providers: [{
+    provide: 'ServiceCalls_Service',
+    useClass: ServiceCallsService
+  }],
 })
 export class ServiceCallsModule {}
