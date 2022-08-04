@@ -19,13 +19,13 @@ export class ServiceCallsController {
   constructor(@Inject('ServiceCalls_Service') private readonly serviceCallsService:ServiceCallsService) {}
 
   @Get()
-  listServiceCalls() {
-    return this.serviceCallsService.find();
+   async listServiceCalls() {
+    return await this.serviceCallsService.find();
   }
   @Post()
   @UsePipes(ValidationPipe)
-  createServiceCall(@Body() body: CreateServiceCallDto) {
-    return this.serviceCallsService.createUser(body)
+  async createServiceCall(@Body() body: CreateServiceCallDto) {
+    return  await this.serviceCallsService.createUser(body)
   }
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('service/:id')
