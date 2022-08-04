@@ -1,0 +1,39 @@
+### List all service calls
+GET http://localhost:3000/service-calls
+
+### Create a new service call
+POST http://localhost:3000/service-calls
+Content-Type: application/json
+
+{
+  "content" : "Hi there"
+}
+
+### Get a particular service call
+GET http://localhost:3000/service-calls/1111
+
+
+### Create a new user 
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+  "email" : "test11111@test.com",
+  "password" : "12345"
+}
+
+### User signin 
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+   "email" : "test@test.com",
+  "password" : "12345"
+}
+
+### Check the current user
+GET http://localhost:3000/auth/whoami
+
+
+### Get a particular user with given id
+GET http://localhost:3000/auth/6
