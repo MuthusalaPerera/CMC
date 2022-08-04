@@ -3,12 +3,18 @@ import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 export class CreateServiceCallDto {
   @IsString()
-  id: number;
-
+  ItemCode: number;
   @IsNotEmpty()
-  serialNumber: string;
-
+  ItemDescription: string;
   @IsNotEmpty()
-  itemCode: string;
+  Customer: string;
+  @IsNotEmpty()
+  Status: string;
+  @IsNotEmpty()
+  CreatedDate: Date;
+  @IsNotEmpty()
+  Priority: string;
+  @IsNotEmpty()
+  Subject: string;
 
 }

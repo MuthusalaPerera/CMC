@@ -7,6 +7,7 @@ import { ServiceCallsModule } from './service-calls/service-calls.module';
 import { UsersModule } from './users/users.module';
 import { User } from './users/user.entity';
 import { ServiceCall } from './service-calls/service-call.entity';
+import {SparePart} from "./spare-parts/spare-part.entity";
 
 @Module({
   imports: [
@@ -36,7 +37,7 @@ import { ServiceCall } from './service-calls/service-call.entity';
       database: 'cmc',
       username: 'root',
       password: '1234',
-      entities: [User, ServiceCall],
+      entities: [User, ServiceCall,SparePart],
       synchronize: true,
     }),
     ServiceCallsModule,
