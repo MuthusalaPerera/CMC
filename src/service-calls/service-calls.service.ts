@@ -16,4 +16,8 @@ export class ServiceCallsService {
     find() {
         return this.serviceRepository.find();
     }
+
+    getServiceById(ItemCode: number) {
+            return this.serviceRepository.findOne(ItemCode);
+    }
 }
