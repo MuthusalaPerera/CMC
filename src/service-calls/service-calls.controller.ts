@@ -1,14 +1,20 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, UsePipes, ValidationPipe, Inject, Query} from '@nestjs/common';
 import { CreateServiceCallDto } from './dtos/create-service-call.dto';
+import {ServiceCallsService} from "./service-calls.service";
+
 
 @Controller('service-calls')
 export class ServiceCallsController {
-  @Get()
-  listServiceCalls() {}
+  constructor(@Inject('ServiceCalls_Service') private readonly serviceCallsService:ServiceCallsService) {}
 
+  @Get()
+  listServiceCalls() {
+    return this.serviceCallsService.find();
+  }
   @Post()
+  @UsePipes(ValidationPipe)
   createServiceCall(@Body() body: CreateServiceCallDto) {
-    console.log(body);
+    return this.serviceCallsService.createUser(body)
   }
 
   @Get('/:id')

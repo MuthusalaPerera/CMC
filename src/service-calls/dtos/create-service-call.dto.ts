@@ -1,6 +1,14 @@
-import { IsString } from 'class-validator';
+import {IsNotEmpty, IsString} from 'class-validator';
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 export class CreateServiceCallDto {
   @IsString()
-  content: string;
+  id: number;
+
+  @IsNotEmpty()
+  serialNumber: string;
+
+  @IsNotEmpty()
+  itemCode: string;
+
 }
