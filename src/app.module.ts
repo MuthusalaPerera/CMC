@@ -5,9 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ServiceCallsModule } from './service-calls/service-calls.module';
 import { UsersModule } from './users/users.module';
-import { User } from './users/user.entity';
-import { ServiceCall } from './service-calls/service-call.entity';
-import {SparePart} from "./spare-parts/spare-part.entity";
+import entities from "./Entities/entities";
 
 @Module({
   imports: [
@@ -37,7 +35,7 @@ import {SparePart} from "./spare-parts/spare-part.entity";
       database: 'cmc',
       username: 'root',
       password: '1234',
-      entities: [User, ServiceCall,SparePart],
+      entities: entities,
       synchronize: true,
     }),
     ServiceCallsModule,

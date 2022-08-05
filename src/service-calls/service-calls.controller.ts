@@ -33,6 +33,5 @@ export class ServiceCallsController {
      const service = await this.serviceCallsService.getServiceById(id);
     if(service) return new SerializedService(service);
     else throw new NotFoundException();
-
   }
 }

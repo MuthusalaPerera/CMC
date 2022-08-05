@@ -9,7 +9,7 @@ export class ServiceCallsService {
     constructor(@InjectRepository(Service) private readonly serviceRepository:Repository<Service>) {}
 
     createUser(createServiceCallDto:CreateServiceCallDto){
-        const newService= this.serviceRepository.create(createServiceCallDto)
+        const newService= this.serviceRepository.create({...createServiceCallDto})
         return this.serviceRepository.save(newService)
     }
 
