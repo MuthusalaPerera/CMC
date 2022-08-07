@@ -1,10 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn} from 'typeorm';
 import {IsNotEmpty, IsString} from "class-validator";
+import {CustomerEntity} from "./customer.entity";
+
 
 @Entity()
 export class ServiceCall {
-  @PrimaryGeneratedColumn()
-  ItemCode: number;
+  @PrimaryColumn()
+  ItemCode: string;
   @Column()
   ItemDescription: string;
   @Column()
@@ -17,4 +19,7 @@ export class ServiceCall {
   Priority: string;
   @Column()
   Subject: string;
+  @ManyToOne(()=>CustomerEntity,customerEntity=>customerEntity.serviceCalls,{onDelete:'CASCADE'})
+  customerEntity:CustomerEntity
+
 }
