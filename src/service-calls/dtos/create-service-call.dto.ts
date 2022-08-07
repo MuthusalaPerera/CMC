@@ -1,8 +1,8 @@
-import {IsNotEmpty, IsString} from 'class-validator';
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {IsNotEmpty, IsNumber, IsString} from 'class-validator';
+
 
 export class CreateServiceCallDto {
-  @IsString()
+  @IsNumber()
   ItemCode: number;
   @IsNotEmpty()
   ItemDescription: string;
@@ -16,5 +16,7 @@ export class CreateServiceCallDto {
   Priority: string;
   @IsNotEmpty()
   Subject: string;
+  @IsNotEmpty()
+  customerDtos:[]
 
 }
