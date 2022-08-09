@@ -31,16 +31,20 @@ export class ServiceCallsService {
             {relations:['serviceCalls']}
         );
     }
-        async update(id: number, attrs: Partial<CustomerEntity>) {
+        async update(id: number, attrs: Partial<CustomerDto>) {
+       // console.log(attrs)
             const customer = await this.getCustomerById(id);
 
             if (!customer) {
                 throw new Error('User not found.');
             }
              Object.assign(customer.serviceCalls,attrs.serviceCalls)
-           await this.serviceRepository.save(customer.serviceCalls)
-             return  await this.customerDtoRepository.update(customer.id,{
-                 name:customer.name
+            console.log(customer)
+            for (const service of this.serviceRepository.create(attrs.serviceCalls)) {
+                await this.serviceRepository.update(service.ItemCode, service)
+            }
+             return  await this.customerDtoRepository.update(id,{
+                 name:attrs.name
              })
         }
 
