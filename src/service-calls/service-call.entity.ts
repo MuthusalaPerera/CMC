@@ -1,5 +1,15 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn} from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryColumn,
+  PrimaryGeneratedColumn
+} from 'typeorm';
 import {CustomerEntity} from "./customer.entity";
+import {ItemEntity} from "./Item.entity";
 
 
 @Entity()
@@ -20,5 +30,8 @@ export class ServiceCall {
   Subject: string;
   @ManyToOne(()=>CustomerEntity,customerEntity=>customerEntity.serviceCalls,{onDelete:'CASCADE'})
   customerEntity:CustomerEntity
+  @OneToOne(()=>ItemEntity, item=>item.serviceCalls,{onDelete:"CASCADE"})
+  @JoinColumn()
+  itemEntity:ItemEntity;
 
 }

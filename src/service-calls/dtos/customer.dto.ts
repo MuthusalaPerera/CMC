@@ -14,7 +14,13 @@ export class CustomerDto {
         { Status: string },
         { CreatedDate:string},
         {Priority:string },
-        {Subject: string}
-    ]
+        {Subject: string},
+        {
+            itemEntity: {
+                id: string;
+                name: string;
+            }
+        }
+    ];
 
 }
