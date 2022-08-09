@@ -4,8 +4,8 @@ import {ServiceCall, ServiceCall as Service} from "./service-call.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 import {CustomerEntity} from "./customer.entity";
 import {CustomerDto} from "./dtos/customer.dto";
-import {QueryDeepPartialEntity} from "typeorm/query-builder/QueryPartialEntity";
-import {User} from "../users/user.entity";
+import {CreateServiceCallDto} from "./dtos/create-service-call.dto";
+
 
 
 @Injectable()
@@ -16,19 +16,14 @@ export class ServiceCallsService {
     ) {}
 
     async createUser(customerDto:CustomerDto){
-
-       const customer= await this.customerDtoRepository.save(customerDto)
+        console.log(customerDto)
+       const customer= await this.customerDtoRepository.save({...customerDto})
         for(const ServiceCall of this.serviceRepository.create(customerDto.serviceCalls)){
-
-            var currentdate =  new Date()
-            let dateTime = currentdate.getFullYear()+"" +(currentdate.getMonth()+1)+""+currentdate.getDate()+""+currentdate.getHours()+""+currentdate.getMinutes()+""+currentdate.getMilliseconds() ;
-            console.log(dateTime)
-            ServiceCall.ItemCode="S"+dateTime
-            ServiceCall.customerEntity=customerDto;
-            await this.serviceRepository.save(ServiceCall)
+            ServiceCall.customerEntity=customer
+            console.log(ServiceCall)
+            await this.serviceRepository.save({...ServiceCall})
         }
-
-       return  customer;
+      return  customer;
     }
 
     find() {
@@ -43,9 +38,9 @@ export class ServiceCallsService {
                 throw new Error('User not found.');
             }
              Object.assign(customer.serviceCalls,attrs.serviceCalls)
-            await this.serviceRepository.save(customer.serviceCalls)
-             return  await this.customerDtoRepository.update(id,{
-                 name:attrs.name
+           await this.serviceRepository.save(customer.serviceCalls)
+             return  await this.customerDtoRepository.update(customer.id,{
+                 name:customer.name
              })
         }
 

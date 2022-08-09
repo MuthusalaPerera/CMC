@@ -1,11 +1,10 @@
 import {Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn} from 'typeorm';
-import {IsNotEmpty, IsString} from "class-validator";
 import {CustomerEntity} from "./customer.entity";
 
 
 @Entity()
 export class ServiceCall {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   ItemCode: string;
   @Column()
   ItemDescription: string;

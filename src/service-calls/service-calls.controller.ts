@@ -27,14 +27,13 @@ export class ServiceCallsController {
     return await this.serviceCallsService.find();
   }
   @Post()
-  @UsePipes(ValidationPipe)
   async createServiceCall(@Body() body: CustomerDto) {
     return  await this.serviceCallsService.createUser(body)
   }
-  @Put('1/:id')
-  updateUser(@Param('id') id: string, @Body() body: CustomerDto) {
-    return this.serviceCallsService.update(parseInt(id), body);
-  }
+  // @Put('1/:id')
+  // updateUser(@Param('id') id: string, @Body() body: CustomerDto) {
+  //   return this.serviceCallsService.update(parseInt(id), body);
+  // }
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/:id')
   async getServiceCall(@Param('id',ParseIntPipe) id:number){

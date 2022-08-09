@@ -10,8 +10,7 @@ export  class CustomerEntity {
     @Column()
     name:string
 
-    @OneToMany(()=>ServiceCall,(serviceCall)=>serviceCall.customerEntity)
+    @OneToMany(()=>ServiceCall,(serviceCall)=>serviceCall.customerEntity,)
     serviceCalls:ServiceCall[];
-
 
 }
