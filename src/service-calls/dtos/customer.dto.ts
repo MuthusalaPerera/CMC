@@ -1,11 +1,26 @@
-import {IsNotEmpty, IsString} from 'class-validator';
+import {IsArray, IsNotEmpty, IsString} from 'class-validator';
+import {PrimaryGeneratedColumn} from "typeorm";
+import {Exclude} from "class-transformer";
 
 export class CustomerDto {
-    @IsString()
     id: number;
     @IsNotEmpty()
     name: string;
-    @IsNotEmpty()
-    serviceCalls:[]
+    @IsArray()
+    serviceCalls:[
+        {ItemCode:string},
+        {ItemDescription:string},
+        { Customer:string },
+        { Status: string },
+        { CreatedDate:string},
+        {Priority:string },
+        {Subject: string},
+        {
+            itemEntity: {
+                id: string;
+                name: string;
+            }
+        }
+    ];
 
 }

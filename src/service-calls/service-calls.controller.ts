@@ -7,7 +7,7 @@ import {
   UsePipes,
   ValidationPipe,
   Inject,
-  UseInterceptors, ClassSerializerInterceptor, ParseIntPipe, NotFoundException, Patch, Put
+  UseInterceptors, ClassSerializerInterceptor, ParseIntPipe, NotFoundException, Patch, Put, Delete
 } from '@nestjs/common';
 import { CreateServiceCallDto } from './dtos/create-service-call.dto';
 import {ServiceCallsService} from "./service-calls.service";
@@ -15,6 +15,7 @@ import {ServiceCallsService} from "./service-calls.service";
 
 import {CustomerDto} from "./dtos/customer.dto";
 import {SerializedCustomer} from "./dtos/serilized.service";
+import {CustomerEntity} from "./customer.entity";
 ;
 
 
@@ -27,7 +28,6 @@ export class ServiceCallsController {
     return await this.serviceCallsService.find();
   }
   @Post()
-  @UsePipes(ValidationPipe)
   async createServiceCall(@Body() body: CustomerDto) {
     return  await this.serviceCallsService.createUser(body)
   }
@@ -41,5 +41,9 @@ export class ServiceCallsController {
      const customer = await this.serviceCallsService.getCustomerById(id);
     if(customer) return customer;
     else throw new NotFoundException();
+  }
+  @Delete('/:id')
+  removeService(@Param('id') id: string) {
+    return this.serviceCallsService.remove(parseInt(id));
   }
 }
