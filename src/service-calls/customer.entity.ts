@@ -6,10 +6,19 @@ import {ServiceCall} from "./service-call.entity";
 @Entity()
 export  class CustomerEntity {
     @PrimaryGeneratedColumn()
-    id:number;
+    CustomerId:number;
 
     @Column()
-    name:string
+    CustomeName:string
+
+    @Column()
+    ContactPerson:string
+
+    @Column()
+    TelephoneNo:number
+
+    @Column()
+    CustomerAddressId:string
 
     @OneToMany(()=>ServiceCall,(serviceCall)=>serviceCall.customerEntity)
     serviceCalls:ServiceCall[];

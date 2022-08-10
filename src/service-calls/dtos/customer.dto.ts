@@ -3,12 +3,18 @@ import {PrimaryGeneratedColumn} from "typeorm";
 import {Exclude} from "class-transformer";
 
 export class CustomerDto {
-    id: number;
+    CustomerId: number;
     @IsNotEmpty()
-    name: string;
+    CustomeName: string;
+    @IsNotEmpty()
+    ContactPerson:string;
+    @IsNotEmpty()
+    TelephoneNo:number;
+    @IsNotEmpty()
+    CustomerAddressId:string;
     @IsArray()
     serviceCalls:[
-        {ItemCode:string},
+        {ItemCode:number},
         {ItemDescription:string},
         { Customer:string },
         { Status: string },
@@ -17,8 +23,11 @@ export class CustomerDto {
         {Subject: string},
         {
             itemEntity: {
-                id: string;
                 name: string;
+                MrfSerialNumber:string
+                SerialNumber:string
+                ItemDescription:string
+                ItemGroup:string
             }
         }
     ];
