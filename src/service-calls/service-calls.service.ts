@@ -44,7 +44,7 @@ export class ServiceCallsService {
             for (const service of customer.serviceCalls) {
                 console.log(service.itemEntity)
                  await this.itemEntityRepository.update(service.itemEntity.ItemCode,service.itemEntity)
-                 await this.serviceRepository.update(service.ItemCode, service)
+                 await this.serviceRepository.update(service.ServiceCallId, service)
             }
               return  await this.customerDtoRepository.update(id,{
                   CustomeName:attrs.CustomeName

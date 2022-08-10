@@ -1,5 +1,5 @@
 import {IsArray, IsNotEmpty, IsString} from 'class-validator';
-import {PrimaryGeneratedColumn} from "typeorm";
+import {Column, PrimaryGeneratedColumn} from "typeorm";
 import {Exclude} from "class-transformer";
 
 export class CustomerDto {
@@ -14,15 +14,27 @@ export class CustomerDto {
     CustomerAddressId:string;
     @IsArray()
     serviceCalls:[
-        {ItemCode:number},
-        {ItemDescription:string},
-        { Customer:string },
+        { ServiceCallId: number },
         { Status: string },
-        { CreatedDate:string},
-        {Priority:string },
-        {Subject: string},
+        { Priority: string },
+        { Subject: string },
+        { Origin: string },
+        { ProblemType: string },
+        { InquiryType: string },
+        { CreatedBy: string },
+        { HandledBy: string },
+        { Queue: string },
+        { Secretary: string },
+        { SalesAssistant: string },
+        { CreatedOn: Date },
+        { PlanedStartDateTime: Date },
+        { EstimatedDutation: string },
+        { PlanedEndDateTime: Date },
+        { ActualStartDate: Date },
+        { ActualEndDate: Date },
         {
             itemEntity: {
+                ItemCode:number,
                 name: string;
                 MrfSerialNumber:string
                 SerialNumber:string
