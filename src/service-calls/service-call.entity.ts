@@ -15,7 +15,7 @@ import {ItemEntity} from "./Item.entity";
 @Entity()
 export class ServiceCall {
   @PrimaryGeneratedColumn()
-  ItemCode: string;
+  ItemCode: number;
   @Column()
   ItemDescription: string;
   @Column()

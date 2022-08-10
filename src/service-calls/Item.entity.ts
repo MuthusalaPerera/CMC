@@ -8,9 +8,18 @@ export  class ItemEntity {
     ItemCode:number;
 
     @Column()
-    name:string
+    MrfSerialNumber:string
 
-    @OneToOne(()=>ServiceCall,(serviceCall)=>serviceCall.itemEntity)
+    @Column()
+    SerialNumber:string
+
+    @Column()
+    ItemDescription:string
+
+    @Column()
+    ItemGroup:string
+
+    @OneToOne(()=>ServiceCall,(serviceCall)=>serviceCall.itemEntity,{eager:true})
     serviceCalls:ServiceCall;
 
 }

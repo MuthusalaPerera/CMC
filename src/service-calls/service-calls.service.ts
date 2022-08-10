@@ -47,7 +47,7 @@ export class ServiceCallsService {
                  await this.serviceRepository.update(service.ItemCode, service)
             }
               return  await this.customerDtoRepository.update(id,{
-                name:attrs.name
+                  CustomeName:attrs.CustomeName
             })
         }
 
