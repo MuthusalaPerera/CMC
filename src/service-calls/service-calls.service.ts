@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable, NotFoundException} from '@nestjs/common';
 import {Column, OneToMany, Repository} from "typeorm";
 import {ServiceCall, ServiceCall as Service} from "./service-call.entity";
 import {InjectRepository} from "@nestjs/typeorm";
@@ -37,18 +37,21 @@ export class ServiceCallsService {
             const customer = await this.getCustomerById(id);
 
             if (!customer) {
-                throw new Error('User not found.');
+                return new HttpException("Customer Not found",HttpStatus.BAD_REQUEST);
             }
-             Object.assign(customer.serviceCalls,attrs.serviceCalls)
-            console.log(customer.serviceCalls)
-            for (const service of customer.serviceCalls) {
-                console.log(service.itemEntity)
-                 await this.itemEntityRepository.update(service.itemEntity.ItemCode,service.itemEntity)
-                 await this.serviceRepository.update(service.ServiceCallId, service)
+            else {
+                Object.assign(customer.serviceCalls, attrs.serviceCalls)
+                console.log(customer.serviceCalls)
+                for (const service of customer.serviceCalls) {
+                    console.log(service.itemEntity)
+                    await this.itemEntityRepository.update(service.itemEntity.ItemCode, service.itemEntity)
+                    await this.serviceRepository.update(service.ServiceCallId, service)
+                }
+                return await this.customerDtoRepository.update(id, {
+                    CustomeName: attrs.CustomeName,
+                    ContactPerson:attrs.ContactPerson,
+                })
             }
-              return  await this.customerDtoRepository.update(id,{
-                  CustomeName:attrs.CustomeName
-            })
         }
 
 
