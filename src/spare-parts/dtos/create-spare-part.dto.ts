@@ -1,26 +1,26 @@
-import { IsDate, IsInt, IsOptional, IsString} from 'class-validator';
+import { IsDate, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString} from 'class-validator';
 
 export class CreateSparePartDto {
   @IsString()
-  ItemCode: string;
+  SPReqId: string;
 
-  @IsString()
-  ItemDescrption: string;
+  @IsNotEmpty()
+  TicketId: string;
 
-  @IsString()
-  Customer: string;
+  @IsNotEmpty()
+  ServiceCallId: string;
 
-  @IsString()
-  Status: string;
+  @IsNotEmpty()
+  ServiceEngineer: string;
 
-  @IsDate()
-  CreatedDate: Date; 
+  @IsNotEmpty()
+  Secretary: Date; 
 
-  @IsString()
-  Priority: string;  
+  @IsNotEmpty()
+  ItemDescription: string;  
 
-  @IsString()
-  Subject: string;
+  @IsNotEmpty()
+  ServiceTicketDtos:[]
 
 }
 

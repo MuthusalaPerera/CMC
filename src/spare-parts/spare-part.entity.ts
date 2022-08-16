@@ -1,27 +1,34 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { CustomerEntity } from 'src/service-calls/customer.entity';
+import { ItemEntity } from 'src/service-calls/Item.entity';
+import { ServiceTicketEntity } from 'src/service-calls/service-ticket.entity';
 
 @Entity()
 export class SparePart {
+ // [x: string]: string | number | Date | string[] | ObjectID | number[] | Date[] | ObjectID[] | FindConditions<SparePart>;
   @PrimaryGeneratedColumn()
-  id: number
-  ItemCode: string;
+  SPReqId: string;
 
   @Column()
-  ItemDescrption: string;
+  TicketId:string;
 
   @Column()
-  Customer: string;
+  ServiceCallId:string;
 
   @Column()
-  Status: string;
+  ServiceEngineer:string;
 
   @Column()
-  CreatedDate: Date;
+  Secretary:Date;
 
   @Column()
-  Priority: string;
+  ItemDescription:string;
 
-  @Column()
-  Subject: string;
+  @ManyToOne(()=>ServiceTicketEntity,ServiceTicketEntity=>ServiceTicketEntity.spareParts,{onDelete:'CASCADE'})
+  ServiceTicketEntity:ServiceTicketEntity
+
+  @OneToOne(()=>ItemEntity, item=>item.spareParts,{onDelete:"CASCADE"})
+  @JoinColumn()
+  itemEntity:ItemEntity;
 
 }
