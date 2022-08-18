@@ -32,6 +32,9 @@ export class ServiceCallsService {
     find() {
         return this.customerDtoRepository.find({relations:['serviceCalls','serviceCalls.itemEntity']});
     }
+    findS() {
+        return this.serviceRepository.find({relations:['customerEntity','itemEntity']});
+    }
         async update(id: number, attrs: Partial<CustomerDto>) {
        // console.log(attrs)
             const customer = await this.getCustomerById(id);
@@ -64,7 +67,6 @@ export class ServiceCallsService {
 
     async remove(Id: number) {
         const user = await this.getServiceById(Id);
-
         if (!user) {
             throw new Error('User not found.');
         }
