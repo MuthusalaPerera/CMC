@@ -1,3 +1,4 @@
+import { SparePart } from "src/spare-parts/spare-part.entity";
 import {Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {ServiceCall} from "./service-call.entity";
 
@@ -21,5 +22,7 @@ export  class ItemEntity {
 
     @OneToOne(()=>ServiceCall,(serviceCall)=>serviceCall.itemEntity)
     serviceCalls:ServiceCall;
+    @OneToOne(()=>SparePart,(sparePart)=>sparePart.itemEntity)
+  spareParts: SparePart;
 
 }

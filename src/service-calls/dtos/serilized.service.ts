@@ -13,3 +13,16 @@ export  class SerializedCustomer {
         Object.assign(this,partial)
     };
 }
+
+export class SerializedServiceTicket{
+    SPReqId: string;
+    TicketId: string;
+    ServiceCallId: string;
+    ServiceEngineer: string;
+    Secretary:string;
+    ItemDescription: string;
+    
+    constructor(partial: Partial<SerializedServiceTicket>){
+        Object.assign(this,partial)
+    }
+}

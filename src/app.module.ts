@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { ServiceCallsModule } from './service-calls/service-calls.module';
 import { UsersModule } from './users/users.module';
 import entities from "./Entities/entities";
+import { SparePartsModule } from './spare-parts/spare-parts.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import entities from "./Entities/entities";
       synchronize: true,
     }),
     ServiceCallsModule,
+    SparePartsModule,
     UsersModule,
   ],
   controllers: [AppController],
