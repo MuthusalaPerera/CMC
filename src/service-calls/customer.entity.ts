@@ -16,7 +16,7 @@ export  class CustomerEntity {
     ContactPerson:string
 
     @Column()
-    TelephoneNo:string
+    TelephoneNo:number
 
     @Column()
     CustomerAddressId:string
