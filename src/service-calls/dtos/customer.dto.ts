@@ -9,7 +9,7 @@ export class CustomerDto {
     @IsNotEmpty()
     ContactPerson:string;
     @IsNotEmpty()
-    TelephoneNo:number;
+    TelephoneNo:string;
     @IsNotEmpty()
     CustomerAddressId:string;
     @IsArray()
