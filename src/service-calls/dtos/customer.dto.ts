@@ -9,7 +9,7 @@ export class CustomerDto {
     @IsNotEmpty()
     ContactPerson:string;
     @IsNotEmpty()
-    TelephoneNo:number;
+    TelephoneNo:string;
     @IsNotEmpty()
     CustomerAddressId:string;
     @IsArray()
@@ -35,10 +35,10 @@ export class CustomerDto {
         {
             itemEntity: {
                 ItemCode:number,
-                name: string;
-                MrfSerialNumber:string
-                SerialNumber:string
-                ItemDescription:string
+                name: string,
+                MrfSerialNumber:string,
+                SerialNumber:string,
+                ItemDescription:string,
                 ItemGroup:string
             }
         }

@@ -18,13 +18,14 @@ export class ServiceCallsService {
     ) {}
 
     async createUser(customerDto:CustomerDto){
-        console.log(customerDto)
+        console.log(customerDto.serviceCalls)
        const customer= await this.customerDtoRepository.save({...customerDto})
         for(const ServiceCall of this.serviceRepository.create(customerDto.serviceCalls)){
-            ServiceCall.customerEntity=customer
-            await this.itemEntityRepository.save(ServiceCall.itemEntity)
             console.log(ServiceCall)
-            await this.serviceRepository.save({...ServiceCall})
+            ServiceCall.customerEntity=customer
+           await this.itemEntityRepository.save(ServiceCall.itemEntity)
+           console.log(ServiceCall)
+           await this.serviceRepository.save({...ServiceCall})
         }
       return  customer;
     }
