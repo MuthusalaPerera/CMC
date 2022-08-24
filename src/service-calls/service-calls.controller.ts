@@ -27,11 +27,15 @@ export class ServiceCallsController {
    async listServiceCalls() {
     return await this.serviceCallsService.find();
   }
+  @Get("service")
+  async listServiceCallsS() {
+    return await this.serviceCallsService.findS();
+  }
   @Post()
   async createServiceCall(@Body() body: CustomerDto) {
     return  await this.serviceCallsService.createUser(body)
   }
-  @Put('1/:id')
+  @Put('/:id')
   updateUser(@Param('id') id: string, @Body() body: CustomerDto) {
     return this.serviceCallsService.update(parseInt(id), body);
   }

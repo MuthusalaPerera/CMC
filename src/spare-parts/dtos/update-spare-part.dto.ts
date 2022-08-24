@@ -23,9 +23,9 @@ export class UpdateSparePartDto {
 
   @IsString()
   @IsOptional()
-  Priority: string;  
+  Priority: string;
 
-  @IsString()
+   @IsString()
    @IsOptional()
   Subject: string;
 
