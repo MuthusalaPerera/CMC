@@ -6,6 +6,7 @@ import {CustomerEntity} from "./customer.entity";
 import {CustomerDto} from "./dtos/customer.dto";
 import {CreateServiceCallDto} from "./dtos/create-service-call.dto";
 import {ItemEntity} from "./Item.entity";
+import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
 
 
 
@@ -18,28 +19,47 @@ export class ServiceCallsService {
     ) {}
 
     async createUser(customerDto:CustomerDto){
-        console.log(customerDto.serviceCalls)
-       const customer= await this.customerDtoRepository.save({...customerDto})
-        for(const ServiceCall of this.serviceRepository.create(customerDto.serviceCalls)){
-            console.log(ServiceCall)
-            ServiceCall.customerEntity=customer
-           await this.itemEntityRepository.save(ServiceCall.itemEntity)
-           console.log(ServiceCall)
-           await this.serviceRepository.save({...ServiceCall})
-        }
-      return  customer;
+        console.log(customerDto.CustomerId)
+        const c=this.getCustomerById(customerDto.CustomerId)
+            if(!c) {
+                const customer = await this.customerDtoRepository.save({...customerDto})
+                for (const ServiceCall of this.serviceRepository.create(customerDto.serviceCalls)) {
+                    console.log(ServiceCall)
+                    ServiceCall.customerEntity = customer
+                    await this.itemEntityRepository.save(ServiceCall.itemEntity)
+                    console.log(ServiceCall)
+                    await this.serviceRepository.save({...ServiceCall})
+                }
+                return customer
+            }
+            else{
+                const customer = await this.customerDtoRepository.create({...customerDto})
+                for (const ServiceCall of this.serviceRepository.create(customerDto.serviceCalls)) {
+                    console.log(ServiceCall)
+                    ServiceCall.customerEntity = customer
+                    await this.itemEntityRepository.save(ServiceCall.itemEntity)
+                    console.log(ServiceCall)
+                    await this.serviceRepository.save({...ServiceCall})
+                }
+            }
     }
 
     find() {
         return this.customerDtoRepository.find({relations:['serviceCalls','serviceCalls.itemEntity']});
     }
+    findById(id:number) {
+        return this.customerDtoRepository.findOne(id);
+    }
     findS() {
         return this.serviceRepository.find({relations:['customerEntity','itemEntity']});
+    }
+
+    async findP(options: IPaginationOptions): Promise<Pagination<ServiceCall>> {
+        return paginate(this.serviceRepository, options);
     }
         async update(id: number, attrs: Partial<CustomerDto>) {
        // console.log(attrs)
             const customer = await this.getCustomerById(id);
-
             if (!customer) {
                 return new HttpException("Customer Not found",HttpStatus.BAD_REQUEST);
             }
@@ -47,7 +67,7 @@ export class ServiceCallsService {
                 Object.assign(customer.serviceCalls, attrs.serviceCalls)
                 console.log(customer.serviceCalls)
                 for (const service of customer.serviceCalls) {
-                    console.log(service.itemEntity)
+                    console.log(service)
                     await this.itemEntityRepository.update(service.itemEntity.ItemCode, service.itemEntity)
                     await this.serviceRepository.update(service.ServiceCallId, service)
                 }

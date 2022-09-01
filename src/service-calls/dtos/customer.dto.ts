@@ -1,8 +1,9 @@
-import {IsArray, IsNotEmpty, IsString} from 'class-validator';
+import {IsArray, IsNotEmpty, IsNumber, IsString} from 'class-validator';
 import {Column, PrimaryGeneratedColumn} from "typeorm";
 import {Exclude} from "class-transformer";
 
 export class CustomerDto {
+    @IsNumber()
     CustomerId: number;
     @IsNotEmpty()
     CustomeName: string;
