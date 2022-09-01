@@ -50,9 +50,9 @@ export class ServiceCall {
   ActualStartDate:Date
   @Column()
   ActualEndDate:Date
-  @ManyToOne(()=>CustomerEntity,customerEntity=>customerEntity.serviceCalls,{onDelete:'CASCADE'})
+  @ManyToOne(()=>CustomerEntity,customerEntity=>customerEntity.serviceCalls,{eager:true} )
   customerEntity:CustomerEntity
-  @OneToOne(()=>ItemEntity, item=>item.serviceCalls,{onDelete:"CASCADE"})
+  @OneToOne(()=>ItemEntity, item=>item.serviceCalls,{eager:true})
   @JoinColumn()
   itemEntity:ItemEntity;
 

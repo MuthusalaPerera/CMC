@@ -20,7 +20,7 @@ export  class ItemEntity {
     @Column()
     ItemGroup:string
 
-    @OneToOne(()=>ServiceCall,(serviceCall)=>serviceCall.itemEntity,{eager:true})
+    @OneToOne(()=>ServiceCall,(serviceCall)=>serviceCall.itemEntity)
     serviceCalls:ServiceCall;
     @OneToOne(()=>SparePart,(sparePart)=>sparePart.itemEntity)
     spareParts: SparePart;
