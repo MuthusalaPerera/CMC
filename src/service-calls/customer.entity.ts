@@ -23,6 +23,7 @@ export  class CustomerEntity {
 
     @OneToMany(()=>ServiceCall,(serviceCall)=>serviceCall.customerEntity)
     serviceCalls:ServiceCall[];
-  spareParts:SparePart[];
+
+    spareParts:SparePart[];
 
 }
