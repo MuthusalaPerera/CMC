@@ -41,7 +41,7 @@ export class ServiceCallsController {
   // async listCustomerId(@Param('id') id: string) {
   //   return await this.serviceCallsService.findById(parseInt(id));
   // }
-  @Get("service")
+  @Get('service')
   async listServiceCallsS() {
     return await this.serviceCallsService.findS();
   }
@@ -58,6 +58,7 @@ export class ServiceCallsController {
   }
   @Post()
   async createServiceCall(@Body() body: CustomerDto) {
+    // console.log(CustomerDto)
     return  await this.serviceCallsService.createUser(body)
   }
   @Put('/:id')
