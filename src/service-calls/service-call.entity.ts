@@ -8,8 +8,10 @@ import {
   PrimaryColumn,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import {CustomerEntity} from "./customer.entity";
-import {ItemEntity} from "./Item.entity";
+import {CustomerEntity} from "../Customer/customer.entity";
+import {ItemEntity} from "../Item/Item.entity";
+import {SparePart} from "../spare-parts/spare-part.entity";
+import {ServiceTicketEntity} from "./service-ticket.entity";
 
 
 @Entity()
@@ -52,6 +54,8 @@ export class ServiceCall {
   ActualEndDate:Date
   @ManyToOne(()=>CustomerEntity,customerEntity=>customerEntity.serviceCalls,{eager:true} )
   customerEntity:CustomerEntity
+  @OneToMany(()=>ServiceTicketEntity,(ServiceTicket)=>ServiceTicket.serviceCall)
+  serviceTicketEntities:ServiceTicketEntity[];
   @OneToOne(()=>ItemEntity, item=>item.serviceCalls,{eager:true})
   @JoinColumn()
   itemEntity:ItemEntity;

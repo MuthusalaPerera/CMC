@@ -1,7 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { CustomerEntity } from 'src/service-calls/customer.entity';
-import { ItemEntity } from 'src/service-calls/Item.entity';
+import { CustomerEntity } from 'src/Customer/customer.entity';
+import { ItemEntity } from 'src/Item/Item.entity';
 import { ServiceTicketEntity } from 'src/service-calls/service-ticket.entity';
+import {ServiceCall} from "../service-calls/service-call.entity";
 
 @Entity()
 export class SparePart {
@@ -24,8 +25,9 @@ export class SparePart {
   @Column()
   ItemDescription:string;
 
-  @ManyToOne(()=>ServiceTicketEntity,ServiceTicketEntity=>ServiceTicketEntity.spareParts,{onDelete:'CASCADE'})
+  @ManyToOne(()=>ServiceTicketEntity,ServiceTicketEntity=>ServiceTicketEntity.sparePart,{onDelete:'CASCADE'})
   ServiceTicketEntity:ServiceTicketEntity
+
 
   @OneToOne(()=>ItemEntity, item=>item.spareParts,{onDelete:"CASCADE"})
   @JoinColumn()

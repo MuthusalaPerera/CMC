@@ -21,9 +21,9 @@ import { CreateServiceCallDto } from './dtos/create-service-call.dto';
 import {ServiceCallsService} from "./service-calls.service";
 
 
-import {CustomerDto} from "./dtos/customer.dto";
+import {CustomerDto} from "../Customer/dtos/customer.dto";
 import {SerializedCustomer} from "./dtos/serilized.service";
-import {CustomerEntity} from "./customer.entity";
+import {CustomerEntity} from "../Customer/customer.entity";
 import {Pagination} from "nestjs-typeorm-paginate";
 import {ServiceCall} from "./service-call.entity";
 ;

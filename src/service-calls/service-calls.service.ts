@@ -2,10 +2,10 @@ import {HttpException, HttpStatus, Injectable, NotFoundException} from '@nestjs/
 import {Column, OneToMany, Repository} from "typeorm";
 import {ServiceCall, ServiceCall as Service} from "./service-call.entity";
 import {InjectRepository} from "@nestjs/typeorm";
-import {CustomerEntity} from "./customer.entity";
-import {CustomerDto} from "./dtos/customer.dto";
+import {CustomerEntity} from "../Customer/customer.entity";
+import {CustomerDto} from "../Customer/dtos/customer.dto";
 import {CreateServiceCallDto} from "./dtos/create-service-call.dto";
-import {ItemEntity} from "./Item.entity";
+import {ItemEntity} from "../Item/Item.entity";
 import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
 
 
