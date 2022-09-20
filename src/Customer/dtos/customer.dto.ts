@@ -41,7 +41,8 @@ export class CustomerDto {
                 SerialNumber:string,
                 ItemDescription:string,
                 ItemGroup:string
-            }
+            },
+
         }
     ];
 

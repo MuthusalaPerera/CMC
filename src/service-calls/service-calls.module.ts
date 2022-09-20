@@ -3,9 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServiceCallsController } from './service-calls.controller';
 import { ServiceCallsService } from './service-calls.service';
 import { ServiceCall } from './service-call.entity';
-import {CustomerEntity} from "./customer.entity";
+import {CustomerEntity} from "../Customer/customer.entity";
 import {SerializedCustomer} from "./dtos/serilized.service";
-import {ItemEntity} from "./Item.entity";
+import {ItemEntity} from "../Item/Item.entity";
 
 
 @Module({

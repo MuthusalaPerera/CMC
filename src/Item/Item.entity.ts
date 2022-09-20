@@ -1,6 +1,6 @@
 import { SparePart } from "src/spare-parts/spare-part.entity";
 import {Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
-import {ServiceCall} from "./service-call.entity";
+import {ServiceCall} from "../service-calls/service-call.entity";
 
 
 @Entity()

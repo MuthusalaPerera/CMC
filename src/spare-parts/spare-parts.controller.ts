@@ -1,5 +1,5 @@
 import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Inject, NotFoundException, Param, ParseIntPipe, Post, Put, UseInterceptors } from '@nestjs/common';
-import { CustomerDto } from 'src/service-calls/dtos/customer.dto';
+import { CustomerDto } from 'src/Customer/dtos/customer.dto';
 import { ServiceTicketDto } from 'src/service-calls/dtos/service-ticket.dto';
 import { ServiceTicketEntity } from 'src/service-calls/service-ticket.entity';
 import { CreateSparePartDto } from 'src/spare-parts/dtos/create-spare-part.dto';
@@ -15,13 +15,12 @@ export class SparePartsController {
       }
     @Post()
     async createSparePart(@Body() body: ServiceTicketDto) {
-      console.log(body)
       return await this.sparePartsService.createSparepart(body)
     }
-    @Put('1/:id')
-    updateSparePart(@Param('id') id: string, @Body() body:ServiceTicketDto){
-      return this.sparePartsService.update(parseInt(id),body);
-    }
+    // @Put('1/:id')
+    // updateSparePart(@Param('id') id: string, @Body() body:ServiceTicketDto){
+    //   return this.sparePartsService.update(parseInt(id),body);
+    // }
     @UseInterceptors(ClassSerializerInterceptor)
     @Get('/:id')
     async getSparePart(@Param('id', ParseIntPipe) id: number) {
@@ -33,6 +32,6 @@ export class SparePartsController {
       removeServic(@Param('id') id:string){
         return this.sparePartsService.remove(parseInt(id));
       }
-      
+
      }
 
