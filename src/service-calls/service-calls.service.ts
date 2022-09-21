@@ -19,16 +19,18 @@ export class ServiceCallsService {
     ) {}
 
     async createUser(customerDto:CustomerDto){
+       // console.log(CustomerDto)
         const c=await this.getCustomerById(customerDto.CustomerId)
-        console.log(c)
             if(!c) {
                 const customer = await this.customerDtoRepository.save({...customerDto})
-                console.log(customer)
                 for (const ServiceCall of this.serviceRepository.create(customerDto.serviceCalls)) {
-                    console.log(ServiceCall)
                     ServiceCall.customerEntity = customer
-                    await this.itemEntityRepository.save(ServiceCall.itemEntity)
-                    await this.serviceRepository.save({...ServiceCall})
+                    const item =await  this.findByItemId(ServiceCall.itemEntity.ItemCode)
+                    if(!item){
+                        await this.itemEntityRepository.save(ServiceCall.itemEntity)
+                        await this.serviceRepository.save({...ServiceCall})
+                    }
+
                 }
                 return customer
             }
@@ -53,6 +55,9 @@ export class ServiceCallsService {
     }
     findById(id:number) {
         return this.customerDtoRepository.findOne(id);
+    }
+    findByItemId(id:number) {
+        return this.itemEntityRepository.findOne(id);
     }
     findS() {
         return this.serviceRepository.find({relations:['customerEntity','itemEntity']});
