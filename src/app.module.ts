@@ -35,7 +35,7 @@ import { SparePartsModule } from './spare-parts/spare-parts.module';
       port: 3306,
       database: 'cmc',
       username: 'root',
-      password: '12345',
+      password: '1234',
       entities: entities,
       synchronize: true,
     }),

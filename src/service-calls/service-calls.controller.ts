@@ -72,6 +72,14 @@ export class ServiceCallsController {
     if(customer) return customer;
     else throw new NotFoundException();
   }
+  @Get('item/:id')
+  async getItem(@Param('id',ParseIntPipe) id:number){
+    const customer = await this.serviceCallsService.findByItemId(id);
+    if(customer) return customer;
+    else throw new NotFoundException();
+  }
+
+  itemEntityRepository
   @Delete('/:id')
   removeService(@Param('id') id: string) {
     return this.serviceCallsService.remove(parseInt(id));
