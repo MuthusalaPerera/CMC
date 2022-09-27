@@ -20,8 +20,23 @@ export  class ServiceTicketEntity {
     @Column()
     AssignedTo:string;
 
-    @IsDate()
+    @Column()
+    EstimatedDuration:string;
+
+    @Column()
+    ContactPerson:string;
+
+    @Column()
     PlannedStartDate:Date;
+    @Column()
+    PlannedEndDate:Date;
+    @Column()
+    ActualStartDate:Date;
+    @Column()
+    ActualEndDate:Date;
+    @Column()
+    CreatedOn:Date;
+
 
     @ManyToOne(()=>ServiceCall,ServiceCallEntity=>ServiceCallEntity.serviceTicketEntities,{eager:true})
     serviceCall:ServiceCall

@@ -1,6 +1,6 @@
 import { IsArray, IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator"
 import { SparePart } from "src/spare-parts/spare-part.entity";
-import { DeepPartial } from "typeorm";
+import {Column, DeepPartial} from "typeorm";
 
 export class ServiceTicketDto{
     @IsNumber()
@@ -12,7 +12,15 @@ export class ServiceTicketDto{
         { Subject: string },
         { AssignedTo: string },
         { PlannedStartDate: Date },
-        {
+        { EstimatedDuration: string },
+        { ContactPerson: string },
+        { PlannedStartDate: Date } ,
+        {PlannedEndDate: Date },
+        { ActualStartDate: Date },
+        { ActualEndDate: Date },
+        { CreatedOn: Date },
+
+{
             sparePart: [
                 { SPReqId: string },
                 { TicketId: string },
