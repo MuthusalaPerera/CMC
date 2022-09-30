@@ -26,6 +26,7 @@ export class ServiceCallsService {
                 for (const ServiceCall of this.serviceRepository.create(customerDto.serviceCalls)) {
                     ServiceCall.customerEntity = customer
                     const item =await  this.findByItemId(ServiceCall.itemEntity.ItemCode)
+                    console.log(item)
                     if(!item){
                         await this.itemEntityRepository.save(ServiceCall.itemEntity)
                         await this.serviceRepository.save({...ServiceCall})

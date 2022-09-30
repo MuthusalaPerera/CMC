@@ -8,6 +8,7 @@ import { ServiceTicketEntity } from 'src/service-calls/service-ticket.entity';
 import { Repository } from 'typeorm';
 import { SparePart } from './spare-part.entity';
 import {ServiceCall} from "../service-calls/service-call.entity";
+import {CreateSparePartDto} from "./dtos/create-spare-part.dto";
 
 @Injectable()
 export class SparePartsService {
@@ -24,31 +25,23 @@ export class SparePartsService {
     constructor(
       @InjectRepository(SparePart) private readonly spareRepository:Repository<SparePart>,
       @InjectRepository(ServiceCall) private readonly serviceRepository:Repository<ServiceCall>,
-      @InjectRepository(ServiceTicketEntity) private readonly ServiceTicketDtoRepository:Repository<ServiceTicketEntity>,
+      @InjectRepository(ServiceTicketEntity) private readonly serviceTicketRepository:Repository<ServiceTicketEntity>,
       @InjectRepository(ItemEntity) private readonly itemEntityRepository:Repository<ItemEntity>
       ){}
 
-      async createSparepart(serviceTicketDto:ServiceTicketDto){
+      async createServiceticket(serviceTicketDto:ServiceTicketDto){
        console.log(serviceTicketDto)
           console.log(serviceTicketDto)
           const serviceCall=await this.serviceRepository.create({...serviceTicketDto})
-          for( const ServiceTickets of this.ServiceTicketDtoRepository.create(serviceTicketDto.serviceTicket)){
+          for( const ServiceTickets of this.serviceTicketRepository.create(serviceTicketDto.serviceTicket)){
               ServiceTickets.serviceCall=serviceCall
-              const ST=await this.ServiceTicketDtoRepository.save({...ServiceTickets})
-              for (const SparePart of this.spareRepository.create(ServiceTickets.sparePart)){
-                  console.log(SparePart.itemEntity)
-                  console.log(SparePart.ServiceTicketEntity)
-
-                  SparePart.ServiceTicketEntity=ST
-                  await this.itemEntityRepository.save(SparePart.itemEntity)
-                  await this.spareRepository.save({...SparePart})
-              }
+              const ST=await this.serviceTicketRepository.save({...ServiceTickets})
           }
       return serviceCall;
     }
 
     find(){
-      return this.ServiceTicketDtoRepository.find();
+      return this.serviceTicketRepository.find();
     }
     // async update(id:number, attrs: Partial<ServiceTicketDto>){
     //   const sparepart = await this.getServiceTicketById(id);
@@ -64,24 +57,35 @@ export class SparePartsService {
     //     await this.itemEntityRepository.update(part.itemEntity.ItemCode,part.itemEntity)
     //     await this.spareRepository.update(part.SPReqId,part)
     //   }
-    //     return await this.ServiceTicketDtoRepository.update(id,{
+    //     return await this.serviceTicketRepository.update(id,{
     //       TicketId:attrs.TicketId
     //     })
     //
     // }
           getServiceTicketById(id: number) {
-              return this.ServiceTicketDtoRepository.findOne(id,{relations:['sparePart','sparePart.itemEntity']});
+              return this.serviceTicketRepository.findOne(id,{relations:['sparePart','sparePart.itemEntity']});
           }
           getSparePartById(Id:number){
-            return this.ServiceTicketDtoRepository.findOne(Id)
+            return this.serviceTicketRepository.findOne(Id)
           }
           async remove(Id: number){
             const Spare = await this.getSparePartById(Id);
             if(!Spare){
               throw new Error('Not Found');
             }
-            return this.ServiceTicketDtoRepository.remove(Spare);
+            return this.serviceTicketRepository.remove(Spare);
           }
 
 
+    async createSparepart(body: CreateSparePartDto) {
+        const ST=await this.serviceTicketRepository.create({...body})
+        for (const SparePart of this.spareRepository.create(body.sparePart)){
+            console.log(SparePart.itemEntity)
+            console.log(SparePart.ServiceTicketEntity)
+
+            SparePart.ServiceTicketEntity=ST
+            await this.itemEntityRepository.save(SparePart.itemEntity)
+            await this.spareRepository.save({...SparePart})
+        }
+    }
 }

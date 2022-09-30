@@ -58,7 +58,7 @@ export class ServiceCallsController {
   }
   @Post()
   async createServiceCall(@Body() body: CustomerDto) {
-    // console.log(CustomerDto)
+   console.log(CustomerDto)
     return  await this.serviceCallsService.createUser(body)
   }
   @Put('/:id')
@@ -78,8 +78,7 @@ export class ServiceCallsController {
     if(customer) return customer;
     else throw new NotFoundException();
   }
-
-  itemEntityRepository
+  
   @Delete('/:id')
   removeService(@Param('id') id: string) {
     return this.serviceCallsService.remove(parseInt(id));

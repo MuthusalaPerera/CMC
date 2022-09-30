@@ -23,9 +23,8 @@ export class ServiceTicketDto{
 {
             sparePart: [
                 { SPReqId: string },
-                { TicketId: string },
-                { ServiceCallId: string },
-                { ServiceEngineer: string },
+                { Remark: string },
+                { Content: string },
                 { Secretary: Date },
                 { ItemDescription: string },
                 {

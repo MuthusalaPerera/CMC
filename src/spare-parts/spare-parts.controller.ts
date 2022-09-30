@@ -14,9 +14,16 @@ export class SparePartsController {
       return await this.sparePartsService.find();
       }
     @Post()
-    async createSparePart(@Body() body: ServiceTicketDto) {
-      return await this.sparePartsService.createSparepart(body)
+    async createServiceTicket(@Body() body: ServiceTicketDto) {
+    console.log(ServiceTicketDto)
+      return await this.sparePartsService.createServiceticket(body)
     }
+  @Post('/create')
+  async createSparePart(@Body() body: CreateSparePartDto) {
+    console.log(ServiceTicketDto)
+    return await this.sparePartsService.createSparepart(body)
+  }
+
     // @Put('1/:id')
     // updateSparePart(@Param('id') id: string, @Body() body:ServiceTicketDto){
     //   return this.sparePartsService.update(parseInt(id),body);

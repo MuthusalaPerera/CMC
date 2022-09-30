@@ -9,15 +9,12 @@ export class SparePart {
  // [x: string]: string | number | Date | string[] | ObjectID | number[] | Date[] | ObjectID[] | FindConditions<SparePart>;
   @PrimaryGeneratedColumn()
   SPReqId: string;
-
+  
   @Column()
-  TicketId:string;
-
+  Remark:string;
+  
   @Column()
-  ServiceCallId:string;
-
-  @Column()
-  ServiceEngineer:string;
+  Content:string
 
   @Column()
   Secretary:Date;
