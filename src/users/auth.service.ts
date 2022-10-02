@@ -47,7 +47,7 @@ export class AuthService {
 
     return user;
   }
-
+//reset
   async update(email: string, attrs: Partial<User>) {
     const userDB = await this.usersService.findOneEmail(email)
 
