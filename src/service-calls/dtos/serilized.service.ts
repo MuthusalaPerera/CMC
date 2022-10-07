@@ -1,14 +1,15 @@
-import {Exclude} from "class-transformer";
+import {Exclude, Expose} from "class-transformer"
 
 export  class SerializedCustomer {
-    ItemCode: number;
-    ItemDescription: string;
-    Customer: string;
-    Status: string;
-    CreatedDate: Date;
-    Priority: string;
-    Subject: string;
-
+    @Expose({ name: "CusID" })
+    CustomerId: number;
+    @Expose({ name: "Address" })
+    CustomerAddressId:string
+    @Expose({ name: "CusName" })
+    CustomeName:string
+    @Exclude()
+    TelephoneNo:string
+    
     constructor(partial: Partial<SerializedCustomer>){
         Object.assign(this,partial)
     };

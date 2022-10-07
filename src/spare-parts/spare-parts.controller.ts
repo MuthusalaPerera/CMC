@@ -13,6 +13,11 @@ export class SparePartsController {
     async listSpareParts() {
       return await this.sparePartsService.find();
       }
+
+  @Get('/Ticket')
+  async listTickets() {
+    return await this.sparePartsService.findTicket();
+  }
     @Post()
     async createServiceTicket(@Body() body: ServiceTicketDto) {
     console.log(ServiceTicketDto)

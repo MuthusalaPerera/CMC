@@ -16,7 +16,6 @@ export class CustomerDto {
     @IsArray()
     serviceCalls:[
         { ServiceCallId: number },
-        { Status: string },
         { Priority: string },
         { Subject: string },
         { Origin: string },

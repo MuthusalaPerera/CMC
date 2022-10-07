@@ -7,6 +7,7 @@ import { ServiceCallsModule } from './service-calls/service-calls.module';
 import { UsersModule } from './users/users.module';
 import entities from "./Entities/entities";
 import { SparePartsModule } from './spare-parts/spare-parts.module';
+import {MobileModule} from "./Mobile/mobile.module"
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { SparePartsModule } from './spare-parts/spare-parts.module';
     ServiceCallsModule,
     SparePartsModule,
     UsersModule,
+    MobileModule
   ],
   controllers: [AppController],
   providers: [AppService],

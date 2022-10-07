@@ -25,7 +25,7 @@ export class ServiceTicketDto{
                 { SPReqId: string },
                 { Remark: string },
                 { Content: string },
-                { Secretary: Date },
+                { Secretary: string },
                 { ItemDescription: string },
                 {
                     itemEntity: {

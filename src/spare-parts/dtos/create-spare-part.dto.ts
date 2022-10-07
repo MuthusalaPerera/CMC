@@ -7,7 +7,7 @@ export class CreateSparePartDto {
   sparePart: [
     { SPReqId: string },
     { Remark: string },
-    { Secretary: Date },
+    { Secretary: string },
     { ItemDescription: string },
     {
       itemEntity: {

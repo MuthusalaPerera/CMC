@@ -17,7 +17,7 @@ export class SparePart {
   Content:string
 
   @Column()
-  Secretary:Date;
+  Secretary:string;
 
   @Column()
   ItemDescription:string;

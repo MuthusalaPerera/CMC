@@ -43,6 +43,9 @@ export class SparePartsService {
     find(){
       return this.serviceTicketRepository.find();
     }
+    findTicket(){
+        return this.spareRepository.find({relations:['ServiceTicketEntity','itemEntity','ServiceTicketEntity.serviceCall']});
+    }
     // async update(id:number, attrs: Partial<ServiceTicketDto>){
     //   const sparepart = await this.getServiceTicketById(id);
     //
@@ -63,7 +66,7 @@ export class SparePartsService {
     //
     // }
           getServiceTicketById(id: number) {
-              return this.serviceTicketRepository.findOne(id,{relations:['sparePart','sparePart.itemEntity']});
+              return this.serviceTicketRepository.findOne(id,{relations:['sparePart','sparePart.itemEntity','itemEntity']});
           }
           getSparePartById(Id:number){
             return this.serviceTicketRepository.findOne(Id)

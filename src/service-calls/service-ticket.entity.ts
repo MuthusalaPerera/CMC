@@ -21,6 +21,9 @@ export  class ServiceTicketEntity {
     AssignedTo:string;
 
     @Column()
+    AssignedBY:string;
+
+    @Column()
     EstimatedDuration:string;
 
     @Column()
