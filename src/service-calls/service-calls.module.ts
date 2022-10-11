@@ -6,10 +6,11 @@ import { ServiceCall } from './service-call.entity';
 import {CustomerEntity} from "../Customer/customer.entity";
 import {SerializedCustomer} from "./dtos/serilized.service";
 import {ItemEntity} from "../Item/Item.entity";
+import {UsersDropDown} from "../IntialDB/Users"
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ServiceCall,CustomerEntity,ItemEntity])],
+  imports: [TypeOrmModule.forFeature([ServiceCall,CustomerEntity,ItemEntity,UsersDropDown])],
   controllers: [ServiceCallsController],
   providers: [{
     provide: 'ServiceCalls_Service',

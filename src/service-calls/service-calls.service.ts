@@ -7,6 +7,7 @@ import {CustomerDto} from "../Customer/dtos/customer.dto";
 import {CreateServiceCallDto} from "./dtos/create-service-call.dto";
 import {ItemEntity} from "../Item/Item.entity";
 import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
+import {UsersDropDown} from "../IntialDB/Users"
 
 
 
@@ -15,9 +16,9 @@ export class ServiceCallsService {
     constructor(
         @InjectRepository(ServiceCall) private readonly serviceRepository:Repository<ServiceCall>,
         @InjectRepository(CustomerEntity) private readonly customerDtoRepository:Repository<CustomerEntity>,
-        @InjectRepository(ItemEntity) private readonly itemEntityRepository:Repository<ItemEntity>
+        @InjectRepository(ItemEntity) private readonly itemEntityRepository:Repository<ItemEntity>,
+        @InjectRepository(UsersDropDown) private readonly userDropDownRepository:Repository<UsersDropDown>
     ) {}
-
     async createUser(customerDto:CustomerDto){
        // console.log(CustomerDto)
         const c=await this.getCustomerById(customerDto.CustomerId)
@@ -53,6 +54,9 @@ export class ServiceCallsService {
 
     find() {
         return this.customerDtoRepository.find({relations:['serviceCalls','serviceCalls.itemEntity']});
+    }
+    findDropdown(){
+        return this.userDropDownRepository.find()
     }
     findById(id:number) {
         return this.customerDtoRepository.findOne(id);

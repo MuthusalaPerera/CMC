@@ -37,6 +37,10 @@ export class ServiceCallsController {
    async listCustomer() {
     return await this.serviceCallsService.find();
   }
+  @Get('drop')
+  async getDropDown() {
+    return await this.serviceCallsService.findDropdown();
+  }
   // @Get('/:id')
   // async listCustomerId(@Param('id') id: string) {
   //   return await this.serviceCallsService.findById(parseInt(id));
