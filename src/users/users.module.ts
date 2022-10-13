@@ -6,9 +6,12 @@ import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { AuthService } from './auth.service';
 import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
+import Login from "../IntialDB/Login"
+import UserType from "../IntialDB/UserRolls"
+import {CreateUserDto} from "./dtos/create-user.dto"
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [TypeOrmModule.forFeature([User,Login,UserType])],
   controllers: [UsersController],
   providers: [
     UsersService,

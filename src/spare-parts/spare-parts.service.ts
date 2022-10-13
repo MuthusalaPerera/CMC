@@ -46,6 +46,7 @@ export class SparePartsService {
     findTicket(){
         return this.spareRepository.find({relations:['ServiceTicketEntity','itemEntity','ServiceTicketEntity.serviceCall']});
     }
+    
     // async update(id:number, attrs: Partial<ServiceTicketDto>){
     //   const sparepart = await this.getServiceTicketById(id);
     //

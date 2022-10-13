@@ -20,6 +20,8 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
+import {CustomerDto} from "../Customer/dtos/customer.dto"
+import {LoginDto} from "./dtos/login.dto"
 
 @Controller('auth')
 export class UsersController {
@@ -28,20 +30,19 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-  @Serialize(UserDto)
+  // @Serialize(UserDto)
   @Post('/signup')
   async createUser(@Body() body: CreateUserDto, @Session() session: any) {
-    const user = await this.authService.signup(body.email, body.password);
-    session.userId = user.id;
-    return user;
+    // const user = await this.authService.authService(body);
+    // console.log(CustomerDto)
+    return  await this.authService.signup(body)
   }
 
-  @Serialize(UserDto)
+  // @Serialize(UserDto)
   @Post('/signin')
-  async signin(@Body() body: CreateUserDto, @Session() session: any) {
-    const user = await this.authService.signin(body.email, body.password);
-    session.userId = user.id;
-    return user;
+  async signin(@Body() body: LoginDto, @Session() session: any) {
+    //const user = await this.authService.signin(body.email, body.password);
+    return  await this.authService.signin(body)
   }
 
   @Serialize(UserDto)
@@ -63,19 +64,19 @@ export class UsersController {
     return this.usersService.findOne(parseInt(id));
   }
 
-  @Get()
-  findAllUsers(@Query('email') email: string) {
-    return this.usersService.find(email);
-  }
+  // @Get()
+  // findAllUsers(@Query('email') email: string) {
+  //   return this.usersService.find(email);
+  // }
 
   @Delete('/:id')
   removeUser(@Param('id') id: string) {
     return this.usersService.remove(parseInt(id));
   }
 
-  @Patch('/:id')
-  updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
-    return this.authService.update(id, body);
-  }
+  // @Patch('/:id')
+  // updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
+  //   return this.authService.update(id, body);
+  // }
 
 }
