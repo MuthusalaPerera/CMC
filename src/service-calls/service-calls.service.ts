@@ -8,6 +8,8 @@ import {CreateServiceCallDto} from "./dtos/create-service-call.dto";
 import {ItemEntity} from "../Item/Item.entity";
 import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
 import {UsersDropDown} from "../IntialDB/Users"
+import { OriginsDropDown } from '../IntialDB/Origin';
+import { ProblemTypesDropDown } from 'src/IntialDB/ProblemType';
 
 
 
@@ -17,7 +19,9 @@ export class ServiceCallsService {
         @InjectRepository(ServiceCall) private readonly serviceRepository:Repository<ServiceCall>,
         @InjectRepository(CustomerEntity) private readonly customerDtoRepository:Repository<CustomerEntity>,
         @InjectRepository(ItemEntity) private readonly itemEntityRepository:Repository<ItemEntity>,
-        @InjectRepository(UsersDropDown) private readonly userDropDownRepository:Repository<UsersDropDown>
+        @InjectRepository(UsersDropDown) private readonly userDropDownRepository:Repository<UsersDropDown>,
+        @InjectRepository(OriginsDropDown) private readonly originDropDownRepository:Repository<OriginsDropDown>,
+        @InjectRepository(ProblemTypesDropDown) private readonly problemTypeDropDownRepository:Repository<ProblemTypesDropDown>
     ) {}
     async createUser(customerDto:CustomerDto){
        // console.log(CustomerDto)
@@ -54,6 +58,12 @@ export class ServiceCallsService {
 
     find() {
         return this.customerDtoRepository.find({relations:['serviceCalls','serviceCalls.itemEntity']});
+    }
+    findproblemTypeDropDown() {
+        return this.problemTypeDropDownRepository.find();
+    }
+    findOriginDropDown() {
+        return this.originDropDownRepository.find();
     }
     findDropdown(){
         return this.userDropDownRepository.find()
