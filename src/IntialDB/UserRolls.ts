@@ -1,4 +1,4 @@
-import {Column, Entity, OneToOne, PrimaryGeneratedColumn} from "typeorm"
+import {Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm"
 import {User} from "../users/user.entity"
 import {ServiceCall} from "../service-calls/service-call.entity"
 
@@ -11,6 +11,6 @@ export default  class UserType {
     Description:string;
     @Column()
     Status:number;
-    @OneToOne(()=>User,(User)=>User.userRolls)
-    user:User;
+    @OneToMany(()=>User,(User)=>User.userType)
+    user:User[];
 }
