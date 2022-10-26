@@ -22,6 +22,7 @@ import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
 import {CustomerDto} from "../Customer/dtos/customer.dto"
 import {LoginDto} from "./dtos/login.dto"
+import {ForgetDto} from "./dtos/Forget.dto"
 
 @Controller('auth')
 export class UsersController {
@@ -43,6 +44,12 @@ export class UsersController {
   async signin(@Body() body: LoginDto, @Session() session: any) {
     //const user = await this.authService.signin(body.email, body.password);
     return  await this.authService.signin(body)
+  }
+
+  @Post('/forgot')
+  async forgot(@Body() body: ForgetDto) {
+    //const user = await this.authService.signin(body.email, body.password);
+    return  await this.authService.forget(body)
   }
 
   @Serialize(UserDto)

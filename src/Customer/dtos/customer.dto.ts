@@ -13,7 +13,7 @@ export class CustomerDto {
     TelephoneNo:string;
     @IsNotEmpty()
     CustomerAddressId:string;
-    @IsArray()
+    @IsNotEmpty()
     serviceCalls:[
         { ServiceCallId: number },
         { Priority: string },
@@ -34,8 +34,9 @@ export class CustomerDto {
         { ActualEndDate: Date },
         {
             itemEntity: {
-                ItemCode:number,
+                ItemCode:string,
                 name: string,
+                MrfSerialNumber:string,
                 SerialNumber:string,
                 ItemDescription:string,
                 ItemGroup:string

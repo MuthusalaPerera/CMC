@@ -24,10 +24,5 @@ export class SparePart {
 
   @ManyToOne(()=>ServiceTicketEntity,ServiceTicketEntity=>ServiceTicketEntity.sparePart,{onDelete:'CASCADE'})
   ServiceTicketEntity:ServiceTicketEntity
-
-
-  @OneToOne(()=>ItemEntity, item=>item.spareParts,{onDelete:"CASCADE"})
-  @JoinColumn()
-  itemEntity:ItemEntity;
-
+  
 }

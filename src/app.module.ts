@@ -8,12 +8,24 @@ import { UsersModule } from './users/users.module';
 import entities from "./Entities/entities";
 import { SparePartsModule } from './spare-parts/spare-parts.module';
 import {MobileModule} from "./Mobile/mobile.module"
+import {MailerModule} from "@nestjs-modules/mailer"
+import UserType from "./IntialDB/UserRolls"
+
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
+    MailerModule.forRoot({
+      transport: {
+        host:'smtp.gmail.com',
+        auth:{
+          user:'agriservice321@gmail.com',
+          pass:'ngymrnlnwabtnksh'
+        }
+      }
     }),
     // TypeOrmModule.forRootAsync({
     //   inject: [ConfigService],
@@ -43,7 +55,7 @@ import {MobileModule} from "./Mobile/mobile.module"
     ServiceCallsModule,
     SparePartsModule,
     UsersModule,
-    MobileModule
+    MobileModule,
   ],
   controllers: [AppController],
   providers: [AppService],
