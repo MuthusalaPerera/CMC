@@ -58,6 +58,14 @@ export class ServiceCallsController {
   async getDropDown() {
     return await this.serviceCallsService.findDropdown();
   }
+  @Get('origindrop')
+   async getOriginDropDown() {
+    return await this.serviceCallsService.findOriginDropDown();
+  }
+  @Get('problemTypedrop')
+   async getproblemTypeDown() {
+    return await this.serviceCallsService.findproblemTypeDropDown();
+  }
   // @Get('/:id')
   // async listCustomerId(@Param('id') id: string) {
   //   return await this.serviceCallsService.findById(parseInt(id));

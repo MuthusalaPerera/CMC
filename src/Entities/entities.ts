@@ -11,9 +11,11 @@ import {CustomerItemMap} from "../Customer/dtos/CustomerItemMap"
 import {ItemMasterEntity} from "../Item/ItemMaster"
 import {AssetMaster} from "../Item/AssetMaster"
 import {EquipmetCard} from "../Customer/EquipmetCard"
+import { OriginsDropDown } from "../IntialDB/Origin";
+import { ProblemTypesDropDown } from "src/IntialDB/ProblemType";
 
 
+const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown];
 
-const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard];
 
 export default entities
