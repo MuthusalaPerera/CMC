@@ -9,15 +9,7 @@ export class CreateSparePartDto {
     { Remark: string },
     { Secretary: string },
     { ItemDescription: string },
-    {
-      itemEntity: {
-        name: string;
-        MrfSerialNumber: string
-        SerialNumber: string
-        ItemDescription: string
-        ItemGroup: string
-      }
-    }]
+   ]
 
 }
 

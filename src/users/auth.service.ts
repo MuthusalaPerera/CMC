@@ -1,12 +1,12 @@
 import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import { UsersService } from './users.service';
-import { randomBytes, scrypt as _script } from 'crypto';
-import { promisify } from 'util';
-import {User} from "./user.entity";
+    BadRequestException,
+    Injectable,
+    NotFoundException
+} from "@nestjs/common"
+import {UsersService} from "./users.service"
+import {randomBytes, scrypt as _script} from "crypto"
+import {promisify} from "util"
+import {User} from "./user.entity"
 import {CreateUserDto} from "./dtos/create-user.dto"
 import {InjectRepository} from "@nestjs/typeorm"
 import {UsersDropDown} from "../IntialDB/Users"
@@ -14,8 +14,10 @@ import {Repository} from "typeorm"
 import Login from "../IntialDB/Login"
 import UserType from "../IntialDB/UserRolls"
 import {LoginDto} from "./dtos/login.dto"
+import {ForgetDto} from "./dtos/Forget.dto"
+import {MailerService} from "@nestjs-modules/mailer"
 
-const scrypt = promisify(_script);
+const scrypt = promisify(_script)
 
 @Injectable()
 export class AuthService {
@@ -23,6 +25,7 @@ export class AuthService {
         @InjectRepository(UserType) private readonly userTypeRepository: Repository<UserType>,
         @InjectRepository(User) private readonly userRepository: Repository<User>,
         @InjectRepository(Login) private readonly loginRepository: Repository<Login>,
+        private readonly mailerService: MailerService
     ) {
     }
 
@@ -33,12 +36,12 @@ export class AuthService {
             User.userType = user
             const dbUser = await this.loginRepository.findOne({UserName: User.login.UserName})
             if (!dbUser) {
-                await this.userRepository.save(User);
+                await this.userRepository.save(User)
 
-                const salt = randomBytes(8).toString('hex');
-                const hash = (await scrypt(User.login.Password, salt, 32)) as Buffer;
+                const salt = randomBytes(8).toString("hex")
+                const hash = (await scrypt(User.login.Password, salt, 32)) as Buffer
 
-                const result = salt + '.' + hash.toString('hex');
+                const result = salt + "." + hash.toString("hex")
 
                 const u = await this.loginRepository.create({
                     Id: User.login.Id,
@@ -46,30 +49,49 @@ export class AuthService {
                     Password: result,
                     Status: User.login.Status,
                     DeviceId: User.login.DeviceId
-                });
+                })
                 u.user = User
-                return this.loginRepository.save(u);
+                return this.loginRepository.save(u)
             }
         }
     }
+
     async signin(loginDto: LoginDto) {
-        const [user] = await this.loginRepository.find({UserName:loginDto.login.UserName});
-       
+        const user = await this.loginRepository.findOne({UserName: loginDto.login.UserName})
+        console.log(user.Status)
         if (!user) {
-            throw new NotFoundException('user not found');
+            throw new NotFoundException("user not found")
         }
-        else{
-                const [salt, storedHash] = user.Password.split('.');
-                const hash = (await scrypt(loginDto.login.Password, salt, 32)) as Buffer;
-                if (hash.toString('hex') !== storedHash) {
-                    throw new BadRequestException('Bad password');
-                }
-                else{
-                    return user
-                }
+        if(user.Status!==1){
+            throw new NotFoundException("status expired")
+        }
+        else {
+            const [salt, storedHash] = user.Password.split(".")
+            const hash = (await scrypt(loginDto.login.Password, salt, 32)) as Buffer
+            if (hash.toString("hex") !== storedHash) {
+                throw new BadRequestException("Bad password")
+            } else {
+                return user
+            }
         }
     }
-    
+
+    async forget(forgetDto: ForgetDto) {
+        console.log(forgetDto.otp)
+        this.mailerService
+            .sendMail({
+                to: forgetDto.email, // list of receivers
+                from: "CMC@notifier.com", // sender address
+                subject: "OTP ✔", // Subject line
+                text: "welcome" + forgetDto.otp, // plaintext body
+                html: "<b>Here is your OTP " + forgetDto.otp + "</b>" // HTML body content
+            })
+            .then(() => {
+            })
+            .catch(() => {
+            })
+    }
+
 //     if (!user) {
 //     throw new NotFoundException('user not found');
 // }
@@ -83,9 +105,8 @@ export class AuthService {
 // }
 //
 // return user;
-    
-    
-    
+
+
 //reset
 //   async update(email: string, attrs: Partial<User>) {
 //     const userDB = await this.usersService.findOneEmail(email)

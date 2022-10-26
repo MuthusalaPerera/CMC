@@ -33,9 +33,9 @@ export  class ServiceTicketEntity {
     PlannedStartDate:Date;
     @Column()
     PlannedEndDate:Date;
-    @Column()
+    @Column({nullable:true})
     ActualStartDate:Date;
-    @Column()
+    @Column({nullable:true})
     ActualEndDate:Date;
     @Column()
     CreatedOn:Date;
