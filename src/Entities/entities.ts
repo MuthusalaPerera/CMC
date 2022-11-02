@@ -13,9 +13,11 @@ import {AssetMaster} from "../Item/AssetMaster"
 import {EquipmetCard} from "../Customer/EquipmetCard"
 import { OriginsDropDown } from "../IntialDB/Origin";
 import { ProblemTypesDropDown } from "src/IntialDB/ProblemType";
+import {Solutions} from "../ServiceCallOther/Solutions"
+import {Expences} from "../ServiceCallOther/expences"
 
 
-const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown];
+const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,Solutions,Expences];
 
 
 export default entities

@@ -12,6 +12,7 @@ import {LoginDto} from "../users/dtos/login.dto"
 import Login from "../IntialDB/Login"
 import {User} from "../users/user.entity"
 import {LoginDtoMobile} from "./dto/loginDtoMobile"
+import {ProblemTypesDropDown} from "../IntialDB/ProblemType"
 
 const scrypt = promisify(_script)
 @Injectable()
@@ -21,7 +22,8 @@ export class MobileService {
         @InjectRepository(ServiceCall) private readonly serviceRepository: Repository<ServiceCall>,
         @InjectRepository(CustomerEntity) private readonly customerDtoRepository: Repository<CustomerEntity>,
         @InjectRepository(ItemEntity) private readonly itemEntityRepository: Repository<ItemEntity>,
-        @InjectRepository(Login) private readonly loginRepository: Repository<Login>
+        @InjectRepository(Login) private readonly loginRepository: Repository<Login>,
+        @InjectRepository(ProblemTypesDropDown) private readonly problemTypesDropDownRepository: Repository<ProblemTypesDropDown>
     ) {
     }
 
@@ -39,6 +41,11 @@ export class MobileService {
 
     getAllService() {
         return this.serviceRepository.find();
+    }
+
+
+    getAllProblem(){
+        return this.problemTypesDropDownRepository.find()
     }
 
     reFormatServiceCall(serviceCall: ServiceCall) {
@@ -79,7 +86,9 @@ export class MobileService {
                 const [salt, storedHash] = user.Password.split(".")
                 const hash = (await scrypt(pass, salt, 32)) as Buffer
                 if (hash.toString("hex") !== storedHash) {
-                    throw new BadRequestException("Bad password")
+                    // throw new BadRequestException("Bad password")
+                   
+                    return null
                 } else {
                     return user
                 }

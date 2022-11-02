@@ -52,6 +52,10 @@ export class ServiceCall {
   ActualStartDate:Date
   @Column({nullable:true})
   ActualEndDate:Date
+  @Column({nullable:true})
+  NextStartDate:Date
+  @Column({nullable:true})
+  NextEndDate:Date
   @ManyToOne(()=>CustomerEntity,customerEntity=>customerEntity.serviceCalls,{eager:true} )
   customerEntity:CustomerEntity
   @OneToMany(()=>ServiceTicketEntity,(ServiceTicket)=>ServiceTicket.serviceCall)

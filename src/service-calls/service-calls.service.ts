@@ -10,6 +10,8 @@ import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate"
 import {UsersDropDown} from "../IntialDB/Users"
 import { OriginsDropDown } from '../IntialDB/Origin';
 import { ProblemTypesDropDown } from 'src/IntialDB/ProblemType';
+import {Solutions} from "../ServiceCallOther/Solutions"
+import {Expences} from "../ServiceCallOther/expences"
 
 
 
@@ -21,7 +23,9 @@ export class ServiceCallsService {
         @InjectRepository(ItemEntity) private readonly itemEntityRepository:Repository<ItemEntity>,
         @InjectRepository(UsersDropDown) private readonly userDropDownRepository:Repository<UsersDropDown>,
         @InjectRepository(OriginsDropDown) private readonly originDropDownRepository:Repository<OriginsDropDown>,
-        @InjectRepository(ProblemTypesDropDown) private readonly problemTypeDropDownRepository:Repository<ProblemTypesDropDown>
+        @InjectRepository(ProblemTypesDropDown) private readonly problemTypeDropDownRepository:Repository<ProblemTypesDropDown>,
+        @InjectRepository(Solutions) private readonly solutionsRepository:Repository<Solutions>,
+        @InjectRepository(Expences) private readonly expencesRepository:Repository<Expences>
     ) {}
     async createUser(customerDto:CustomerDto){
        console.log(CustomerDto)
@@ -75,6 +79,17 @@ export class ServiceCallsService {
             }
     }
 
+
+    async createNewSolutions(solutions:Solutions){
+        return   this.solutionsRepository.save(solutions)
+    }
+    async createNewExpences(expences:Expences){
+        return   this.expencesRepository.save(expences)
+    }
+    async getSolutions(){
+        return   this.solutionsRepository.find()
+    }
+
     find() {
         return this.customerDtoRepository.find({relations:['serviceCalls','serviceCalls.itemEntity']});
     }
@@ -110,10 +125,15 @@ export class ServiceCallsService {
         return this.serviceRepository.find({relations:['customerEntity','itemEntity']});
     }
 
+    listServiceCallsDocuments() {
+        return this.serviceRepository.find({Status: "completed"});
+    }
+
     async findP(options: IPaginationOptions): Promise<Pagination<ServiceCall>> {
         return paginate(this.serviceRepository, options);
     }
-        async update(id: number, attrs: Partial<CustomerDto>) {
+    
+    async update(id: number, attrs: Partial<CustomerDto>) {
              console.log(attrs)
             const customer = await this.getCustomerById(id);
              Object.assign(customer,attrs)
@@ -134,6 +154,20 @@ export class ServiceCallsService {
                 })
             }
         }
+
+    async updateNextSchedule(id: number, attrs: Partial<ServiceCall>) {
+        console.log(attrs)
+
+             const servie = await this.getServiceById(id);
+        if(!servie){
+            return new HttpException("Service Not found",HttpStatus.BAD_REQUEST);
+        }
+        else{
+            Object.assign(servie, attrs)
+            console.log(servie)
+            return await this.serviceRepository.save(servie)
+        }
+    }
         
     getCustomerById(Id: number) {
             return this.customerDtoRepository.findOne(Id,{relations:['serviceCalls','serviceCalls.itemEntity']});
