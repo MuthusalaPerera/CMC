@@ -129,5 +129,20 @@ export  class SerilizedService {
 }
 
 
+export  class SerilizedProblem {
+    @Expose({ name: "typeId" })
+    ProblemTypeCode: number;
+    @Expose({ name: "typeName" })
+    ProblemTypeName: string;
+    @Expose({ name: "description" })
+    ProblemTypeValue: string;
+    @Expose({ name: "status" })
+    Status: number;
+    
+    constructor(partial: Partial<SerilizedProblem>){
+        Object.assign(this,partial)
+    };
+}
+
 
 

@@ -15,6 +15,4 @@ export  class Solutions {
     Status:string
     @Column()
     HandledBy:string
-
-
 }
