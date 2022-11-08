@@ -4,20 +4,20 @@ import {Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} 
 export  class EquipmetCard {
     @PrimaryGeneratedColumn()
     Id:number
-    @Column()
+    @Column({length:50})
     msnfSN: string;
-    @Column()
+    @Column({length:50})
     internalSN: string
-    @Column()
+    @Column({length:50})
     itemCode: string
-    @Column()
+    @Column({length:100})
     itemName: string
-    @Column()
+    @Column({length:15})
     customer: string
-    @Column()
+    @Column({length:100})
     custmrName: string
     @Column()
-    Distance: string
+    Distance: number
     @Column()
     cntrctEnd: Date
     @Column()

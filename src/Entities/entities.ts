@@ -15,9 +15,18 @@ import { OriginsDropDown } from "../IntialDB/Origin";
 import { ProblemTypesDropDown } from "src/IntialDB/ProblemType";
 import {Solutions} from "../ServiceCallOther/Solutions"
 import {Expences} from "../ServiceCallOther/expences"
+import {AssertsReservation} from "../AssertsReservation/AssertsReservation";
+import {VehicleReservation} from "../Vehicle/VehicleReservation";
+import {Vehicle} from "../Vehicle/Vehicle";
 
 
-const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,Solutions,Expences];
+const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle];
+
+
+
+//
+// const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,AssertsReservation];
+// >>>>>>> Stashed changes
 
 
 export default entities
