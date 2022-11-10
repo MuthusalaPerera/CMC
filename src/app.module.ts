@@ -10,9 +10,13 @@ import { SparePartsModule } from './spare-parts/spare-parts.module';
 import {MobileModule} from "./Mobile/mobile.module"
 import {MailerModule} from "@nestjs-modules/mailer"
 import UserType from "./IntialDB/UserRolls"
+
 import { UserRoleTypesModule } from './user-role-types/user-role-types.module';
 import { OriginTypesModule } from './origin-types/origin-types.module';
 import { ProblemTypesModule } from './problem-types/problem-types.module';
+
+import {MulterModule} from "@nestjs/platform-express"
+
 
 
 @Module({
@@ -21,6 +25,7 @@ import { ProblemTypesModule } from './problem-types/problem-types.module';
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
+    MulterModule.register({dest:'./uploads123'}),
     MailerModule.forRoot({
       transport: {
         host:'smtp.gmail.com',

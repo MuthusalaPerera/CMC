@@ -18,7 +18,7 @@ import {
     DefaultValuePipe, Session
 } from "@nestjs/common"
 import {MobileService} from "./mobile.service"
-import {SerilizedItem, SerilizedService, SerilizedUser} from "./dto/serilized.mobile"
+import {SerilizedItem, SerilizedProblem, SerilizedService, SerilizedUser} from "./dto/serilized.mobile"
 import {classToPlain} from "class-transformer"
 import {randomBytes, scrypt as _script} from "crypto"
 import {promisify} from "util"
@@ -93,12 +93,29 @@ export class MobileController {
         return service.map(service => this.mobileService.reFormatServiceCall(service))
     }
 
+
+    @UseInterceptors(ClassSerializerInterceptor)
+    @Get('/problem')
+    public async getProblemType() {
+        const problem = await this.mobileService.getAllProblem();
+         const catResponses = problem.map(problems => classToPlain(new SerilizedProblem(problems)))
+        // console.log(catResponses)
+        //  const refomat={
+        //      Data:[
+        //          service.map(service => this.mobileService.reFormatServiceCall(service))
+        //      ]
+        //  }
+        return catResponses
+        // return service.map(service => this.mobileService.reFormatServiceCall(service))
+    }
+
     @Get('/signin?')
     async signin(@Query('uname') uname: string,@Query('password') password: string,@Query('deviceId') deviceId: string) {
         const login= await this.mobileService.signin(uname,password,deviceId)
             console.log(uname)
+        var refomat;
         if(login){
-            const refomat={
+             refomat={
                 Token:randomBytes(32).toString("hex"),
                 Status:"",
                 TokenAccess:"",
@@ -110,8 +127,18 @@ export class MobileController {
             }
             return  refomat
         }
-       else throw new NotFoundException();
-       return login;
+       else {
+             refomat= {
+                Token: randomBytes(32).toString("hex"),
+                Status: "",
+                TokenAccess: "",
+                ResponseDescription: "Data Un Successfull",
+                ErrorDescription: "Data Fail",
+            }
+            
+        }
+           // throw new NotFoundException();
+       return refomat;
     }
 
     

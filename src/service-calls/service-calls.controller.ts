@@ -15,8 +15,8 @@ import {
   Put,
   Delete,
   Query,
-  DefaultValuePipe
-} from '@nestjs/common';
+  DefaultValuePipe, UploadedFile
+} from "@nestjs/common"
 import { CreateServiceCallDto } from './dtos/create-service-call.dto';
 import {ServiceCallsService} from "./service-calls.service";
 
@@ -28,6 +28,9 @@ import {Pagination} from "nestjs-typeorm-paginate";
 import {ServiceCall} from "./service-call.entity";
 import {classToPlain} from "class-transformer"
 import {SerilizedItemDropdown, SerilizedUser, SerilizedUserDropdown} from "../Mobile/dto/serilized.mobile"
+import {Solutions} from "../ServiceCallOther/Solutions"
+import {SolutionDTO} from "../ServiceCallOther/SolutionDTO"
+import {FileInterceptor} from "@nestjs/platform-express"
 
 @Controller('service-calls')
 export class ServiceCallsController {
@@ -74,6 +77,10 @@ export class ServiceCallsController {
   async listServiceCallsS() {
     return await this.serviceCallsService.findS();
   }
+  @Get('service-documents')
+  async listServiceCallsDocuments() {
+    return await this.serviceCallsService.listServiceCallsDocuments();
+  }
   @Get('a/')
   async index(
       @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
@@ -89,6 +96,30 @@ export class ServiceCallsController {
   async createServiceCall(@Body() body: CustomerDto) {
   console.log(body)
     return  await this.serviceCallsService.createUser(body)
+  }
+  @Post('/file')
+  @UseInterceptors(FileInterceptor('file'))
+   handleUpload(@UploadedFile() file:Express.Multer.File) {
+    console.log('file',file)
+    return  'file upload';
+  }
+  @Post('/solutions')
+  async AddSolutions(@Body() body:SolutionDTO) {
+    console.log(body)
+    return  await this.serviceCallsService.createNewSolutions(body)
+  }
+  @Post('/expences')
+  async AddExpences(@Body() body) {
+    console.log(body)
+    return  await this.serviceCallsService.createNewExpences(body)
+  }
+  @Get('/getSolutions')
+  async getSolutions() {
+    return await this.serviceCallsService.getSolutions();
+  }
+  @Put('/Schedule/:id')
+  scheduleServiceCall(@Param('id') id: string, @Body() body) {
+    return this.serviceCallsService.updateNextSchedule(parseInt(id), body);
   }
   @Put('a/:id')
   updateUser(@Param('id') id: string, @Body() body) {
