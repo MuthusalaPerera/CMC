@@ -9,6 +9,7 @@ import { Repository } from 'typeorm';
 import { SparePart } from './spare-part.entity';
 import {ServiceCall} from "../service-calls/service-call.entity";
 import {CreateSparePartDto} from "./dtos/create-spare-part.dto";
+import {TicketDto} from "./dtos/ticket.dto";
 
 @Injectable()
 export class SparePartsService {
@@ -46,29 +47,25 @@ export class SparePartsService {
     findTicket(){
         return this.spareRepository.find({relations:['ServiceTicketEntity','ServiceTicketEntity.serviceCall']});
     }
-    
-    // async update(id:number, attrs: Partial<ServiceTicketDto>){
-    //   const sparepart = await this.getServiceTicketById(id);
-    //
-    //   if(!sparepart){
-    //     throw new Error('Not found');
-    //   }
-    //
-    //   Object.assign(sparepart.sparePart,attrs.sparePart)
-    //   console.log(sparepart.sparePart)
-    //   for (const part of sparepart.sparePart){
-    //     console.log(part.itemEntity)
-    //     await this.itemEntityRepository.update(part.itemEntity.ItemCode,part.itemEntity)
-    //     await this.spareRepository.update(part.SPReqId,part)
-    //   }
-    //     return await this.serviceTicketRepository.update(id,{
-    //       TicketId:attrs.TicketId
-    //     })
-    //
-    // }
+
+    async update(id:number, attrs: Partial<TicketDto>){
+         const serviceTicketEntity = await this.getServiceTicketOnlyById(id);
+        console.log(attrs)
+        if(!serviceTicketEntity){
+            throw new Error('Not found');
+        }
+        Object.assign(serviceTicketEntity,attrs)
+        return await this.serviceTicketRepository.save(serviceTicketEntity)
+    }
+
+
           getServiceTicketById(id: number) {
               return this.serviceTicketRepository.findOne(id,{relations:['sparePart','sparePart.itemEntity','itemEntity']});
           }
+
+         getServiceTicketOnlyById(id: number) {
+              return this.serviceTicketRepository.findOne(id);
+        }
           getSparePartById(Id:number){
             return this.serviceTicketRepository.findOne(Id)
           }

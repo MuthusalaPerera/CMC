@@ -113,6 +113,10 @@ export class ServiceCallsController {
     console.log(body)
     return  await this.serviceCallsService.createNewExpences(body)
   }
+  @Get('/getExpences')
+  async getExpences() {
+    return await this.serviceCallsService.getExpences();
+  }
   @Get('/getSolutions')
   async getSolutions() {
     return await this.serviceCallsService.getSolutions();

@@ -86,6 +86,9 @@ export class ServiceCallsService {
     async createNewExpences(expences:Expences){
         return   this.expencesRepository.save(expences)
     }
+    async getExpences(){
+        return   this.expencesRepository.find()
+    }
     async getSolutions(){
         return   this.solutionsRepository.find()
     }

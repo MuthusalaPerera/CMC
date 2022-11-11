@@ -4,6 +4,7 @@ import { ServiceTicketDto } from 'src/service-calls/dtos/service-ticket.dto';
 import { ServiceTicketEntity } from 'src/service-calls/service-ticket.entity';
 import { CreateSparePartDto } from 'src/spare-parts/dtos/create-spare-part.dto';
 import { SparePartsService } from './spare-parts.service';
+import {TicketDto} from "./dtos/ticket.dto";
 
 @Controller('spare-parts')
 export class SparePartsController {
@@ -29,10 +30,11 @@ export class SparePartsController {
     return await this.sparePartsService.createSparepart(body)
   }
 
-    // @Put('1/:id')
-    // updateSparePart(@Param('id') id: string, @Body() body:ServiceTicketDto){
-    //   return this.sparePartsService.update(parseInt(id),body);
-    // }
+    @Put('/ticket/:id')
+    updateSparePart(@Param('id') id: string, @Body() body:TicketDto){
+    console.log(body)
+      return this.sparePartsService.update(parseInt(id),body);
+    }
     @UseInterceptors(ClassSerializerInterceptor)
     @Get('/:id')
     async getSparePart(@Param('id', ParseIntPipe) id: number) {

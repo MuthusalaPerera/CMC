@@ -48,6 +48,7 @@ export class AuthService {
                     UserName: User.login.UserName,
                     Password: result,
                     Status: User.login.Status,
+                    Count:0,
                     DeviceId: User.login.DeviceId
                 })
                 u.user = User
