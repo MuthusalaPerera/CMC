@@ -10,7 +10,13 @@ import { SparePartsModule } from './spare-parts/spare-parts.module';
 import {MobileModule} from "./Mobile/mobile.module"
 import {MailerModule} from "@nestjs-modules/mailer"
 import UserType from "./IntialDB/UserRolls"
+
+import { UserRoleTypesModule } from './user-role-types/user-role-types.module';
+import { OriginTypesModule } from './origin-types/origin-types.module';
+import { ProblemTypesModule } from './problem-types/problem-types.module';
+
 import {MulterModule} from "@nestjs/platform-express"
+
 
 
 @Module({
@@ -58,6 +64,9 @@ import {MulterModule} from "@nestjs/platform-express"
     SparePartsModule,
     UsersModule,
     MobileModule,
+    UserRoleTypesModule,
+    OriginTypesModule,
+    ProblemTypesModule
   ],
   controllers: [AppController],
   providers: [AppService],

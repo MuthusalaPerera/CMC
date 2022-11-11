@@ -10,6 +10,8 @@ export default  class UserType {
     @Column()
     Description:string;
     @Column()
+    RoleDescription:string;
+    @Column()
     Status:number;
     @OneToMany(()=>User,(User)=>User.userType)
     user:User[];
