@@ -10,5 +10,6 @@ export  class ProblemTypesDropDown {
 
     @Column()
     ProblemTypeValue:string
-
+    @Column()
+    Status:number
 }

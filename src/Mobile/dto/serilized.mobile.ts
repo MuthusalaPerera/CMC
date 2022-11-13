@@ -1,5 +1,5 @@
 import {Exclude, Expose} from "class-transformer"
-import {Column} from "typeorm"
+import {Column, PrimaryGeneratedColumn} from "typeorm"
 
 
 export  class SerilizedUser {
@@ -7,7 +7,7 @@ export  class SerilizedUser {
     CustomerId: number;
     @Expose({ name: "Address" })
     CustomerAddressId:string
-    @Expose({ name: "CusName" })
+    @Expose({ name: "ss" })
     CustomeName:string
     @Exclude()
     TelephoneNo:string
@@ -16,6 +16,46 @@ export  class SerilizedUser {
         Object.assign(this,partial)
     };
 }
+
+
+
+export  class SerilizedItemDropdown {
+    @Exclude()
+    Id: number;
+    @Exclude()
+    ItemCode:string
+    @Expose({ name: "label" })
+    ItemDescription:string
+    @Exclude()
+    MrfSerialNumber:string
+    @Exclude()
+    SerialNumber:string
+    @Exclude()
+    ItemGroup:string
+
+    constructor(partial: Partial<SerilizedItemDropdown>){
+        Object.assign(this,partial)
+    };
+}
+
+
+export  class SerilizedUserDropdown {
+    @Exclude()
+    CustomerId: number;
+    @Exclude()
+    CustomerAddressId:string
+    @Expose({ name: "label" })
+    CustomeName:string
+    @Exclude()
+    TelephoneNo:string
+    @Exclude()
+    ContactPerson:string
+
+    constructor(partial: Partial<SerilizedUserDropdown>){
+        Object.assign(this,partial)
+    };
+}
+
 
 
 export  class SerilizedItem {
@@ -83,13 +123,26 @@ export  class SerilizedService {
     customerEntity
     @Exclude()
     itemEntity
-  
-
     constructor(partial: Partial<SerilizedService>){
         Object.assign(this,partial)
     };
 }
 
+
+export  class SerilizedProblem {
+    @Expose({ name: "typeId" })
+    ProblemTypeCode: number;
+    @Expose({ name: "typeName" })
+    ProblemTypeName: string;
+    @Expose({ name: "description" })
+    ProblemTypeValue: string;
+    @Expose({ name: "status" })
+    Status: number;
+    
+    constructor(partial: Partial<SerilizedProblem>){
+        Object.assign(this,partial)
+    };
+}
 
 
 

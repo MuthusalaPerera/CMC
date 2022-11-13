@@ -12,6 +12,8 @@ export default  class Login {
     @Column()
     Status:number;
     @Column()
+    Count:number;
+    @Column()
     DeviceId:string;
     @OneToOne(()=>User,(User)=>User.login,{eager:true})
     @JoinColumn()

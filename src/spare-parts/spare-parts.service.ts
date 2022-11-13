@@ -44,7 +44,7 @@ export class SparePartsService {
       return this.serviceTicketRepository.find();
     }
     findTicket(){
-        return this.spareRepository.find({relations:['ServiceTicketEntity','itemEntity','ServiceTicketEntity.serviceCall']});
+        return this.spareRepository.find({relations:['ServiceTicketEntity','ServiceTicketEntity.serviceCall']});
     }
     
     // async update(id:number, attrs: Partial<ServiceTicketDto>){
@@ -79,16 +79,19 @@ export class SparePartsService {
             }
             return this.serviceTicketRepository.remove(Spare);
           }
-
-
+    findByItemCode(code:string) {
+        return this.itemEntityRepository.findOne({ItemCode:code});
+    }
     async createSparepart(body: CreateSparePartDto) {
         const ST=await this.serviceTicketRepository.create({...body})
         for (const SparePart of this.spareRepository.create(body.sparePart)){
-            console.log(SparePart.itemEntity)
+            // console.log(SparePart.itemEntity)
             console.log(SparePart.ServiceTicketEntity)
-
             SparePart.ServiceTicketEntity=ST
-            await this.itemEntityRepository.save(SparePart.itemEntity)
+            // const itemDB =await  this.findByItemCode(SparePart.itemEntity.ItemCode)
+            // console.log(itemDB)
+            // SparePart.itemEntity=itemDB;
+         //   await this.itemEntityRepository.create(SparePart.itemEntity)
             await this.spareRepository.save({...SparePart})
         }
     }

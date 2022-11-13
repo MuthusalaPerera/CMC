@@ -4,6 +4,8 @@ import {Column, ManyToOne, OneToMany} from "typeorm";
 import { PrimaryGeneratedColumn } from "typeorm/decorator/columns/PrimaryGeneratedColumn";
 import { Entity } from "typeorm/decorator/entity/Entity";
 import {ServiceCall} from "./service-call.entity";
+import {VehicleReservation} from "../Vehicle/VehicleReservation";
+import {AssertsReservation} from "../AssertsReservation/AssertsReservation";
 
 @Entity()
 export  class ServiceTicketEntity {
@@ -33,9 +35,9 @@ export  class ServiceTicketEntity {
     PlannedStartDate:Date;
     @Column()
     PlannedEndDate:Date;
-    @Column()
+    @Column({nullable:true})
     ActualStartDate:Date;
-    @Column()
+    @Column({nullable:true})
     ActualEndDate:Date;
     @Column()
     CreatedOn:Date;
@@ -46,4 +48,10 @@ export  class ServiceTicketEntity {
 
      @OneToMany(()=>SparePart,(sparePart)=>sparePart.ServiceTicketEntity)
     sparePart:SparePart[];
+
+    @OneToMany(()=>VehicleReservation,(vehicleReservation)=>vehicleReservation.serviceTicketEntity)
+    vehicleReservations:VehicleReservation[]
+
+    @OneToMany(()=>AssertsReservation,(assertsReservations)=>assertsReservations.serviceTicketEntity)
+    assertsReservations:AssertsReservation[]
 }

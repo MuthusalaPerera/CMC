@@ -5,9 +5,11 @@ import {CustomerEntity} from "../Customer/customer.entity"
 import {ItemEntity} from "../Item/Item.entity"
 import {MobileService} from "./mobile.service"
 import {MobileController} from "./mobile.controller"
+import Login from "../IntialDB/Login"
+import {ProblemTypesDropDown} from "../IntialDB/ProblemType"
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ServiceCall,CustomerEntity,ItemEntity])],
+  imports: [TypeOrmModule.forFeature([ServiceCall,CustomerEntity,ItemEntity,Login,ProblemTypesDropDown])],
   controllers: [MobileController],
   providers: [{
     provide: 'Mobile_Service',

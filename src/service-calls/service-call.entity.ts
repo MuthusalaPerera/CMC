@@ -48,16 +48,19 @@ export class ServiceCall {
   EstimatedDutation:string
   @Column()
   PlanedEndDateTime:Date
-  @Column()
+  @Column({nullable:true})
   ActualStartDate:Date
-  @Column()
+  @Column({nullable:true})
   ActualEndDate:Date
+  @Column({nullable:true})
+  NextStartDate:Date
+  @Column({nullable:true})
+  NextEndDate:Date
   @ManyToOne(()=>CustomerEntity,customerEntity=>customerEntity.serviceCalls,{eager:true} )
   customerEntity:CustomerEntity
   @OneToMany(()=>ServiceTicketEntity,(ServiceTicket)=>ServiceTicket.serviceCall)
   serviceTicketEntities:ServiceTicketEntity[];
-  @OneToOne(()=>ItemEntity, item=>item.serviceCalls,{eager:true})
-  @JoinColumn()
+  @ManyToOne(()=>ItemEntity, item=>item.serviceCalls,{eager:true})
   itemEntity:ItemEntity;
 
 }

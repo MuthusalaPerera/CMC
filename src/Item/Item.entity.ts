@@ -1,13 +1,15 @@
 import { SparePart } from "src/spare-parts/spare-part.entity";
 import {Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {ServiceCall} from "../service-calls/service-call.entity";
+import {CustomerItemMap} from "../Customer/dtos/CustomerItemMap"
 
 
 @Entity()
 export  class ItemEntity {
     @PrimaryGeneratedColumn()
-    ItemCode:number;
-
+    Id:number;
+    @Column()
+    ItemCode:string
     @Column()
     MrfSerialNumber:string
 
@@ -20,9 +22,12 @@ export  class ItemEntity {
     @Column()
     ItemGroup:string
     
-    @OneToOne(()=>ServiceCall,(serviceCall)=>serviceCall.itemEntity)
-    serviceCalls:ServiceCall;
-    @OneToOne(()=>SparePart,(sparePart)=>sparePart.itemEntity)
-    spareParts: SparePart;
+    @OneToMany(()=>ServiceCall,(serviceCall)=>serviceCall.itemEntity)
+    serviceCalls:ServiceCall[];
 
+
+    // @OneToMany(()=>ItemEntity,(item)=>item.customerItemMap)
+    // itemEntities:ItemEntity[];
+     // @ManyToOne(()=>CustomerItemMap, (cutomerItem)=>cutomerItem.itemEntities)
+     // customerItemMap:CustomerItemMap;
 }
