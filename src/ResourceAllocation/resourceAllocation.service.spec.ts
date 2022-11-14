@@ -1,18 +1,18 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { SparePartsService } from './spare-parts.service';
+import { Test, TestingModule } from '@nestjs/testing';
+import { resourceAllocationService } from './resourceAllocation.service';
 
-// describe('SparePartsService', () => {
-//   let service: SparePartsService;
+describe('resourceAllocationService', () => {
+  let service: resourceAllocationService;
 
-//   beforeEach(async () => {
-//     const module: TestingModule = await Test.createTestingModule({
-//       providers: [SparePartsService],
-//     }).compile();
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [resourceAllocationService],
+    }).compile();
 
-//     service = module.get<SparePartsService>(SparePartsService);
-//   });
+    service = module.get<resourceAllocationService>(resourceAllocationService);
+  });
 
-//   it('should be defined', () => {
-//     expect(service).toBeDefined();
-//   });
-// });
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});

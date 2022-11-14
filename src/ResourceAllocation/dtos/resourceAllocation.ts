@@ -1,27 +1,43 @@
-// import { Expose } from 'class-transformer';
-// import { IsInt, IsOptional, IsString } from 'class-validator';
+import { Expose } from 'class-transformer';
 
-// export class inventoryDto {
-//  @Expose()
-//  id: number;
+export class resourceAllocationDto{
+    @Expose()
+    id: number;
 
-//   @Expose()
-//   SPID: string;
-
-//   @Expose()
-//   ItemDescription: string;
-
-//   @Expose()
-//   ItemType: string;
-
-//   @Expose()
-//   Remarks: string;
-
-//   @Expose()
-//   AvailableQuantity:number;
-
-//   @Expose()
-//   Attachment: string;
-
+    @Expose()
+    ToolId: string;
+    
+    @Expose()
+    ToolGroup:string;
+    
+    @Expose()
+    ToolReqID:string
+    
+    @Expose()
+    ToolDescription:string;
+    
+    @Expose()
+    SerialNo:string;
+    
+    @Expose()
+    ToolRequestStatus:string;
+    
+    @Expose()
+    ToolType:string;
+    
+    @Expose()
+    CreatedDateAndTime:string;
+    
+    @Expose()
+    RequestDateAndTime:string;
+    
+    @Expose()
+    NoOfDays:string;
+        
+    @Expose()
+    HandOverDateAndTime:string;
+    
+    
+}
 
 // }

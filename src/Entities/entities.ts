@@ -21,6 +21,7 @@ import {Expences} from "../ServiceCallOther/expences"
 import {AssertsReservation} from "../AssertsReservation/AssertsReservation";
 import {VehicleReservation} from "../Vehicle/VehicleReservation";
 import {Vehicle} from "../Vehicle/Vehicle";
+import { resourceAllocationEntity } from "src/ResourceAllocation/resourceAllocation.entity";
 
 
 
@@ -31,7 +32,7 @@ import {Vehicle} from "../Vehicle/Vehicle";
 
 
 
-const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle];
+const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle,resourceAllocationEntity];
 
 // import {Expences} from "../ServiceCallOther/expences"
 // import {AssertsReservation} from "../AssertsReservation/AssertsReservation";

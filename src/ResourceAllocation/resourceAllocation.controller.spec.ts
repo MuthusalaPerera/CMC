@@ -1,18 +1,18 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { InventoryController } from './inventory.controller';
+import { Test, TestingModule } from '@nestjs/testing';
+import { resourceAllocationController } from './resourceAllocation.controller';
 
-// describe('InventoryController', () => {
-//   let controller: InventoryController;
+describe('resourceAllocationController', () => {
+  let controller: resourceAllocationController;
 
-//   beforeEach(async () => {
-//     const module: TestingModule = await Test.createTestingModule({
-//       controllers: [InventoryController],
-//     }).compile();
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [resourceAllocationController],
+    }).compile();
 
-//     controller = module.get<InventoryController>(InventoryController);
-//   });
+    controller = module.get<resourceAllocationController>(resourceAllocationController);
+  });
 
-//   it('should be defined', () => {
-//     expect(controller).toBeDefined();
-//   });
-// });
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
