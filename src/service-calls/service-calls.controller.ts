@@ -36,6 +36,7 @@ import {FileInterceptor} from "@nestjs/platform-express"
 export class ServiceCallsController {
   constructor(@Inject('ServiceCalls_Service') private readonly serviceCallsService:ServiceCallsService) {}
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
    async listCustomer() {
     return await this.serviceCallsService.find();
