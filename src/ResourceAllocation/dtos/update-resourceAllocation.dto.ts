@@ -1,28 +1,56 @@
-// import { IsInt, IsOptional, IsString } from 'class-validator';
+import {IsArray, IsDate, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString} from 'class-validator';
 
-// export class UpdateinventoryDto {
-//   @IsString()
-//   @IsOptional()
-//   SPID: string;
+export class UpdateresourceAllocationtDto {
+  @IsNumber()
+  @IsOptional()
+  TicketId: number;
+  @IsArray()
+  @IsOptional()
+  resourceAllocation: [
+    { ToolGroup: string },
+    { ToolReqID: string },
+    { ToolDescription: string },
+    { SerialNo: string },
+    { ToolRequestStatus: string },
+    { ToolType: string },
+    { CreatedDateAndTime: string },
+    { RequestDateAndTime: string },
+    { NoOfDays: string },
+    { HandOverDateAndTime: string },
+   ]
 
-//   @IsString()
-//   @IsOptional()
-//   ItemDescription: string;
+}
 
-//   @IsString()
-//   @IsOptional()
-//   ItemType: string;
+// @Column()
+//   ToolGroup:string;
+  
+//   @Column()
+//   ToolReqID:string
 
-//   @IsOptional()
-//   @IsOptional()
-//   Remarks: string;
+//   @Column()
+//   ToolDescription:string;
 
-//   @IsInt()
-//   @IsOptional()
-//   AvailableQuantity:number;
+//   @Column()
+//   SerialNo:string;
 
-//   @IsOptional()
-//   Attachment: string;
+//   @Column()
+//   ToolRequestStatus:string;
+
+//   @Column()
+//   ToolType:string;
+
+//   @Column()
+//   CreatedDateAndTime:string;
+
+//   @Column()
+//   RequestDateAndTime:string;
+
+//   @Column()
+//   NoOfDays:string;
+
+  
+//   @Column()
+//   HandOverDateAndTimw:string;
 
 
 // }

@@ -11,7 +11,7 @@ import {promisify} from "util"
 import {LoginDto} from "../users/dtos/login.dto"
 import Login from "../IntialDB/Login"
 import {User} from "../users/user.entity"
-import {LoginDtoMobile} from "./dto/loginDtoMobile"
+//import {LoginDtoMobile} from "./dto/loginDtoMobile"
 import {ProblemTypesDropDown} from "../IntialDB/ProblemType"
 
 const scrypt = promisify(_script)
