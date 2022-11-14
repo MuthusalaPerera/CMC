@@ -12,6 +12,7 @@ import { OriginsDropDown } from '../IntialDB/Origin';
 import { ProblemTypesDropDown } from 'src/IntialDB/ProblemType';
 import {Solutions} from "../ServiceCallOther/Solutions"
 import {Expences} from "../ServiceCallOther/expences"
+import {randomBytes} from "crypto";
 
 
 
@@ -91,6 +92,18 @@ export class ServiceCallsService {
     }
     async getSolutions(){
         return   this.solutionsRepository.find()
+    }
+    findTicketById(id:number){
+        return this.serviceRepository.find({where:{ServiceCallId:id},relations:['serviceTicketEntities']});
+    }
+    reFormatServiceCall(serviceCall: ServiceCall) {
+        const refomat = {
+
+            Status: serviceCall.Status,
+            typeid: serviceCall.ServiceCallId,
+            typeName: serviceCall.ProblemType
+        }
+        return refomat;
     }
 
     find() {

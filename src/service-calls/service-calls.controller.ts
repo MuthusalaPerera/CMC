@@ -27,10 +27,16 @@ import {CustomerEntity} from "../Customer/customer.entity";
 import {Pagination} from "nestjs-typeorm-paginate";
 import {ServiceCall} from "./service-call.entity";
 import {classToPlain} from "class-transformer"
-import {SerilizedItemDropdown, SerilizedUser, SerilizedUserDropdown} from "../Mobile/dto/serilized.mobile"
+import {
+  SerilizedItemDropdown,
+  SerilizedProblem,
+  SerilizedUser,
+  SerilizedUserDropdown
+} from "../Mobile/dto/serilized.mobile"
 import {Solutions} from "../ServiceCallOther/Solutions"
 import {SolutionDTO} from "../ServiceCallOther/SolutionDTO"
 import {FileInterceptor} from "@nestjs/platform-express"
+import {randomBytes} from "crypto";
 
 @Controller('service-calls')
 export class ServiceCallsController {
@@ -121,9 +127,21 @@ export class ServiceCallsController {
   async getSolutions() {
     return await this.serviceCallsService.getSolutions();
   }
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('/ticketInServiceCall/:id')
+  async ticketServiceCall(@Param('id')id: string){
+   const serviceCall= await this.serviceCallsService.findTicketById(parseInt(id))
+    // if(serviceCall){
+    //  return   serviceCall.map(service => this.serviceCallsService.reFormatServiceCall(service))
+    // }
+    // else {
+    //
+    // }
+    return serviceCall
+  }
   @Put('/Schedule/:id')
-  scheduleServiceCall(@Param('id') id: string, @Body() body) {
-    return this.serviceCallsService.updateNextSchedule(parseInt(id), body);
+  async scheduleServiceCall(@Param('id') id: string, @Body() body) {
+    const service= await this.serviceCallsService.updateNextSchedule(parseInt(id), body);
   }
   @Put('a/:id')
   updateUser(@Param('id') id: string, @Body() body) {

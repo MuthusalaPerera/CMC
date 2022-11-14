@@ -19,13 +19,14 @@ import {Expences} from "../ServiceCallOther/expences"
 import {AssertsReservation} from "../AssertsReservation/AssertsReservation";
 import {VehicleReservation} from "../Vehicle/VehicleReservation";
 import {Vehicle} from "../Vehicle/Vehicle";
+import {File} from "../ServiceCallOther/File";
 
 // const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions];
 
 
 
 
-const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle];
+const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle,File];
 
 
 
