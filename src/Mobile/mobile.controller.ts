@@ -23,7 +23,7 @@ import {classToPlain} from "class-transformer"
 import {randomBytes, scrypt as _script} from "crypto"
 import {promisify} from "util"
 import {LoginDto} from "../users/dtos/login.dto"
-import {LoginDtoMobile} from "./dto/loginDtoMobile"
+//import {LoginDtoMobile} from "./dto/loginDtoMobile"
 
 const scrypt = promisify(_script)
 @Controller('mobile')
