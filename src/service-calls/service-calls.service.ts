@@ -103,11 +103,10 @@ export class ServiceCallsService {
         //serviceTicketEntities:serviceCall.serviceTicketEntities
         const serviceCallObj =this.serviceRepository.create(serviceCall)
         console.log(serviceCallObj.serviceTicketEntities.length)
-        if(serviceCallObj.serviceTicketEntities.length!==0){
-            for (const ServiceTicketEntity of serviceCall.serviceTicketEntities){
 
-                console.log(ServiceTicketEntity)
-                var ticket= {
+
+                // console.log(ServiceTicketEntity)
+                return  serviceCall.serviceTicketEntities.map(ServiceTicketEntity =>{return {
                     TicketId: ServiceTicketEntity.TicketId,
                     TicketType: ServiceTicketEntity.TicketType,
                     Subject: ServiceTicketEntity.Subject,
@@ -122,13 +121,8 @@ export class ServiceCallsService {
                     CreatedOn: ServiceTicketEntity.CreatedOn,
                     priority:serviceCall.Priority
                 }
-            }
-            return ticket
-        }
-        else{
-            return {message:null}
-        }
 
+                })
 
 
 

@@ -132,7 +132,7 @@ export class ServiceCallsController {
   @Get('/ticketInServiceCall/:id')
   async ticketServiceCall(@Param('id')id: string){
    const serviceCall= await this.serviceCallsService.findTicketById(parseInt(id))
-    console.log(serviceCall)
+    // console.log(serviceCall)
     if(serviceCall.length!==0){
      return   serviceCall.map(service => this.serviceCallsService.reFormatServiceCall(service))
     }
