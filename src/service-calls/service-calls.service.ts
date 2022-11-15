@@ -13,6 +13,8 @@ import { ProblemTypesDropDown } from 'src/IntialDB/ProblemType';
 import {Solutions} from "../ServiceCallOther/Solutions"
 import {Expences} from "../ServiceCallOther/expences"
 import {randomBytes} from "crypto";
+import {ServiceTicketEntity} from "./service-ticket.entity";
+import {map} from "rxjs/operators";
 
 
 
@@ -26,7 +28,8 @@ export class ServiceCallsService {
         @InjectRepository(OriginsDropDown) private readonly originDropDownRepository:Repository<OriginsDropDown>,
         @InjectRepository(ProblemTypesDropDown) private readonly problemTypeDropDownRepository:Repository<ProblemTypesDropDown>,
         @InjectRepository(Solutions) private readonly solutionsRepository:Repository<Solutions>,
-        @InjectRepository(Expences) private readonly expencesRepository:Repository<Expences>
+        @InjectRepository(Expences) private readonly expencesRepository:Repository<Expences>,
+        @InjectRepository(ServiceTicketEntity) private readonly serviceTicketRepository:Repository<ServiceTicketEntity>,
     ) {}
     async createUser(customerDto:CustomerDto){
        console.log(CustomerDto)
@@ -97,13 +100,56 @@ export class ServiceCallsService {
         return this.serviceRepository.find({where:{ServiceCallId:id},relations:['serviceTicketEntities']});
     }
     reFormatServiceCall(serviceCall: ServiceCall) {
-        const refomat = {
+        //serviceTicketEntities:serviceCall.serviceTicketEntities
+        const serviceCallObj =this.serviceRepository.create(serviceCall)
+        console.log(serviceCallObj.serviceTicketEntities.length)
+        if(serviceCallObj.serviceTicketEntities.length!==0){
+            for (const ServiceTicketEntity of serviceCall.serviceTicketEntities){
 
-            Status: serviceCall.Status,
-            typeid: serviceCall.ServiceCallId,
-            typeName: serviceCall.ProblemType
+                console.log(ServiceTicketEntity)
+                var ticket= {
+                    TicketId: ServiceTicketEntity.TicketId,
+                    TicketType: ServiceTicketEntity.TicketType,
+                    Subject: ServiceTicketEntity.Subject,
+                    AssignedTo: ServiceTicketEntity.AssignedTo,
+                    AssignedBY: ServiceTicketEntity.AssignedBY,
+                    EstimatedDuration: ServiceTicketEntity.EstimatedDuration,
+                    ContactPerson: ServiceTicketEntity.ContactPerson,
+                    PlannedStartDate: ServiceTicketEntity.PlannedStartDate,
+                    PlannedEndDate: ServiceTicketEntity.PlannedEndDate,
+                    ActualStartDate: ServiceTicketEntity.ActualStartDate,
+                    ActualEndDate:ServiceTicketEntity.ActualEndDate,
+                    CreatedOn: ServiceTicketEntity.CreatedOn,
+                    priority:serviceCall.Priority
+                }
+            }
+            return ticket
         }
-        return refomat;
+        else{
+            return {message:null}
+        }
+
+
+
+
+    }
+
+    reFormatServiceTicket(serviceTicketEntity: ServiceTicketEntity) {
+        const refomat = {
+            TicketId: serviceTicketEntity.TicketId,
+            TicketType: serviceTicketEntity.TicketType,
+            Subject: serviceTicketEntity.Subject,
+            AssignedTo: serviceTicketEntity.AssignedTo,
+            AssignedBY: serviceTicketEntity.AssignedBY,
+            EstimatedDuration: serviceTicketEntity.EstimatedDuration,
+            ContactPerson: serviceTicketEntity.ContactPerson,
+            PlannedStartDate: serviceTicketEntity.PlannedStartDate,
+            PlannedEndDate: serviceTicketEntity.PlannedEndDate,
+            ActualStartDate: serviceTicketEntity.ActualStartDate,
+            ActualEndDate:serviceTicketEntity.ActualEndDate,
+            CreatedOn: serviceTicketEntity.CreatedOn,
+        }
+        return refomat
     }
 
     find() {
