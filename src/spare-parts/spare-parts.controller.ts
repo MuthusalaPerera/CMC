@@ -31,11 +31,11 @@ export class SparePartsController {
     return await this.sparePartsService.createSparepart(body)
   }
 
-    // @Put('/ticket/:id')
-    // updateSparePart(@Param('id') id: string, @Body() body:TicketDto) {
-    //     console.log(body)
-    //     return this.sparePartsService.update(parseInt(id), body);
-    // }
+    @Put('/ticket/:id')
+    updateSparePart1(@Param('id') id: string, @Body() body:TicketDto) {
+        console.log(body)
+        return this.sparePartsService.update(parseInt(id), body);
+    }
   @Get('/itemService')
   async getItemEntity() {
     const sparepart = await this.sparePartsService.getItemMasterEntity();
