@@ -5,7 +5,7 @@ export class CreateSparePartDto {
   TicketId: number;
   @IsArray()
   sparePart: [
-    { SPReqId: string },
+    { SPReqId: number },
     { Remark: string },
     { Secretary: string },
     { ItemDescription: string },

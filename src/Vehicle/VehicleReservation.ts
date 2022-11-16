@@ -20,8 +20,8 @@ export  class VehicleReservation {
     ReturnedOn:Date
     @Column()
     ReturnedRemark:string
-    @OneToOne(() => Vehicle, (vehicle) => vehicle.vehicleReservation) // specify inverse side as a second parameter
-    vehicle: Vehicle
+    // @OneToOne(() => Vehicle, (vehicle) => vehicle.vehicleReservation) // specify inverse side as a second parameter
+    // vehicle: Vehicle
 
     @ManyToOne(()=>ServiceTicketEntity,ServiceTicketEntity=>ServiceTicketEntity.vehicleReservations,{onDelete:'CASCADE'})
     serviceTicketEntity:ServiceTicketEntity

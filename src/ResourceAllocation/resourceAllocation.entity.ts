@@ -6,7 +6,7 @@ import {ServiceCall} from "../service-calls/service-call.entity";
 import { ServiceTicketEntity } from 'src/service-calls/service-ticket.entity';
 
 @Entity()
-export class resourceAllocationEntity {
+export class ResourceAllocationEntity {
  // [x: string]: string | number | Date | string[] | ObjectID | number[] | Date[] | ObjectID[] | FindConditions<SparePart>;
   @PrimaryGeneratedColumn()
   ToolId: string;
@@ -15,7 +15,7 @@ export class resourceAllocationEntity {
   ToolGroup:string;
   
   @Column()
-  ToolReqID:string
+  ToolReqID:string;
 
   @Column()
   ToolDescription:string;
@@ -30,23 +30,22 @@ export class resourceAllocationEntity {
   ToolType:string;
 
   @Column()
-  CreatedDateAndTime:string;
+  CreatedDateAndTime:Date;
 
   @Column()
-  RequestDateAndTime:string;
+  RequestDateAndTime:Date;
 
   @Column()
   NoOfDays:string;
 
-  
   @Column()
-  HandOverDateAndTime:string;
+  HandOverDateAndTime:Date;
 
 //   @Column()
 //   ItemDescription:string;
 
-  @ManyToOne(()=> resourceAllocationEntity,ServiceTicketEntity=>ServiceTicketEntity. resourceAllocation,{onDelete:'CASCADE'})
-  ServiceTicketEntity:ServiceTicketEntity
-  resourceAllocation: any;
+  @ManyToOne(()=> ServiceTicketEntity, ServiceTicketEntity=>ServiceTicketEntity.resourceAllocationEntity,{onDelete:'CASCADE'})
+  serviceTicketEntity:ServiceTicketEntity
+
   
 }

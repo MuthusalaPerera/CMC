@@ -6,6 +6,7 @@ import { Entity } from "typeorm/decorator/entity/Entity";
 import {ServiceCall} from "./service-call.entity";
 import {VehicleReservation} from "../Vehicle/VehicleReservation";
 import {AssertsReservation} from "../AssertsReservation/AssertsReservation";
+import { ResourceAllocationEntity } from "src/ResourceAllocation/resourceAllocation.entity";
 
 @Entity()
 export  class ServiceTicketEntity {
@@ -54,4 +55,6 @@ export  class ServiceTicketEntity {
 
     @OneToMany(()=>AssertsReservation,(assertsReservations)=>assertsReservations.serviceTicketEntity)
     assertsReservations:AssertsReservation[]
+    @OneToMany(()=>ResourceAllocationEntity,(resourceAllocation)=>resourceAllocation.serviceTicketEntity)
+    resourceAllocationEntity:ResourceAllocationEntity[]
 }

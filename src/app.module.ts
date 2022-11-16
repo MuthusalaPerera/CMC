@@ -16,6 +16,7 @@ import { OriginTypesModule } from './origin-types/origin-types.module';
 import { ProblemTypesModule } from './problem-types/problem-types.module';
 
 import {MulterModule} from "@nestjs/platform-express"
+import { resourceAllocationModule } from './ResourceAllocation/resourceAllocation.module';
 
 
 
@@ -66,7 +67,8 @@ import {MulterModule} from "@nestjs/platform-express"
     MobileModule,
     UserRoleTypesModule,
     OriginTypesModule,
-    ProblemTypesModule
+    ProblemTypesModule,
+    resourceAllocationModule
   ],
   controllers: [AppController],
   providers: [AppService],
