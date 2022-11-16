@@ -1,26 +1,48 @@
+import { ServiceTicketEntity } from "src/service-calls/service-ticket.entity";
 import { SparePart } from "src/spare-parts/spare-part.entity";
 import {Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {VehicleReservation} from "./VehicleReservation";
 
 @Entity()
 export  class Vehicle {
+
     @PrimaryGeneratedColumn()
-    VehicleRegistrationNo:number;
+    VehicleID:string
     @Column()
-    IsAvailable:string
+    VehicleType:string
+
+    @Column()
+    VehicleReqId:string
+
     @Column()
     VehicleDescription:string
+
     @Column()
-    IsRecordActive:string
+    VehicleCapacity:string
+
     @Column()
-    CreatedOn:Date
+    VehicleReqStatus:string
+
+     @Column()
+    CreatedDateAndTime:Date
+
     @Column()
-    CreatedBy:string
+    RequestDateAndTime:Date
     @Column()
-    EditedOn:Date
+    HandOverDateAndTime:Date
+
     @Column()
-    EditedBy:string
-    @OneToOne(() => VehicleReservation, (vehicleReservation) => vehicleReservation.vehicle) // specify inverse side as a second parameter
-    @JoinColumn()
-    vehicleReservation: VehicleReservation
+    NoOfDays:string;
+
+    
+
+    // @OneToOne(() => VehicleReservation, (vehicleReservation) => vehicleReservation.vehicle) // specify inverse side as a second parameter
+    // @JoinColumn()
+    // vehicleReservation: VehicleReservation
+
+    // @ManyToOne(()=> ServiceTicketEntity, ServiceTicketEntity=>ServiceTicketEntity.resourceAllocationEntity,{onDelete:'CASCADE'})
+    // serviceTicketEntity:ServiceTicketEntity
+  
+
+
 }
