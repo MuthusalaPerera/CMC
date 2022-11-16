@@ -63,9 +63,9 @@ export class resourceAllocationService {
 
 
 
-    // find(){
-    //   return this.serviceTicketRepository.find();
-    // }
+    find(){
+      return this.resourceAllocationRepository.find();
+    }
     // findTicket(){
     //     // return this.resourceAllocationRepository.find({relations:['ServiceTicketEntity','ServiceTicketEntity.serviceCall']});
     // }

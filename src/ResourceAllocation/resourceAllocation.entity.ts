@@ -40,6 +40,8 @@ export class ResourceAllocationEntity {
 
   @Column()
   HandOverDateAndTime:Date;
+  @Column({nullable:true})
+  Status:String;
 
 //   @Column()
 //   ItemDescription:string;

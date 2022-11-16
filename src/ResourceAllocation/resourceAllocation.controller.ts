@@ -15,10 +15,10 @@ export class resourceAllocationController {
     //   return await this.resourceAllocationService.find();
     //   }
 
-  // @Get('/Ticket')
-  // async listTickets() {
-  //   return await this.resourceAllocationService.findTicket();
-  // }
+  @Get('/get')
+  async listTickets() {
+    return await this.resourceAllocationService.find();
+  }
     // @Post()
     // async createResourceAllocation(@Body() body: CreateresourceAllocationDto) {
     // console.log(resourceAllocationDto)
