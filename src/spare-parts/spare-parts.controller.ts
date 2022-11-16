@@ -3,6 +3,7 @@ import { CustomerDto } from 'src/Customer/dtos/customer.dto';
 import { ServiceTicketDto } from 'src/service-calls/dtos/service-ticket.dto';
 import { ServiceTicketEntity } from 'src/service-calls/service-ticket.entity';
 import { CreateSparePartDto } from 'src/spare-parts/dtos/create-spare-part.dto';
+import { UpdateSparePartDto } from './dtos/update-spare-part.dto';
 import { SparePartsService } from './spare-parts.service';
 import {TicketDto} from "./dtos/ticket.dto";
 
@@ -30,10 +31,22 @@ export class SparePartsController {
     return await this.sparePartsService.createSparepart(body)
   }
 
-    @Put('/ticket/:id')
-    updateSparePart(@Param('id') id: string, @Body() body:TicketDto){
-    console.log(body)
-      return this.sparePartsService.update(parseInt(id),body);
+    // @Put('/ticket/:id')
+    // updateSparePart(@Param('id') id: string, @Body() body:TicketDto) {
+    //     console.log(body)
+    //     return this.sparePartsService.update(parseInt(id), body);
+    // }
+  @Get('/itemService')
+  async getItemEntity() {
+    const sparepart = await this.sparePartsService.getItemMasterEntity();
+    if(sparepart) return sparepart;
+    else throw new NotFoundException();
+  }
+
+    @Put('/updateSpare/:id')
+    updateSparePart(@Param('id',ParseIntPipe) id: number, @Body() body:UpdateSparePartDto){
+      return this.sparePartsService.updateSpare(id,body);
+
     }
     @UseInterceptors(ClassSerializerInterceptor)
     @Get('/:id')

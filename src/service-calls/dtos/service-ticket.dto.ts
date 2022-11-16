@@ -22,7 +22,7 @@ export class ServiceTicketDto{
 
         {
             sparePart: [
-                { SPReqId: string },
+                { SPReqId: number },
                 { Remark: string },
                 { Content: string },
                 { Secretary: string },

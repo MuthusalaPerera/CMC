@@ -1,36 +1,33 @@
 import { Expose } from 'class-transformer';
 
-export class resourceAllocationDto{
+export class CreateVehicleAllocationDto{
     @Expose()
     id: number;
 
-    // @Expose()
-    // ToolId: string;
+    @Expose()
+    VehicleID: string;
     
     @Expose()
-    ToolGroup:string;
+    VehicleType:string;
     
     @Expose()
-    ToolReqID:string;
+    VehicleReqId:string
     
     @Expose()
-    ToolDescription:string;
+    VehicleDescription:string;
     
     @Expose()
-    SerialNo:string;
+    VehicleCapacity:string;
     
     @Expose()
-    ToolRequestStatus:string;
-    
-    @Expose()
-    ToolType:string;
+    VehicleReqStatus:string;
     
     @Expose()
     CreatedDateAndTime:Date;
     
     @Expose()
     RequestDateAndTime:Date;
-    
+     
     @Expose()
     NoOfDays:string;
         

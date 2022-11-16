@@ -8,7 +8,7 @@ import {ServiceCall} from "../service-calls/service-call.entity";
 export class SparePart {
  // [x: string]: string | number | Date | string[] | ObjectID | number[] | Date[] | ObjectID[] | FindConditions<SparePart>;
   @PrimaryGeneratedColumn()
-  SPReqId: string;
+  SPReqId: number;
   
   @Column()
   Remark:string;

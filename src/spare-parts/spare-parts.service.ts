@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CustomerEntity } from 'src/Customer/customer.entity';
 import { CustomerDto } from 'src/Customer/dtos/customer.dto';
@@ -9,7 +9,12 @@ import { Repository } from 'typeorm';
 import { SparePart } from './spare-part.entity';
 import {ServiceCall} from "../service-calls/service-call.entity";
 import {CreateSparePartDto} from "./dtos/create-spare-part.dto";
+
 import {TicketDto} from "./dtos/ticket.dto";
+
+import { ItemMasterEntity } from 'src/Item/ItemMaster';
+import { UpdateSparePartDto } from './dtos/update-spare-part.dto';
+
 
 @Injectable()
 export class SparePartsService {
@@ -27,7 +32,8 @@ export class SparePartsService {
       @InjectRepository(SparePart) private readonly spareRepository:Repository<SparePart>,
       @InjectRepository(ServiceCall) private readonly serviceRepository:Repository<ServiceCall>,
       @InjectRepository(ServiceTicketEntity) private readonly serviceTicketRepository:Repository<ServiceTicketEntity>,
-      @InjectRepository(ItemEntity) private readonly itemEntityRepository:Repository<ItemEntity>
+      @InjectRepository(ItemEntity) private readonly itemEntityRepository:Repository<ItemEntity>,
+      @InjectRepository(ItemMasterEntity) private readonly itemMasterEntityRepository:Repository<ItemMasterEntity>
       ){}
 
       async createServiceticket(serviceTicketDto:ServiceTicketDto){
@@ -59,6 +65,21 @@ export class SparePartsService {
     }
 
 
+    async updateSpare(id: number, attrs: Partial<UpdateSparePartDto>) {
+      console.log(attrs)
+     const sparePart = await this.spareRepository.findOne(id);
+     
+     if (!sparePart) {
+         return new HttpException("Spare Part Not found",HttpStatus.BAD_REQUEST);
+     }
+     else {
+      Object.assign(sparePart,attrs)
+        
+              await this.spareRepository.update({SPReqId:id},attrs)
+             
+     }
+ }
+
           getServiceTicketById(id: number) {
               return this.serviceTicketRepository.findOne(id,{relations:['sparePart','sparePart.itemEntity','itemEntity']});
           }
@@ -68,6 +89,9 @@ export class SparePartsService {
         }
           getSparePartById(Id:number){
             return this.serviceTicketRepository.findOne(Id)
+          }
+          getItemMasterEntity(){
+            return this.itemMasterEntityRepository.find()
           }
           async remove(Id: number){
             const Spare = await this.getSparePartById(Id);

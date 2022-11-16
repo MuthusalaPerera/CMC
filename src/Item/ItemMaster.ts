@@ -14,4 +14,6 @@ export  class ItemMasterEntity {
     Onhand: number
     @Column()
     SalUnitMsr: string
+    @Column()
+    qty: number
 }

@@ -13,44 +13,10 @@ export class UpdateresourceAllocationtDto {
     { SerialNo: string },
     { ToolRequestStatus: string },
     { ToolType: string },
-    { CreatedDateAndTime: string },
-    { RequestDateAndTime: string },
+    { CreatedDateAndTime: Date },
+    { RequestDateAndTime: Date },
     { NoOfDays: string },
-    { HandOverDateAndTime: string },
+    { HandOverDateAndTime: Date },
    ]
 
 }
-
-// @Column()
-//   ToolGroup:string;
-  
-//   @Column()
-//   ToolReqID:string
-
-//   @Column()
-//   ToolDescription:string;
-
-//   @Column()
-//   SerialNo:string;
-
-//   @Column()
-//   ToolRequestStatus:string;
-
-//   @Column()
-//   ToolType:string;
-
-//   @Column()
-//   CreatedDateAndTime:string;
-
-//   @Column()
-//   RequestDateAndTime:string;
-
-//   @Column()
-//   NoOfDays:string;
-
-  
-//   @Column()
-//   HandOverDateAndTimw:string;
-
-
-// }

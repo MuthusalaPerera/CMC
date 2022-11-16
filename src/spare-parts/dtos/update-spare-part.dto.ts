@@ -1,33 +1,24 @@
 import { IsDate, IsOptional, IsString} from 'class-validator';
 
 export class UpdateSparePartDto {
-  @IsString()
+ 
   @IsOptional()
-  ItemCode: string;
+  SPReqId: number;
 
-  @IsString()
+
   @IsOptional()
-  ItemDescrption: string;
+  Remark:string;
 
-  @IsString()
   @IsOptional()
-  Customer: string;
+  Content:string
 
-  @IsString()
+
   @IsOptional()
-  Status: string;
-
-  @IsDate()
-  @IsOptional()
-  CreatedDate: Date; 
-
-  @IsString()
-  @IsOptional()
-  Priority: string;
-
-   @IsString()
+  Secretary:string;
+  
    @IsOptional()
-  Subject: string;
+   ItemDescription:string;
 
 }
+
 
