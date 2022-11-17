@@ -58,7 +58,7 @@ export class AuthService {
 
     async signin(loginDto: LoginDto) {
         const user = await this.loginRepository.findOne({UserName: loginDto.login.UserName})
-        console.log(user.Status)
+        //console.log(user.Status)
         if (!user) {
             throw new NotFoundException("user not found")
         }

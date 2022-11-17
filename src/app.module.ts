@@ -17,6 +17,7 @@ import { ProblemTypesModule } from './problem-types/problem-types.module';
 
 import {MulterModule} from "@nestjs/platform-express"
 import { resourceAllocationModule } from './ResourceAllocation/resourceAllocation.module';
+import { ManageUserDetailsModule } from './manage-user-details/manage-user-details.module';
 
 
 
@@ -68,7 +69,8 @@ import { resourceAllocationModule } from './ResourceAllocation/resourceAllocatio
     UserRoleTypesModule,
     OriginTypesModule,
     ProblemTypesModule,
-    resourceAllocationModule
+    resourceAllocationModule,
+    ManageUserDetailsModule
   ],
   controllers: [AppController],
   providers: [AppService],
