@@ -17,6 +17,7 @@ export class LoginDto {
                 Password:string;
                 Status:number;
                 DeviceId:string;
+                 Email:string;
             }
         
 

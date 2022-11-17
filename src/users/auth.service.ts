@@ -46,8 +46,10 @@ export class AuthService {
                 const u = await this.loginRepository.create({
                     Id: User.login.Id,
                     UserName: User.login.UserName,
+                    Email: User.login.Email,
                     Password: result,
                     Status: User.login.Status,
+                    Count:0,
                     DeviceId: User.login.DeviceId
                 })
                 u.user = User
