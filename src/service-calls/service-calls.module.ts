@@ -11,10 +11,11 @@ import { OriginsDropDown } from 'src/IntialDB/Origin';
 import { ProblemTypesDropDown } from 'src/IntialDB/ProblemType';
 import {Solutions} from "../ServiceCallOther/Solutions"
 import {Expences} from "../ServiceCallOther/expences"
+import {ServiceTicketEntity} from "./service-ticket.entity";
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ServiceCall,CustomerEntity,ItemEntity,UsersDropDown,OriginsDropDown,ProblemTypesDropDown,Solutions,Expences])],
+  imports: [TypeOrmModule.forFeature([ServiceCall,CustomerEntity,ItemEntity,UsersDropDown,OriginsDropDown,ProblemTypesDropDown,Solutions,Expences,ServiceTicketEntity])],
   controllers: [ServiceCallsController],
   providers: [{
     provide: 'ServiceCalls_Service',

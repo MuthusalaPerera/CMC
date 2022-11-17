@@ -20,7 +20,7 @@ export class ServiceTicketDto{
         { ActualEndDate: Date },
         { CreatedOn: Date },
 
-{
+        {
             sparePart: [
                 { SPReqId: number },
                 { Remark: string },

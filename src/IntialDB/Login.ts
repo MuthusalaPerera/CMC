@@ -7,6 +7,8 @@ export default  class Login {
     Id: number;
     @Column()
     UserName:string;
+    @Column({nullable:true})
+    Email:string;
     @Column()
     Password:string;
     @Column()

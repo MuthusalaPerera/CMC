@@ -9,8 +9,12 @@ import { Repository } from 'typeorm';
 import { SparePart } from './spare-part.entity';
 import {ServiceCall} from "../service-calls/service-call.entity";
 import {CreateSparePartDto} from "./dtos/create-spare-part.dto";
+
+import {TicketDto} from "./dtos/ticket.dto";
+
 import { ItemMasterEntity } from 'src/Item/ItemMaster';
 import { UpdateSparePartDto } from './dtos/update-spare-part.dto';
+
 
 @Injectable()
 export class SparePartsService {
@@ -49,7 +53,18 @@ export class SparePartsService {
     findTicket(){
         return this.spareRepository.find({relations:['ServiceTicketEntity','ServiceTicketEntity.serviceCall']});
     }
-    
+
+    async update(id:number, attrs: Partial<TicketDto>){
+         const serviceTicketEntity = await this.getServiceTicketOnlyById(id);
+        console.log(attrs)
+        if(!serviceTicketEntity){
+            throw new Error('Not found');
+        }
+        Object.assign(serviceTicketEntity,attrs)
+        return await this.serviceTicketRepository.save(serviceTicketEntity)
+    }
+
+
     async updateSpare(id: number, attrs: Partial<UpdateSparePartDto>) {
       console.log(attrs)
      const sparePart = await this.spareRepository.findOne(id);
@@ -64,9 +79,14 @@ export class SparePartsService {
              
      }
  }
+
           getServiceTicketById(id: number) {
               return this.serviceTicketRepository.findOne(id,{relations:['sparePart','sparePart.itemEntity','itemEntity']});
           }
+
+         getServiceTicketOnlyById(id: number) {
+              return this.serviceTicketRepository.findOne(id);
+        }
           getSparePartById(Id:number){
             return this.serviceTicketRepository.findOne(Id)
           }
