@@ -37,6 +37,7 @@ import {Solutions} from "../ServiceCallOther/Solutions"
 import {SolutionDTO} from "../ServiceCallOther/SolutionDTO"
 import {FileInterceptor} from "@nestjs/platform-express"
 import {randomBytes} from "crypto";
+import {Remark} from "../ServiceCallOther/Remark";
 
 @Controller('service-calls')
 export class ServiceCallsController {
@@ -54,7 +55,7 @@ export class ServiceCallsController {
     const catResponses = user.map(user => classToPlain(new SerilizedUserDropdown(user)))
     console.log(catResponses)
     return catResponses
-    
+
   }
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('itemlist')
@@ -81,8 +82,12 @@ export class ServiceCallsController {
   //   return await this.serviceCallsService.findById(parseInt(id));
   // }
   @Get('service')
-  async listServiceCallsS() {
+  async listServiceCall() {
     return await this.serviceCallsService.findS();
+  }
+  @Get('service/:id')
+  async listServiceCallsById(@Param('id')id: string) {
+    return await this.serviceCallsService.findServiceById(parseInt(id));
   }
   @Get('service-documents')
   async listServiceCallsDocuments() {
@@ -104,6 +109,11 @@ export class ServiceCallsController {
   console.log(body)
     return  await this.serviceCallsService.createUser(body)
   }
+  @Put("/remark")
+  async createRemark(@Body() body:Remark) {
+    console.log(body)
+    return  await this.serviceCallsService.createRemark(body)
+  }
   @Post('/file')
   @UseInterceptors(FileInterceptor('file'))
    handleUpload(@UploadedFile() file:Express.Multer.File) {
@@ -111,9 +121,14 @@ export class ServiceCallsController {
     return  'file upload';
   }
   @Post('/solutions')
-  async AddSolutions(@Body() body:SolutionDTO) {
+  async AddSolutions(@Body() body) {
     console.log(body)
     return  await this.serviceCallsService.createNewSolutions(body)
+  }
+  @Put('/updatesolutions')
+  async UpdateSolutions(@Body() body) {
+    console.log(body)
+    return  await this.serviceCallsService.updateNewSolutions(body)
   }
   @Post('/expences')
   async AddExpences(@Body() body) {
@@ -127,6 +142,16 @@ export class ServiceCallsController {
   @Get('/getSolutions')
   async getSolutions() {
     return await this.serviceCallsService.getSolutions();
+  }
+  @Get('/getSolutionsId/:id')
+  async getSolutionsId(@Param('id')id: string) {
+    const solutions= await this.serviceCallsService.getSolutionsId(parseInt(id));
+    if(solutions.length!==0){
+      return   solutions
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/ticketInServiceCall/:id')

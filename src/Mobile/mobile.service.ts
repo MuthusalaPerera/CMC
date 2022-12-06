@@ -74,13 +74,13 @@ export class MobileService {
     
     async signin(uname , pass, deviceId) {
         const user = await this.loginRepository.findOne({UserName: uname})
-        console.log(user)
+        // console.log(user)
         if (!user) {
-            throw new NotFoundException("user not found")
+            return {statusCode:404, message:"user not found"}
         }
         else {
             if(user.Status!==1){
-                throw new NotFoundException("status expired")
+                return {statusCode:404, message:"status expired"}
             }
             else {
                 const [salt, storedHash] = user.Password.split(".")
@@ -88,17 +88,17 @@ export class MobileService {
                 if (hash.toString("hex") !== storedHash) {
                     // throw new BadRequestException("Bad password")
                    
-                    return null
+                    return {statusCode:404, message:"Password Incorrect"}
                 } else {
-                    return user
+                     return  this.reFormaLogin(user)
                 }
             }
         }
     }
     
     reFormatCustomer(customerEntity: CustomerEntity) {
-        const salt = randomBytes(32).toString("hex")
         const refomat = {
+            statusCode:200,
             CusID: customerEntity.CustomerId,
             CusCode: customerEntity.CustomeName,
             CusName: customerEntity.CustomeName,
@@ -110,6 +110,7 @@ export class MobileService {
     
     reFormaLogin(login: Login) {
         const refomat = {
+            statusCode:200,
             Id: login.Id,
             UserName:login.UserName,
             Password:login.Password,

@@ -15,7 +15,7 @@ import {
     Put,
     Delete,
     Query,
-    DefaultValuePipe, Session
+    DefaultValuePipe, Session, Res, HttpStatus
 } from "@nestjs/common"
 import {MobileService} from "./mobile.service"
 import {SerilizedItem, SerilizedProblem, SerilizedService, SerilizedUser} from "./dto/serilized.mobile"
@@ -24,7 +24,7 @@ import {randomBytes, scrypt as _script} from "crypto"
 import {promisify} from "util"
 import {LoginDto} from "../users/dtos/login.dto"
 //import {LoginDtoMobile} from "./dto/loginDtoMobile"
-
+import { Response } from 'express';
 const scrypt = promisify(_script)
 @Controller('mobile')
 export class MobileController {
@@ -58,7 +58,7 @@ export class MobileController {
        // const catResponses = user.map(user => classToPlain(new SerilizedUser(user)))
        // const catResponses =  user.map(user => this.mobileService.reFormatCustomer(user))
        // console.log(catResponses)
-    //    return catResponses
+       //    return catResponses
         const refomat={
             Data:[
                 user.map(user => this.mobileService.reFormatCustomer(user))
@@ -110,21 +110,22 @@ export class MobileController {
     }
 
     @Get('/signin?')
-    async signin(@Query('uname') uname: string,@Query('password') password: string,@Query('deviceId') deviceId: string) {
+    async signin(@Query('uname') uname: string,@Query('password') password: string,@Query('deviceId') deviceId: string,@Res({ passthrough: true }) res: Response) {
         const login= await this.mobileService.signin(uname,password,deviceId)
-            console.log(uname)
+        console.log(login)
         var refomat;
-        if(login){
+        if(login.statusCode!==404){
              refomat={
                 Token:randomBytes(32).toString("hex"),
                 Status:"",
                 TokenAccess:"",
                 ResponseDescription:"Data Successfull",
-                ErrorDescription:"Data Fail",
+                ErrorDescription:"Data Successfull",
                 Data:[
-                   this.mobileService.reFormaLogin(login)
+                    login
                 ]
             }
+            res.status(HttpStatus.OK);
             return  refomat
         }
        else {
@@ -134,11 +135,14 @@ export class MobileController {
                 TokenAccess: "",
                 ResponseDescription: "Data Un Successfull",
                 ErrorDescription: "Data Fail",
+                 Data:[
+                     login
+                 ]
             }
-            
         }
            // throw new NotFoundException();
-       return refomat;
+        res.status(HttpStatus.BAD_REQUEST);
+        return refomat;
     }
 
     
