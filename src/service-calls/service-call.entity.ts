@@ -12,6 +12,7 @@ import {CustomerEntity} from "../Customer/customer.entity";
 import {ItemEntity} from "../Item/Item.entity";
 import {SparePart} from "../spare-parts/spare-part.entity";
 import {ServiceTicketEntity} from "./service-ticket.entity";
+import {Solutions} from "../ServiceCallOther/Solutions";
 
 
 @Entity()
@@ -42,6 +43,8 @@ export class ServiceCall {
   SalesAssistant: string;
   @Column()
   CreatedOn:Date;
+  @Column({nullable:true})
+  Remark:string;
   @Column()
   PlanedStartDateTime:Date
   @Column()
@@ -62,5 +65,7 @@ export class ServiceCall {
   serviceTicketEntities:ServiceTicketEntity[];
   @ManyToOne(()=>ItemEntity, item=>item.serviceCalls,{eager:true})
   itemEntity:ItemEntity;
+  @OneToMany(()=>Solutions,(Solutions)=>Solutions.serviceCall)
+  solutions:Solutions[];
 
 }
