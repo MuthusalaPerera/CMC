@@ -15,8 +15,11 @@ import {Expences} from "../ServiceCallOther/expences"
 import {randomBytes} from "crypto";
 import {ServiceTicketEntity} from "./service-ticket.entity";
 import {map} from "rxjs/operators";
+import {Resolution} from "../ServiceCallOther/Resolution";
+import {ResolutionDTO} from "../ServiceCallOther/ResolutionDTO";
 import {Remark} from "../ServiceCallOther/Remark";
-
+import {File} from "../ServiceCallOther/File";
+import {ExpencesDTO} from "../ServiceCallOther/ExpencesDTO";
 
 
 @Injectable()
@@ -31,18 +34,17 @@ export class ServiceCallsService {
         @InjectRepository(Solutions) private readonly solutionsRepository:Repository<Solutions>,
         @InjectRepository(Expences) private readonly expencesRepository:Repository<Expences>,
         @InjectRepository(ServiceTicketEntity) private readonly serviceTicketRepository:Repository<ServiceTicketEntity>,
+        @InjectRepository(Resolution) private readonly resolutionRepository:Repository<Resolution>,
+        @InjectRepository(File) private readonly fileRepository:Repository<File>
     ) {}
     async createUser(customerDto:CustomerDto){
-       console.log(CustomerDto)
         const c=await this.getCustomerById(customerDto.CustomerId)
-        //console.log(c)
             if(!c) {
                 const customer = await this.customerDtoRepository.save({...customerDto})
-                console.log(customer)
+                // console.log(customer)
                 for (const ServiceCall of this.serviceRepository.create(customerDto.serviceCalls)) {
                     ServiceCall.customerEntity = customer
                     const item =await  this.findByItemCode(ServiceCall.itemEntity.ItemCode)
-                   // console.log(item)
                     if(!item){
                         await this.itemEntityRepository.save(ServiceCall.itemEntity)
                         await this.serviceRepository.save({...ServiceCall})
@@ -58,13 +60,11 @@ export class ServiceCallsService {
             {
                 const customer = await this.customerDtoRepository.create({...customerDto})
                 for (const ServiceCall of this.serviceRepository.create(customerDto.serviceCalls)) {
-                    // console.log(ServiceCall)
                     const s = await this.findServiceById(ServiceCall.ServiceCallId)
-                    console.log(s)
+                    console.log("ooooo"+s)
                     if(!s){
                         ServiceCall.customerEntity = customer
                         const item =await  this.findByItemCode(ServiceCall.itemEntity.ItemCode)
-                        console.log(item)
                         if(!item){
                             await this.itemEntityRepository.save(ServiceCall.itemEntity)
                             await this.serviceRepository.save({...ServiceCall})
@@ -82,6 +82,26 @@ export class ServiceCallsService {
                 }
                 return customer
             }
+    }
+
+    async createResolution(remark:Resolution){
+        console.log(remark)
+        const service = await this.serviceRepository.findOne(remark.serviceCall.ServiceCallId);
+        console.log(remark)
+        if (!service) {
+            return new HttpException("Service Not found",HttpStatus.BAD_REQUEST);
+        }
+        else {
+            const serviceObj = await this.serviceRepository.create(remark.serviceCall);
+            remark.serviceCall=serviceObj
+            return await this.resolutionRepository.save(remark)
+        }
+
+    }
+    async getResolutionId(id:number){
+        const servicecall=await this.serviceRepository.findOne(id)
+        console.log(servicecall)
+        return   this.resolutionRepository.find({where:{serviceCall:servicecall}})
     }
 
     async createRemark(remark:Remark){
@@ -114,14 +134,29 @@ export class ServiceCallsService {
         }
 
     }
-    async createNewExpences(expences:Expences){
-        return   this.expencesRepository.save(expences)
+    async createNewExpences(expences:ExpencesDTO){
+        const servicecall=this.serviceRepository.findOne(expences.serviceCall)
+        if (!servicecall) {
+            return new HttpException("Service Not found",HttpStatus.BAD_REQUEST);
+        }
+        else {
+            const serviceObj = await this.serviceRepository.create(expences.serviceCall);
+            expences.serviceCall=serviceObj
+            console.log(expences)
+            return await this.expencesRepository.save(expences)
+        }
+
     }
-    async getExpences(){
-        return   this.expencesRepository.find()
+    async getExpences(Id:number){
+        const servicecall=await this.serviceRepository.findOne(Id)
+        return   this.expencesRepository.find({where:{serviceCall:servicecall}})
     }
     async getSolutions(){
         return   this.solutionsRepository.find()
+    }
+    async getFiles(Id:number){
+        const servicecall=await this.serviceRepository.findOne(Id)
+        return   this.fileRepository.find({where:{serviceCall:servicecall}})
     }
     async getSolutionsId(id:number){
         const servicecall=await this.serviceRepository.findOne(id)
@@ -200,7 +235,12 @@ export class ServiceCallsService {
     // findById(id:number) {
     //     return this.customerDtoRepository.findOne(id);
     // }
+
     async findServiceById(id:number) {
+        const service=await this.serviceRepository.findOne(id)
+        return service;
+    }
+    async findServiceByIdNew(id:number) {
         const service=await this.serviceRepository.findOne(id)
         return [service];
     }
@@ -218,7 +258,7 @@ export class ServiceCallsService {
     }
 
     listServiceCallsDocuments() {
-        return this.serviceRepository.find({Status: "completed"});
+        return this.serviceRepository.find({where:{Status: "completed"}});
     }
 
     async findP(options: IPaginationOptions): Promise<Pagination<ServiceCall>> {

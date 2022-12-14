@@ -31,6 +31,7 @@ import {File} from "../ServiceCallOther/File";
 // const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions];
 
 import { ResourceAllocationEntity } from "src/ResourceAllocation/resourceAllocation.entity";
+import {Resolution} from "../ServiceCallOther/Resolution";
 
 
 
@@ -43,7 +44,7 @@ import { ResourceAllocationEntity } from "src/ResourceAllocation/resourceAllocat
 
 
 
-const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle,ResourceAllocationEntity];
+const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle,ResourceAllocationEntity,Resolution,File];
 
 
 

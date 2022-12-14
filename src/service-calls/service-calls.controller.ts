@@ -37,7 +37,10 @@ import {Solutions} from "../ServiceCallOther/Solutions"
 import {SolutionDTO} from "../ServiceCallOther/SolutionDTO"
 import {FileInterceptor} from "@nestjs/platform-express"
 import {randomBytes} from "crypto";
+import {Resolution} from "../ServiceCallOther/Resolution";
+import {ResolutionDTO} from "../ServiceCallOther/ResolutionDTO";
 import {Remark} from "../ServiceCallOther/Remark";
+import {ExpencesDTO} from "../ServiceCallOther/ExpencesDTO";
 
 @Controller('service-calls')
 export class ServiceCallsController {
@@ -87,7 +90,7 @@ export class ServiceCallsController {
   }
   @Get('service/:id')
   async listServiceCallsById(@Param('id')id: string) {
-    return await this.serviceCallsService.findServiceById(parseInt(id));
+    return await this.serviceCallsService.findServiceByIdNew(parseInt(id));
   }
   @Get('service-documents')
   async listServiceCallsDocuments() {
@@ -106,13 +109,26 @@ export class ServiceCallsController {
   }
   @Post()
   async createServiceCall(@Body() body: CustomerDto) {
-  console.log(body)
     return  await this.serviceCallsService.createUser(body)
+  }
+  @Post("/resolutions")
+  async createResolution(@Body() body:ResolutionDTO) {
+    return  await this.serviceCallsService.createResolution(body)
   }
   @Put("/remark")
   async createRemark(@Body() body:Remark) {
     console.log(body)
     return  await this.serviceCallsService.createRemark(body)
+  }
+  @Get('/getResolutionsId/:id')
+  async getRemarkId(@Param('id')id: string) {
+    const remark= await this.serviceCallsService.getResolutionId(parseInt(id));
+    if(remark.length!==0){
+      return   remark
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Post('/file')
   @UseInterceptors(FileInterceptor('file'))
@@ -131,17 +147,33 @@ export class ServiceCallsController {
     return  await this.serviceCallsService.updateNewSolutions(body)
   }
   @Post('/expences')
-  async AddExpences(@Body() body) {
+  async AddExpences(@Body()  body:ExpencesDTO) {
     console.log(body)
     return  await this.serviceCallsService.createNewExpences(body)
   }
-  @Get('/getExpences')
-  async getExpences() {
-    return await this.serviceCallsService.getExpences();
+  @Get('/getExpences/:id')
+  async getExpences(@Param('id')id: string) {
+    const expences= await this.serviceCallsService.getExpences(parseInt(id));
+    if(expences.length!==0){
+      return   expences
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Get('/getSolutions')
   async getSolutions() {
     return await this.serviceCallsService.getSolutions();
+  }
+  @Get('/getFiles/:id')
+  async getFiles(@Param('id')id: string) {
+    const file= await this.serviceCallsService.getFiles(parseInt(id));
+    if(file.length!==0){
+      return   file
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Get('/getSolutionsId/:id')
   async getSolutionsId(@Param('id')id: string) {

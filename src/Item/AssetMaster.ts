@@ -8,5 +8,11 @@ export  class AssetMaster {
     ItemCode: string
     @Column()
     ItemName: string
-   
+    @Column()
+    ItemType:string
+    @Column()
+    ItemGrpCod:number
+    @Column()
+    SerialNumber:number
+
 }

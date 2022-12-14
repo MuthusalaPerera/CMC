@@ -15,5 +15,5 @@ export  class ItemMasterEntity {
     @Column()
     SalUnitMsr: string
     @Column()
-    qty: number
+    ItmsGrpCod: number
 }

@@ -7,6 +7,7 @@ import {ServiceCall} from "./service-call.entity";
 import {VehicleReservation} from "../Vehicle/VehicleReservation";
 import {AssertsReservation} from "../AssertsReservation/AssertsReservation";
 import { ResourceAllocationEntity } from "src/ResourceAllocation/resourceAllocation.entity";
+import {Resolution} from "../ServiceCallOther/Resolution";
 
 @Entity()
 export  class ServiceTicketEntity {
@@ -54,4 +55,6 @@ export  class ServiceTicketEntity {
     assertsReservations:AssertsReservation[]
     @OneToMany(()=>ResourceAllocationEntity,(resourceAllocation)=>resourceAllocation.serviceTicketEntity)
     resourceAllocationEntity:ResourceAllocationEntity[]
+
+
 }

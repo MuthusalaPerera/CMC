@@ -17,11 +17,18 @@ export  class EquipmetCard {
     @Column({length:100})
     custmrName: string
     @Column()
-    Distance: number
+    U_Distance: number
     @Column()
     cntrctEnd: Date
     @Column()
     contractID: number
     @Column()
-    Name: number
+    Status: string
+    @Column()
+    Address: string
+    @Column()
+    ContactEmployeeCode: number
+    @Column()
+    ContactPhone: string
+
 }

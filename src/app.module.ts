@@ -14,18 +14,16 @@ import UserType from "./IntialDB/UserRolls"
 import { UserRoleTypesModule } from './user-role-types/user-role-types.module';
 import { OriginTypesModule } from './origin-types/origin-types.module';
 import { ProblemTypesModule } from './problem-types/problem-types.module';
-
 import {MulterModule} from "@nestjs/platform-express"
 import { resourceAllocationModule } from './ResourceAllocation/resourceAllocation.module';
+import {File} from "./ServiceCallOther/File";
+import {ServiceCall} from "./service-calls/service-call.entity";
 
 
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: `.env.${process.env.NODE_ENV}`,
-    }),
+    ConfigModule.forRoot(),
     MulterModule.register({dest:'./uploads123'}),
     MailerModule.forRoot({
       transport: {
@@ -51,6 +49,7 @@ import { resourceAllocationModule } from './ResourceAllocation/resourceAllocatio
     //     };
     //   },
     // }),
+    TypeOrmModule.forFeature([File,ServiceCall]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
