@@ -16,7 +16,11 @@ import { ProblemTypesDropDown } from "src/IntialDB/ProblemType";
 import UserType from "../IntialDB/UserRolls";
 
 import { Solutions } from "src/ServiceCallOther/Solutions";
-
+import { HandledBy } from "src/IntialDB/handledBy";
+import { ClusterHead } from "src/IntialDB/ClusterHead";
+import { SecretaryDB } from "src/IntialDB/Secretary";
+import { SalesAssistantDB } from "src/IntialDB/SalesAssistant";
+import { EngineersDB } from "src/IntialDB/Engineers";
 
 
 //const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions];
@@ -31,6 +35,7 @@ import {File} from "../ServiceCallOther/File";
 // const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions];
 
 import { ResourceAllocationEntity } from "src/ResourceAllocation/resourceAllocation.entity";
+
 import {Resolution} from "../ServiceCallOther/Resolution";
 
 
@@ -44,7 +49,11 @@ import {Resolution} from "../ServiceCallOther/Resolution";
 
 
 
-const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle,ResourceAllocationEntity,Resolution,File];
+// const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle,ResourceAllocationEntity,Resolution,File,HandledBy,
+//     ClusterHead,
+//     SecretaryDB,
+//     SalesAssistantDB,
+//     EngineersDB];
 
 
 
@@ -67,6 +76,36 @@ const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTic
 //
 // const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,AssertsReservation];
 // >>>>>>> Stashed changes
+
+
+
+const entities =[User,
+                ServiceCall,
+                SparePart,
+                CustomerEntity,
+                ItemEntity,
+                ServiceTicketEntity ,
+                UsersDropDown,
+                userRolls,
+                Login,
+                ItemMasterEntity,
+                AssetMaster,
+                EquipmetCard,
+                OriginsDropDown,
+                ProblemTypesDropDown,
+                UserType,
+                Solutions,
+                Expences,
+                AssertsReservation,
+                VehicleReservation,
+                Vehicle,
+                ResourceAllocationEntity,
+                HandledBy,
+                ClusterHead,
+                SecretaryDB,
+                SalesAssistantDB,
+                EngineersDB];
+
 
 
 
