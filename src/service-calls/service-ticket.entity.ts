@@ -42,11 +42,8 @@ export  class ServiceTicketEntity {
     ActualEndDate:Date;
     @Column()
     CreatedOn:Date;
-
-
     @ManyToOne(()=>ServiceCall,ServiceCallEntity=>ServiceCallEntity.serviceTicketEntities,{eager:true})
     serviceCall:ServiceCall
-
      @OneToMany(()=>SparePart,(sparePart)=>sparePart.ServiceTicketEntity)
     sparePart:SparePart[];
 

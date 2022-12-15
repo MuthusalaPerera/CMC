@@ -15,6 +15,7 @@ import {Expences} from "../ServiceCallOther/expences"
 import {randomBytes} from "crypto";
 import {ServiceTicketEntity} from "./service-ticket.entity";
 import {map} from "rxjs/operators";
+import {Remark} from "../ServiceCallOther/Remark";
 
 
 
@@ -83,9 +84,35 @@ export class ServiceCallsService {
             }
     }
 
+    async createRemark(remark:Remark){
+        const service = await this.serviceRepository.findOne(remark.ServiceCallId);
+
+        if (!service) {
+            return new HttpException("Service Not found",HttpStatus.BAD_REQUEST);
+        }
+        else {
+            Object.assign(service,remark)
+            return   this.serviceRepository.save(remark)
+        }
+
+    }
 
     async createNewSolutions(solutions:Solutions){
+        const servicecall=this.serviceRepository.create(solutions.serviceCall)
+        solutions.serviceCall=servicecall;
         return   this.solutionsRepository.save(solutions)
+    }
+    async updateNewSolutions(solutions:Solutions){
+        const usolutions = await this.solutionsRepository.findOne(solutions.Id);
+
+        if (!usolutions) {
+            return new HttpException("Solution Not found",HttpStatus.BAD_REQUEST);
+        }
+        else {
+            Object.assign(usolutions,solutions)
+            return   this.solutionsRepository.save(usolutions)
+        }
+
     }
     async createNewExpences(expences:Expences){
         return   this.expencesRepository.save(expences)
@@ -96,13 +123,18 @@ export class ServiceCallsService {
     async getSolutions(){
         return   this.solutionsRepository.find()
     }
+    async getSolutionsId(id:number){
+        const servicecall=await this.serviceRepository.findOne(id)
+        console.log(servicecall)
+        return   this.solutionsRepository.find({where:{serviceCall:servicecall}})
+    }
     findTicketById(id:number){
         return this.serviceRepository.find({where:{ServiceCallId:id},relations:['serviceTicketEntities']});
     }
     reFormatServiceCall(serviceCall: ServiceCall) {
         //serviceTicketEntities:serviceCall.serviceTicketEntities
         const serviceCallObj =this.serviceRepository.create(serviceCall)
-        console.log(serviceCallObj.serviceTicketEntities.length)
+        // console.log(serviceCallObj.serviceTicketEntities.length)
 
 
                 // console.log(ServiceTicketEntity)
@@ -165,11 +197,12 @@ export class ServiceCallsService {
     findDropdown(){
         return this.userDropDownRepository.find()
     }
-    findById(id:number) {
-        return this.customerDtoRepository.findOne(id);
-    }
-    findServiceById(id:number) {
-        return this.serviceRepository.findOne(id);
+    // findById(id:number) {
+    //     return this.customerDtoRepository.findOne(id);
+    // }
+    async findServiceById(id:number) {
+        const service=await this.serviceRepository.findOne(id)
+        return [service];
     }
     findByItemCode(code:string) {
         return this.itemEntityRepository.findOne({ItemCode:code});
@@ -179,6 +212,9 @@ export class ServiceCallsService {
     }
     findS() {
         return this.serviceRepository.find({relations:['customerEntity','itemEntity']});
+    }
+    findById(id:number) {
+        return this.serviceRepository.findOne({relations:['customerEntity','itemEntity']});
     }
 
     listServiceCallsDocuments() {
