@@ -1,47 +1,47 @@
-import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
-import { inventory } from './inventory.entity';
+// import { Injectable } from '@nestjs/common';
+// import { Repository } from 'typeorm';
+// import { InjectRepository } from '@nestjs/typeorm';
+// import { inventory } from './inventory.entity';
 
-@Injectable()
-export class InventoryService {
-    constructor(@InjectRepository(inventory) private repo: Repository<inventory>){}
+// @Injectable()
+// export class InventoryService {
+//     constructor(@InjectRepository(inventory) private repo: Repository<inventory>){}
 
-    create ( id:number, SPID: string, ItemDescription: string, ItemType: string, Remarks: string, AvailableQuantity: number, Attachment: string){
-        const inventory = this.repo.create({ id, SPID, ItemDescription, ItemType, Remarks, AvailableQuantity, Attachment });
+//     create ( id:number, SPID: string, ItemDescription: string, ItemType: string, Remarks: string, AvailableQuantity: number, Attachment: string){
+//         const inventory = this.repo.create({ id, SPID, ItemDescription, ItemType, Remarks, AvailableQuantity, Attachment });
 
-        return this.repo.save(inventory);
+//         return this.repo.save(inventory);
 
-    }
+//     }
 
-    findOne(id: number){
-        return this.repo.findOne(id);
-    }
+//     findOne(id: number){
+//         return this.repo.findOne(id);
+//     }
 
-    find(SPID: string){
-        return this.repo.find({ SPID});
-    }
+//     find(SPID: string){
+//         return this.repo.find({ SPID});
+//     }
 
-    //
-    // async update(id: number, attrs: Partial<User>) {
-    //     const user = await this.findOne(id);
+//     //
+//     // async update(id: number, attrs: Partial<User>) {
+//     //     const user = await this.findOne(id);
     
-    //     if (!user) {
-    //       throw new Error('User not found.');
-    //     }
+//     //     if (!user) {
+//     //       throw new Error('User not found.');
+//     //     }
     
-    //     Object.assign(user, attrs);
-    //     return this.repo.save(user);
-    //   }
+//     //     Object.assign(user, attrs);
+//     //     return this.repo.save(user);
+//     //   }
     
-    //   async remove(id: number) {
-    //     const user = await this.findOne(id);
+//     //   async remove(id: number) {
+//     //     const user = await this.findOne(id);
     
-    //     if (!user) {
-    //       throw new Error('User not found.');
-    //     }
+//     //     if (!user) {
+//     //       throw new Error('User not found.');
+//     //     }
     
-    //     return this.repo.remove(user);
-    //   }
+//     //     return this.repo.remove(user);
+//     //   }
 
-}
+// }
