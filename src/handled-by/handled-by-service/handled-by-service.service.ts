@@ -11,7 +11,7 @@ export class HandledByServiceService {
         
     ) {}
 
-    // find method to get all handledBy
+    // find method to get all handledBy persons
     findHandledBy() {
         return this.handledByRepository.find();
     }
@@ -21,7 +21,7 @@ export class HandledByServiceService {
         return this.handledByRepository.findOne(id);
     }
 
-    // create handledBy
+    // create handledBy persons
     async createHandledBy(handledByPerson:HandledBy){
 
         const handledBy = await this.handledByRepository.save({...handledByPerson})
