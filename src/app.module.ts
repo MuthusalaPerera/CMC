@@ -17,6 +17,12 @@ import { ProblemTypesModule } from './problem-types/problem-types.module';
 
 import {MulterModule} from "@nestjs/platform-express"
 import { resourceAllocationModule } from './ResourceAllocation/resourceAllocation.module';
+import { ManageUserDetailsModule } from './manage-user-details/manage-user-details.module';
+import { HandledByModule } from './handled-by/handled-by.module';
+import { ClusterHeadModule } from './cluster-head/cluster-head.module';
+import { SecretaryModule } from './secretary/secretary.module';
+import { SalesAssistantModule } from './sales-assistant/sales-assistant.module';
+import { EngineersModule } from './engineers/engineers.module';
 
 
 
@@ -68,7 +74,13 @@ import { resourceAllocationModule } from './ResourceAllocation/resourceAllocatio
     UserRoleTypesModule,
     OriginTypesModule,
     ProblemTypesModule,
-    resourceAllocationModule
+    resourceAllocationModule,
+    ManageUserDetailsModule,
+    HandledByModule,
+    ClusterHeadModule,
+    SecretaryModule,
+    SalesAssistantModule,
+    EngineersModule
   ],
   controllers: [AppController],
   providers: [AppService],
