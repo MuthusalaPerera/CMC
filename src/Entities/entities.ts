@@ -17,11 +17,6 @@ import UserType from "../IntialDB/UserRolls";
 
 import { Solutions } from "src/ServiceCallOther/Solutions";
 
-
-
-//const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions];
-
-
 import {Expences} from "../ServiceCallOther/expences"
 import {AssertsReservation} from "../AssertsReservation/AssertsReservation";
 import {VehicleReservation} from "../Vehicle/VehicleReservation";
