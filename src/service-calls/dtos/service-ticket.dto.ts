@@ -19,16 +19,8 @@ export class ServiceTicketDto{
         { ActualStartDate: Date },
         { ActualEndDate: Date },
         { CreatedOn: Date },
+        {Status:string},
 
-        {
-            sparePart: [
-                { SPReqId: number },
-                { Remark: string },
-                { Content: string },
-                { Secretary: string },
-                { ItemDescription: string },
-             ]
-        }
     ];
 
 

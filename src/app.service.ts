@@ -22,15 +22,21 @@ export class AppService {
     return 'success'
   }
 
-  saveFile(path:string,name:string,serviceCallId:number){
+  saveFile(path:string,name:string,type:string,serviceCallId:number){
       const serviceCallDBthis=this.serviceCallRepository.findOne({ServiceCallId:serviceCallId});
       if(serviceCallDBthis)
       {
           const serviceCall=this.serviceCallRepository.create({ServiceCallId:serviceCallId})
-          this.fileRepository.save({Path:path,Name:name,serviceCall:serviceCall})
+          this.fileRepository.save({Path:path,Name:name,mimeType:type,serviceCall:serviceCall})
       }
 
   }
+
+    async getFileById(fileId: number) {
+        const file = await this.fileRepository.findOne(fileId);
+
+        return file;
+    }
 
 
 }

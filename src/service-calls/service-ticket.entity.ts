@@ -34,6 +34,9 @@ export  class ServiceTicketEntity {
     ContactPerson:string;
 
     @Column()
+    Status:string;
+
+    @Column()
     PlannedStartDate:Date;
     @Column()
     PlannedEndDate:Date;

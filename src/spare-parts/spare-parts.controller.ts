@@ -11,10 +11,18 @@ import {TicketDto} from "./dtos/ticket.dto";
 export class SparePartsController {
   constructor(@Inject('SpareParts_Service') private readonly sparePartsService:SparePartsService){}
 
-    @Get()
+    @Get('/FindTicket')
     async listSpareParts() {
       return await this.sparePartsService.find();
       }
+  @Get('/FindTicket/:id')
+  async listSparePartsId(@Param('id') id: string) {
+    return await this.sparePartsService.findId(id);
+  }
+  @Get('/History')
+  async History() {
+    return await this.sparePartsService.findHistory();
+  }
 
   @Get('/Ticket')
   async listTickets() {

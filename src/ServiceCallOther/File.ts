@@ -9,6 +9,8 @@ export  class File {
     Path:string
     @Column()
     Name:string
+    @Column()
+    mimeType:string
     @ManyToOne(()=> ServiceCall, ServiceCall=>ServiceCall.files)
     serviceCall:ServiceCall
 }

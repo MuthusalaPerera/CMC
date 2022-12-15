@@ -1,5 +1,5 @@
 import {HttpException, HttpStatus, Injectable, NotFoundException} from '@nestjs/common';
-import {Column, OneToMany, Repository} from "typeorm";
+import {Column, createQueryBuilder, OneToMany, Repository} from "typeorm";
 import {ServiceCall, ServiceCall as Service} from "./service-call.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 import {CustomerEntity} from "../Customer/customer.entity";
@@ -20,6 +20,7 @@ import {ResolutionDTO} from "../ServiceCallOther/ResolutionDTO";
 import {Remark} from "../ServiceCallOther/Remark";
 import {File} from "../ServiceCallOther/File";
 import {ExpencesDTO} from "../ServiceCallOther/ExpencesDTO";
+import {EquipmetCard} from "../Customer/EquipmetCard";
 
 
 @Injectable()
@@ -35,7 +36,8 @@ export class ServiceCallsService {
         @InjectRepository(Expences) private readonly expencesRepository:Repository<Expences>,
         @InjectRepository(ServiceTicketEntity) private readonly serviceTicketRepository:Repository<ServiceTicketEntity>,
         @InjectRepository(Resolution) private readonly resolutionRepository:Repository<Resolution>,
-        @InjectRepository(File) private readonly fileRepository:Repository<File>
+        @InjectRepository(File) private readonly fileRepository:Repository<File>,
+         @InjectRepository(EquipmetCard) private readonly equipmentCardRepository:Repository<EquipmetCard>
     ) {}
     async createUser(customerDto:CustomerDto){
         const c=await this.getCustomerById(customerDto.CustomerId)
@@ -61,10 +63,11 @@ export class ServiceCallsService {
                 const customer = await this.customerDtoRepository.create({...customerDto})
                 for (const ServiceCall of this.serviceRepository.create(customerDto.serviceCalls)) {
                     const s = await this.findServiceById(ServiceCall.ServiceCallId)
-                    console.log("ooooo"+s)
+                    console.log(s)
                     if(!s){
                         ServiceCall.customerEntity = customer
                         const item =await  this.findByItemCode(ServiceCall.itemEntity.ItemCode)
+                        console.log(item)
                         if(!item){
                             await this.itemEntityRepository.save(ServiceCall.itemEntity)
                             await this.serviceRepository.save({...ServiceCall})
@@ -219,8 +222,19 @@ export class ServiceCallsService {
     findCustomer() {
         return this.customerDtoRepository.find();
     }
+    findEquipmentCard() {
+        return  createQueryBuilder("EquipmetCard")
+            .groupBy('custmrName')
+            .getRawMany();
+    }
     findItem() {
         return this.itemEntityRepository.find();
+    }
+    findEquipmentCardItem(name:string) {
+        return  createQueryBuilder("EquipmetCard")
+            .where('EquipmetCard.custmrName = :name')
+            .setParameter('name', name)
+            .getRawMany();
     }
     findproblemTypeDropDown() {
         return this.problemTypeDropDownRepository.find();
@@ -246,6 +260,9 @@ export class ServiceCallsService {
     }
     findByItemCode(code:string) {
         return this.itemEntityRepository.findOne({ItemCode:code});
+    }
+    findByEquipmentCardItem(code:string) {
+        return this.equipmentCardRepository.findOne({itemName:code});
     }
     findByItemName(name:string) {
         return this.itemEntityRepository.findOne({ItemDescription:name});
@@ -282,7 +299,8 @@ export class ServiceCallsService {
                 }
                 return await this.customerDtoRepository.update(id, {
                     CustomeName: attrs.CustomeName,
-                    ContactPerson:attrs.ContactPerson,
+                    CustomerAddressId:attrs.CustomerAddressId,
+                    TelephoneNo:attrs.TelephoneNo
                 })
             }
         }
@@ -307,6 +325,9 @@ export class ServiceCallsService {
 
     getCustomerByName(name: string) {
         return this.customerDtoRepository.findOne({CustomeName: name}, {relations: ["serviceCalls", "serviceCalls.itemEntity"]});
+    }
+    getCustomerByEquipmentCardName(name: string) {
+        return this.equipmentCardRepository.findOne({custmrName: name});
     }
     getServiceById(Id:number) {
         return this.serviceRepository.findOne(Id)

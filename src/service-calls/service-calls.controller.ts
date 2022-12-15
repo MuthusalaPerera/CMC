@@ -54,16 +54,16 @@ export class ServiceCallsController {
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('list')
   async listCustomerAll() {
-    const user = await this.serviceCallsService.findCustomer();
+    const user = await this.serviceCallsService.findEquipmentCard();
     const catResponses = user.map(user => classToPlain(new SerilizedUserDropdown(user)))
     console.log(catResponses)
     return catResponses
 
   }
   @UseInterceptors(ClassSerializerInterceptor)
-  @Get('itemlist')
-  async listItemAll() {
-    const item = await this.serviceCallsService.findItem();
+  @Get('/itemlist/:id')
+  async listItemAll(@Param('id')id: string) {
+    const item = await this.serviceCallsService.findEquipmentCardItem(id);
     const catResponses = item.map(item => classToPlain(new SerilizedItemDropdown(item)))
     console.log(catResponses)
     return catResponses
@@ -216,7 +216,7 @@ export class ServiceCallsController {
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/name/:name')
   async getCustomerName(@Param('name') name:string){
-    const customer = await this.serviceCallsService.getCustomerByName(name);
+    const customer = await this.serviceCallsService.getCustomerByEquipmentCardName(name);
     if(customer) return customer
     else return {error:"NotFound"};
   }
@@ -228,7 +228,7 @@ export class ServiceCallsController {
   }
   @Get('itemName/:name')
   async getName(@Param('name') name:string){
-    const customer = await this.serviceCallsService.findByItemName(name);
+    const customer = await this.serviceCallsService.findByEquipmentCardItem(name);
     if(customer) return customer;
     else return  {error:"NotFound"};
   }
