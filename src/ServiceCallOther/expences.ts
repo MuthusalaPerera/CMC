@@ -1,4 +1,4 @@
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm"
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm"
 import {ServiceCall} from "../service-calls/service-call.entity"
 
 @Entity()
@@ -17,4 +17,6 @@ export  class Expences {
     Amount:number
     @Column()
     Remark:string
+    @ManyToOne(()=> ServiceCall, ServiceCall=>ServiceCall.expences)
+    serviceCall:ServiceCall
 }

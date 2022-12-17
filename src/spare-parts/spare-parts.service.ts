@@ -50,11 +50,18 @@ export class SparePartsService {
     find(){
       return this.serviceTicketRepository.find();
     }
+    findId(Id){
+        return this.serviceTicketRepository.find({TicketId:Id});
+    }
+    findHistory(){
+        return this.serviceTicketRepository.find({where:{Status:"completed"}});
+    }
     findTicket(){
         return this.spareRepository.find({relations:['ServiceTicketEntity','ServiceTicketEntity.serviceCall']});
     }
 
     async update(id:number, attrs: Partial<TicketDto>){
+        console.log(attrs)
          const serviceTicketEntity = await this.getServiceTicketOnlyById(id);
         console.log(attrs)
         if(!serviceTicketEntity){

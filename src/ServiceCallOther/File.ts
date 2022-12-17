@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {ServiceCall} from "../service-calls/service-call.entity";
 
 @Entity()
 export  class File {
@@ -8,4 +9,8 @@ export  class File {
     Path:string
     @Column()
     Name:string
+    @Column()
+    mimeType:string
+    @ManyToOne(()=> ServiceCall, ServiceCall=>ServiceCall.files)
+    serviceCall:ServiceCall
 }

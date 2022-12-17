@@ -21,19 +21,35 @@ export  class SerilizedUser {
 
 export  class SerilizedItemDropdown {
     @Exclude()
-    Id: number;
+    EquipmetCard_Id:number
     @Exclude()
-    ItemCode:string
+    EquipmetCard_msnfSN: string;
+    @Exclude()
+    EquipmetCard_internalSN: string
+    @Exclude()
+    EquipmetCard_itemCode: string
     @Expose({ name: "label" })
-    ItemDescription:string
+    EquipmetCard_itemName: string
     @Exclude()
-    MrfSerialNumber:string
+    EquipmetCard_customer: string
     @Exclude()
-    SerialNumber:string
+    EquipmetCard_custmrName: string
     @Exclude()
-    ItemGroup:string
+    EquipmetCard_U_Distance: number
+    @Exclude()
+    EquipmetCard_cntrctEnd: Date
+    @Exclude()
+    EquipmetCard_contractID: number
+    @Exclude()
+    EquipmetCard_Status: string
+    @Exclude()
+    EquipmetCard_Address: string
+    @Exclude()
+    EquipmetCard_ContactEmployeeCode: number
+    @Exclude()
+    EquipmetCard_ContactPhone: string
 
-    constructor(partial: Partial<SerilizedItemDropdown>){
+    constructor(partial: Partial<SerilizedUserDropdown>){
         Object.assign(this,partial)
     };
 }
@@ -41,15 +57,33 @@ export  class SerilizedItemDropdown {
 
 export  class SerilizedUserDropdown {
     @Exclude()
-    CustomerId: number;
+    EquipmetCard_Id:number
     @Exclude()
-    CustomerAddressId:string
+    EquipmetCard_msnfSN: string;
+    @Exclude()
+    EquipmetCard_internalSN: string
+    @Exclude()
+    EquipmetCard_itemCode: string
+    @Exclude()
+    EquipmetCard_itemName: string
+    @Exclude()
+    EquipmetCard_customer: string
     @Expose({ name: "label" })
-    CustomeName:string
+    EquipmetCard_custmrName: string
     @Exclude()
-    TelephoneNo:string
+    EquipmetCard_U_Distance: number
     @Exclude()
-    ContactPerson:string
+    EquipmetCard_cntrctEnd: Date
+    @Exclude()
+    EquipmetCard_contractID: number
+    @Exclude()
+    EquipmetCard_Status: string
+    @Exclude()
+    EquipmetCard_Address: string
+    @Exclude()
+    EquipmetCard_ContactEmployeeCode: number
+    @Exclude()
+    EquipmetCard_ContactPhone: string
 
     constructor(partial: Partial<SerilizedUserDropdown>){
         Object.assign(this,partial)
