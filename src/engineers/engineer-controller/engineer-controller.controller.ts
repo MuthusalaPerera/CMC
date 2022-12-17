@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Inject, NotFoundException, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { EngineerServiceService } from '../engineer-service/engineer-service.service';
 
 @Controller('engineer-controller')
@@ -27,6 +27,11 @@ export class EngineerControllerController {
         return  await this.engineerService.createEngineers(body)
     }
 
+    // update 
+    @Put('/update/:id')
+    updateManageUserDetails(@Param('id') Id: string, @Body() body) {
+        return this.engineerService.updateAssignedClusterHead(parseInt(Id), body);
+    }
 
     // delete Engineers
     @Delete('/delete/:id')

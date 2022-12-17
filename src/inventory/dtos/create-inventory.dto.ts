@@ -1,23 +1,23 @@
-import { IsInt, IsOptional, IsString } from 'class-validator';
+// import { IsInt, IsOptional, IsString } from 'class-validator';
 
-export class CreateinventoryDto {
-  @IsString()
-  SPID: string;
+// export class CreateinventoryDto {
+//   @IsString()
+//   SPID: string;
 
-  @IsString()
-  ItemDescription: string;
+//   @IsString()
+//   ItemDescription: string;
 
-  @IsString()
-  ItemType: string;
+//   @IsString()
+//   ItemType: string;
 
-  @IsOptional()
-  Remarks: string;
+//   @IsOptional()
+//   Remarks: string;
 
-  @IsInt()
-  AvailableQuantity:number;
+//   @IsInt()
+//   AvailableQuantity:number;
 
-  @IsOptional()
-  Attachment: string;
+//   @IsOptional()
+//   Attachment: string;
 
 
-}
+// }
