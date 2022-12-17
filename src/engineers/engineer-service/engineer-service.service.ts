@@ -34,6 +34,32 @@ export class EngineerServiceService {
         return this.engineerRepository.findOne(EngineerCode);
     }
 
+    //Update Assigned Cluster Head
+    async updateAssignedClusterHead(EngineerCode: number, attrs: any) {
+        const EngineersDB = await this.engineerRepository.findOne({
+            where: {
+                EngineerCode: EngineerCode,
+            }
+        });
+        EngineersDB.ClusterHead = attrs.ClusterHead;
+        await this.engineerRepository.save(EngineersDB);
+        // const user = await this.usersRepository.findOne({
+        //     where: {
+        //         id: Id,
+        //     }
+        // })
+        // user.ContactNumber = attrs.ContactNumber;
+        // user.NIC = attrs.NIC;
+        // await this.usersRepository.save(user);
+        // const userDetails = await this.getManageUserDetailsById(Id);
+        // if (!userDetails) {
+        //     return new HttpException("User Details Not found!",HttpStatus.BAD_REQUEST);
+        // }
+        
+            console.log(EngineerCode);
+        
+    }
+
     //Remove Engineers
     async remove(EngineerCode: number) {
         const engineer = await this.getengineerPersonById(EngineerCode);

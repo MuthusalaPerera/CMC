@@ -14,9 +14,10 @@ import UserType from "./IntialDB/UserRolls"
 import { UserRoleTypesModule } from './user-role-types/user-role-types.module';
 import { OriginTypesModule } from './origin-types/origin-types.module';
 import { ProblemTypesModule } from './problem-types/problem-types.module';
-
 import {MulterModule} from "@nestjs/platform-express"
 import { resourceAllocationModule } from './ResourceAllocation/resourceAllocation.module';
+import {File} from "./ServiceCallOther/File";
+import {ServiceCall} from "./service-calls/service-call.entity";
 import { ManageUserDetailsModule } from './manage-user-details/manage-user-details.module';
 import { HandledByModule } from './handled-by/handled-by.module';
 import { ClusterHeadModule } from './cluster-head/cluster-head.module';
@@ -26,12 +27,10 @@ import { EngineersModule } from './engineers/engineers.module';
 
 
 
+
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: `.env.${process.env.NODE_ENV}`,
-    }),
+    ConfigModule.forRoot(),
     MulterModule.register({dest:'./uploads123'}),
     MailerModule.forRoot({
       transport: {
@@ -57,6 +56,7 @@ import { EngineersModule } from './engineers/engineers.module';
     //     };
     //   },
     // }),
+    TypeOrmModule.forFeature([File,ServiceCall]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',

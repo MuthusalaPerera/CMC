@@ -16,7 +16,11 @@ import { ProblemTypesDropDown } from "src/IntialDB/ProblemType";
 import UserType from "../IntialDB/UserRolls";
 
 import { Solutions } from "src/ServiceCallOther/Solutions";
-
+import { HandledBy } from "src/IntialDB/handledBy";
+import { ClusterHead } from "src/IntialDB/ClusterHead";
+import { SecretaryDB } from "src/IntialDB/Secretary";
+import { SalesAssistantDB } from "src/IntialDB/SalesAssistant";
+import { EngineersDB } from "src/IntialDB/Engineers";
 
 
 //const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions];
@@ -31,39 +35,73 @@ import {File} from "../ServiceCallOther/File";
 // const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions];
 
 import { ResourceAllocationEntity } from "src/ResourceAllocation/resourceAllocation.entity";
-import { HandledBy } from "src/IntialDB/handledBy";
-import { ClusterHead } from "src/IntialDB/ClusterHead";
-import { SecretaryDB } from "src/IntialDB/Secretary";
-import { SalesAssistantDB } from "src/IntialDB/SalesAssistant";
-import { EngineersDB } from "src/IntialDB/Engineers";
+
+import {Resolution} from "../ServiceCallOther/Resolution";
 
 
-const entities =[User,
-                ServiceCall,
-                SparePart,
-                CustomerEntity,
-                ItemEntity,
-                ServiceTicketEntity ,
-                UsersDropDown,
-                userRolls,
-                Login,
-                ItemMasterEntity,
-                AssetMaster,
-                EquipmetCard,
-                OriginsDropDown,
-                ProblemTypesDropDown,
-                UserType,
-                Solutions,
-                Expences,
-                AssertsReservation,
-                VehicleReservation,
-                Vehicle,
-                ResourceAllocationEntity,
-                HandledBy,
-                ClusterHead,
-                SecretaryDB,
-                SalesAssistantDB,
-                EngineersDB];
+
+
+//const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,OriginsDropDown,ProblemTypesDropDown,UserType];
+
+//ItemMasterEntity,AssetMaster,EquipmetCard,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle
+
+
+
+
+
+const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle,ResourceAllocationEntity,Resolution,File,HandledBy, ClusterHead, SecretaryDB, SalesAssistantDB, EngineersDB];
+
+
+
+
+// import {Expences} from "../ServiceCallOther/expences"
+// import {AssertsReservation} from "../AssertsReservation/AssertsReservation";
+// import {VehicleReservation} from "../Vehicle/VehicleReservation";
+// import {Vehicle} from "../Vehicle/Vehicle";
+
+
+
+
+
+
+//const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle];
+
+
+
+
+//
+// const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,AssertsReservation];
+// >>>>>>> Stashed changes
+
+
+
+// const entities =[User,
+//                 ServiceCall,
+//                 SparePart,
+//                 CustomerEntity,
+//                 ItemEntity,
+//                 ServiceTicketEntity ,
+//                 UsersDropDown,
+//                 userRolls,
+//                 Login,
+//                 ItemMasterEntity,
+//                 AssetMaster,
+//                 EquipmetCard,
+//                 OriginsDropDown,
+//                 ProblemTypesDropDown,
+//                 UserType,
+//                 Solutions,
+//                 Expences,
+//                 AssertsReservation,
+//                 VehicleReservation,
+//                 Vehicle,
+//                 ResourceAllocationEntity,
+//                 HandledBy,
+//                 ClusterHead,
+//                 SecretaryDB,
+//                 SalesAssistantDB,
+//                 EngineersDB];
+
 
 
 

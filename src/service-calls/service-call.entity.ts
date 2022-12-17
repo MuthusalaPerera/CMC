@@ -13,6 +13,9 @@ import {ItemEntity} from "../Item/Item.entity";
 import {SparePart} from "../spare-parts/spare-part.entity";
 import {ServiceTicketEntity} from "./service-ticket.entity";
 import {Solutions} from "../ServiceCallOther/Solutions";
+import {Resolution} from "../ServiceCallOther/Resolution";
+import {File} from "../ServiceCallOther/File";
+import {Expences} from "../ServiceCallOther/expences";
 
 
 @Entity()
@@ -67,5 +70,10 @@ export class ServiceCall {
   itemEntity:ItemEntity;
   @OneToMany(()=>Solutions,(Solutions)=>Solutions.serviceCall)
   solutions:Solutions[];
-
+  @OneToMany(()=>Resolution,(remark)=>remark.serviceCall)
+  resolutions:Resolution[];
+  @OneToMany(()=>File,(file)=>file.serviceCall)
+  files:File[];
+  @OneToMany(()=>Expences,(expences)=>expences.serviceCall)
+  expences:Expences[];
 }

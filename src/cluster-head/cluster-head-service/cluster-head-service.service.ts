@@ -35,7 +35,7 @@ export class ClusterHeadServiceService {
         return this.clusterHeadRepository.findOne(ClusterHeadCode);
     }
 
-    //Remove Cluster Head Person
+    //Remove Cluster Heads
     async remove(ClusterHeadCode: number) {
         const clusterHead = await this.getclusterHeadPersonById(ClusterHeadCode);
         if (!clusterHead) {
