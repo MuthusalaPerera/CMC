@@ -16,7 +16,7 @@ import UserType from "../IntialDB/UserRolls"
 import {LoginDto} from "./dtos/login.dto"
 import {ForgetDto} from "./dtos/Forget.dto"
 import {MailerService} from "@nestjs-modules/mailer"
-
+import { join } from 'path';
 const scrypt = promisify(_script)
 
 @Injectable()
@@ -86,7 +86,11 @@ export class AuthService {
                 from: "CMC@notifier.com", // sender address
                 subject: "OTP ✔", // Subject line
                 text: "welcome" + forgetDto.otp, // plaintext body
-                html: "<b>Here is your OTP " + forgetDto.otp + "</b>" // HTML body content
+                html: "<b>Here is your OTP " + forgetDto.otp + "</b>", // HTML body content
+                attachments:[ {   // utf-8 string as an attachment
+                    filename: 'text1.txt',
+                    content: 'hello world!'
+                }]
             })
             .then(() => {
             })
