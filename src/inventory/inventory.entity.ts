@@ -1,27 +1,27 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+// import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-export class inventory {
-  @PrimaryGeneratedColumn()
-  id: number;
+// @Entity()
+// export class inventory {
+//   @PrimaryGeneratedColumn()
+//   id: number;
 
-  @Column()
-  SPID: string;
+//   @Column()
+//   SPID: string;
 
-  @Column()
-  ItemDescription: string;
+//   @Column()
+//   ItemDescription: string;
 
-  @Column()
-  ItemType: string;
+//   @Column()
+//   ItemType: string;
 
-  @Column()
-  Remarks: string;
+//   @Column()
+//   Remarks: string;
 
-  @Column()
-  AvailableQuantity:number;
+//   @Column()
+//   AvailableQuantity:number;
 
-  @Column()
-  Attachment: string;
+//   @Column()
+//   Attachment: string;
 
 
-}
+// }
