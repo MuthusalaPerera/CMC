@@ -33,6 +33,11 @@ export class SparePartsController {
     console.log(ServiceTicketDto)
       return await this.sparePartsService.createServiceticket(body)
     }
+  @Post('fileUpload')
+  async attachment(@Body() body: ServiceTicketDto) {
+    console.log(ServiceTicketDto)
+    return await this.sparePartsService.createServiceticket(body)
+  }
   @Post('/create')
   async createSparePart(@Body() body: CreateSparePartDto) {
     console.log(ServiceTicketDto)

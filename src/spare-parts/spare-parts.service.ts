@@ -48,7 +48,7 @@ export class SparePartsService {
     }
 
     find(){
-      return this.serviceTicketRepository.find();
+      return this.serviceTicketRepository.find({order:{CreatedOn:"DESC"}});
     }
     findId(Id){
         return this.serviceTicketRepository.find({TicketId:Id});

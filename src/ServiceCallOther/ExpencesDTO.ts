@@ -3,6 +3,7 @@ import {IsNotEmpty} from "class-validator";
 import {Column, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 
 export class ExpencesDTO{
+    @IsNotEmpty()
     Id: number;
     @IsNotEmpty()
     CreatedDate:Date

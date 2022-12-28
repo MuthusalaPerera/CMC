@@ -151,6 +151,10 @@ export class ServiceCallsController {
     console.log(body)
     return  await this.serviceCallsService.createNewExpences(body)
   }
+  @Put('/Editexpences')
+  async EditExpences(@Body()  body:ExpencesDTO) {
+    return  await this.serviceCallsService.editExpences(body)
+  }
   @Get('/getExpences/:id')
   async getExpences(@Param('id')id: string) {
     const expences= await this.serviceCallsService.getExpences(parseInt(id));

@@ -149,6 +149,26 @@ export class ServiceCallsService {
             return await this.expencesRepository.save(expences)
         }
 
+    }async editExpences(expences:ExpencesDTO){
+        const servicecall=await this.serviceRepository.findOne(expences.serviceCall)
+        if (!servicecall) {
+            return new HttpException("Service Not Found",HttpStatus.BAD_REQUEST);
+        }
+        else {
+            const expencesobj=await this.expencesRepository.findOne({Id:expences.Id})
+            console.log(expences)
+            if(!expencesobj){
+                return new HttpException("Expence Not Found",HttpStatus.BAD_REQUEST);
+            }
+            else{
+                const serviceObj = await this.serviceRepository.create(expences.serviceCall);
+                expences.serviceCall=serviceObj
+                Object.assign(expencesobj,expences)
+                console.log(serviceObj)
+                return await this.expencesRepository.save(expencesobj)
+            }
+        }
+
     }
     async getExpences(Id:number){
         const servicecall=await this.serviceRepository.findOne(Id)
@@ -268,14 +288,14 @@ export class ServiceCallsService {
         return this.itemEntityRepository.findOne({ItemDescription:name});
     }
     findS() {
-        return this.serviceRepository.find({relations:['customerEntity','itemEntity']});
+        return this.serviceRepository.find({relations:['customerEntity','itemEntity'],order:{CreatedOn:"DESC"}});
     }
     findById(id:number) {
         return this.serviceRepository.findOne({relations:['customerEntity','itemEntity']});
     }
 
     listServiceCallsDocuments() {
-        return this.serviceRepository.find({where:{Status: "completed"}});
+        return this.serviceRepository.find({where:{Status: "completed"},order:{CreatedOn:"DESC"}});
     }
 
     async findP(options: IPaginationOptions): Promise<Pagination<ServiceCall>> {
