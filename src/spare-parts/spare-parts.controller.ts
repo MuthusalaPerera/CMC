@@ -6,6 +6,7 @@ import { CreateSparePartDto } from 'src/spare-parts/dtos/create-spare-part.dto';
 import { UpdateSparePartDto } from './dtos/update-spare-part.dto';
 import { SparePartsService } from './spare-parts.service';
 import {TicketDto} from "./dtos/ticket.dto";
+import { CreateinventoryDto } from 'src/inventory/dtos/create-inventory.dto';
 
 @Controller('spare-parts')
 export class SparePartsController {
@@ -29,7 +30,12 @@ export class SparePartsController {
     return await this.sparePartsService.findTicket();
   }
     @Post()
-    async createServiceTicket(@Body() body: ServiceTicketDto) {
+    async createServiceTicket(@Body() body: CreateinventoryDto) {
+    console.log(body)
+      return await this.sparePartsService.createInventory(body)
+    }
+    @Post()
+    async createInventory(@Body() body: ServiceTicketDto) {
     console.log(ServiceTicketDto)
       return await this.sparePartsService.createServiceticket(body)
     }

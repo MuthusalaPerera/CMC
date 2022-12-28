@@ -1,4 +1,5 @@
-import { IsInt, IsOptional, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { SparePart } from 'src/spare-parts/spare-part.entity';
 
 export class CreateinventoryDto {
   @IsString()
@@ -10,14 +11,16 @@ export class CreateinventoryDto {
   @IsString()
   ItemType: string;
 
-  @IsOptional()
+  @IsString()
   Remarks: string;
 
-  @IsInt()
+  @IsNotEmpty()
   AvailableQuantity:number;
 
-  @IsOptional()
-  Attachment: string;
+  @IsNotEmpty()
+  RequestQuantity: number;
 
+  @IsNotEmpty()
+  spareparts:SparePart;
 
 }

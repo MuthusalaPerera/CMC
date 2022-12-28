@@ -1,24 +1,35 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { SparePart } from 'src/spare-parts/spare-part.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class inventory {
+export class Inventory {
   @PrimaryGeneratedColumn()
-  id: number;
+  Id: number;
 
   @Column()
-  SPID: string;
+  ItemCode: string;
 
   @Column()
-  ItemDescription: string;
+  ItemName: string;
 
   @Column()
-  Remarks: string;
+  ItemType: string;
 
   @Column()
-  AvailableQuantity:number;
+  Onhand:number;
 
   @Column()
-  RequestQuantity: number;
+  qty: number;
 
+  // Id: string;
+  // ItemCode: string;
+  // ItemName: string;
+  // ItemType: string;
+  // Onhand: number;
+  // SalUnitMsr: string;
+  // qty: number;
+
+  @ManyToOne(()=>SparePart,SparePart=>SparePart.inventory)
+  spareparts:SparePart
 
 }

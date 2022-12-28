@@ -37,6 +37,7 @@ import {File} from "../ServiceCallOther/File";
 import { ResourceAllocationEntity } from "src/ResourceAllocation/resourceAllocation.entity";
 
 import {Resolution} from "../ServiceCallOther/Resolution";
+import { Inventory } from "src/inventory/inventory.entity";
 
 
 
@@ -49,7 +50,7 @@ import {Resolution} from "../ServiceCallOther/Resolution";
 
 
 
-const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle,ResourceAllocationEntity,Resolution,File,HandledBy, ClusterHead, SecretaryDB, SalesAssistantDB, EngineersDB];
+const entities =[User,ServiceCall,SparePart,CustomerEntity,ItemEntity,ServiceTicketEntity ,UsersDropDown,userRolls,Login,ItemMasterEntity,AssetMaster,EquipmetCard,OriginsDropDown,ProblemTypesDropDown,UserType,Solutions,Expences,AssertsReservation,VehicleReservation,Vehicle,ResourceAllocationEntity,Resolution,File,HandledBy, ClusterHead, SecretaryDB, SalesAssistantDB, EngineersDB,Inventory];
 
 
 

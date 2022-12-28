@@ -8,9 +8,10 @@ import { SparePartsController } from './spare-parts.controller';
 import { SparePartsService } from './spare-parts.service';
 import {ServiceCall} from "../service-calls/service-call.entity";
 import { ItemMasterEntity } from 'src/Item/ItemMaster';
+import { Inventory } from 'src/inventory/inventory.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SparePart,ServiceCall,CustomerEntity,ItemEntity,ServiceTicketEntity,ItemMasterEntity])],
+  imports: [TypeOrmModule.forFeature([SparePart,ServiceCall,CustomerEntity,ItemEntity,ServiceTicketEntity,ItemMasterEntity,Inventory])],
   controllers: [SparePartsController],
   providers: [{
     provide:'SpareParts_Service',
