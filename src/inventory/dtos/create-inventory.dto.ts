@@ -1,23 +1,26 @@
-// import { IsInt, IsOptional, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { SparePart } from 'src/spare-parts/spare-part.entity';
 
-// export class CreateinventoryDto {
-//   @IsString()
-//   SPID: string;
+export class CreateinventoryDto {
+  @IsString()
+  SPID: string;
 
-//   @IsString()
-//   ItemDescription: string;
+  @IsString()
+  ItemDescription: string;
 
-//   @IsString()
-//   ItemType: string;
+  @IsString()
+  ItemType: string;
 
-//   @IsOptional()
-//   Remarks: string;
+  @IsString()
+  Remarks: string;
 
-//   @IsInt()
-//   AvailableQuantity:number;
+  @IsNotEmpty()
+  AvailableQuantity:number;
 
-//   @IsOptional()
-//   Attachment: string;
+  @IsNotEmpty()
+  RequestQuantity: number;
 
+  @IsNotEmpty()
+  spareparts:SparePart;
 
-// }
+}

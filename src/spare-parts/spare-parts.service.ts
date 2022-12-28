@@ -14,6 +14,8 @@ import {TicketDto} from "./dtos/ticket.dto";
 
 import { ItemMasterEntity } from 'src/Item/ItemMaster';
 import { UpdateSparePartDto } from './dtos/update-spare-part.dto';
+import { Inventory } from 'src/inventory/inventory.entity';
+import { CreateinventoryDto } from 'src/inventory/dtos/create-inventory.dto';
 
 
 @Injectable()
@@ -33,7 +35,8 @@ export class SparePartsService {
       @InjectRepository(ServiceCall) private readonly serviceRepository:Repository<ServiceCall>,
       @InjectRepository(ServiceTicketEntity) private readonly serviceTicketRepository:Repository<ServiceTicketEntity>,
       @InjectRepository(ItemEntity) private readonly itemEntityRepository:Repository<ItemEntity>,
-      @InjectRepository(ItemMasterEntity) private readonly itemMasterEntityRepository:Repository<ItemMasterEntity>
+      @InjectRepository(ItemMasterEntity) private readonly itemMasterEntityRepository:Repository<ItemMasterEntity>,
+      @InjectRepository(Inventory) private readonly inventoryRepository:Repository<Inventory>
       ){}
 
       async createServiceticket(serviceTicketDto:ServiceTicketDto){
@@ -45,6 +48,16 @@ export class SparePartsService {
               const ST=await this.serviceTicketRepository.save({...ServiceTickets})
           }
       return serviceCall;
+    }
+    async  createInventory(inventory:CreateinventoryDto){
+      const sparepart=this.spareRepository.create(inventory.spareparts)
+      if(sparepart){
+        const spareobj=this.spareRepository.create({SPReqId:inventory.spareparts.SPReqId})
+        inventory.spareparts=spareobj
+        this.inventoryRepository.save(inventory)
+       
+      }
+      return this.spareRepository.save(inventory.spareparts)
     }
 
     find(){
@@ -111,16 +124,26 @@ export class SparePartsService {
         return this.itemEntityRepository.findOne({ItemCode:code});
     }
     async createSparepart(body: CreateSparePartDto) {
-        const ST=await this.serviceTicketRepository.create({...body})
-        for (const SparePart of this.spareRepository.create(body.sparePart)){
-            // console.log(SparePart.itemEntity)
-            console.log(SparePart.ServiceTicketEntity)
-            SparePart.ServiceTicketEntity=ST
-            // const itemDB =await  this.findByItemCode(SparePart.itemEntity.ItemCode)
-            // console.log(itemDB)
-            // SparePart.itemEntity=itemDB;
-         //   await this.itemEntityRepository.create(SparePart.itemEntity)
-            await this.spareRepository.save({...SparePart})
-        }
+
+
+        const ST=await this.serviceTicketRepository.findOne({TicketId:body.TicketId})
+        // console.log(ST);
+        const spare = await this.spareRepository.create(body.sparePart)
+        spare.ServiceTicketEntity=ST
+        console.log(spare);
+        const savedSpare = await this.spareRepository.save(spare)
+        //  console.log(savedSpare);
+        for(const inventory of this.inventoryRepository.create(body.sparePart.inventory)){
+          inventory.spareparts=savedSpare
+          console.log("inventory");
+          console.log(inventory);
+          const Inventory=await this.inventoryRepository.save(inventory)
+        }  
+        
+       
+        
+       
+        return Inventory;
+
     }
 }

@@ -9,17 +9,26 @@ export  class VehicleReservation {
     @Column()
     VehicleRegistrationNo:string
     @Column()
-    RequestedOn:Date
+    VehicleType:string
     @Column()
-    ReservationRemark:string
+    VehicleDescription:string
+    @Column()
+    VehicleCapacity:string
+    @Column()
+    Status:string
+    @Column()
+    PlateNo:string
+    @Column()
+    CreatedOn:Date
+    @Column()
+    Remark:string
+    @Column()
+    RequestedOn:Date
     @Column()
     Duration:string
     @Column()
-    IsReturned:string
-    @Column()
     ReturnedOn:Date
-    @Column()
-    ReturnedRemark:string
+    
     // @OneToOne(() => Vehicle, (vehicle) => vehicle.vehicleReservation) // specify inverse side as a second parameter
     // vehicle: Vehicle
 
