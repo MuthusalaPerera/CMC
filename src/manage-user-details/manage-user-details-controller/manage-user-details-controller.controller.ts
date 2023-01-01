@@ -9,7 +9,14 @@ export class ManageUserDetailsControllerController {
     // get all User Deatils
     @Get('/get')
     async getUserDetails() {
-    return await this.manageUserDetailsService.findManageUserDetails();
+    //return await this.manageUserDetailsService.findManageUserDetails();
+    const manageUserDetails = await this.manageUserDetailsService.findManageUserDetails();
+    if(manageUserDetails.length!==0){
+        return   manageUserDetails
+      }
+      else {
+        return [{message:null}]
+      }
     }
 
     // get by id

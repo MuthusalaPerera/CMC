@@ -9,7 +9,14 @@ export class ClusterHeadControllerController {
     // get all Cluster Head Person
     @Get('/get')
     async getClusterHeadPerson() {
-    return await this.clusterHeadService.findClusterHead();
+    //return await this.clusterHeadService.findClusterHead();
+    const clusterHead = await this.clusterHeadService.findClusterHead();
+    if(clusterHead.length!==0){
+        return   clusterHead
+      }
+      else {
+        return [{message:null}]
+      }
     }
 
     // get by id

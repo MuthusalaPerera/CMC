@@ -9,7 +9,14 @@ export class HandledByControllerController {
     // get all Handled By Person
     @Get('/get')
     async getHandledByPerson() {
-    return await this.handledByService.findHandledBy();
+    //return await this.handledByService.findHandledBy();
+    const handledBy = await this.handledByService.findHandledBy();
+    if(handledBy.length!==0){
+        return   handledBy
+      }
+      else {
+        return [{message:null}]
+      }
     }
 
     // get by id

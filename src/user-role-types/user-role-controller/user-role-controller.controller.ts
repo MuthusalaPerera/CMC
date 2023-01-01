@@ -11,7 +11,14 @@ export class UserRoleControllerController {
   // get all userRole types
   @Get('/get')
    async getUserType() {
-    return await this.userRoleService.findUserType();
+    //return await this.userRoleService.findUserType();
+    const allUserRoles = await this.userRoleService.findUserType();
+    if(allUserRoles.length!==0){
+      return   allUserRoles
+    }
+    else {
+      return [{message:null}]
+    }
   }
 
   // get by id

@@ -9,7 +9,14 @@ export class SalesAssistantControllerController {
     // get all Sales Assistants
     @Get('/get')
     async getSalesAssistantPerson() {
-    return await this.salesAssistantService.findSalesAssistant();
+    //return await this.salesAssistantService.findSalesAssistant();
+    const salesAssistant = await this.salesAssistantService.findSalesAssistant();
+    if(salesAssistant.length!==0){
+        return   salesAssistant
+      }
+      else {
+        return [{message:null}]
+      }
     }
 
     // get by id

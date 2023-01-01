@@ -9,7 +9,14 @@ export class EngineerControllerController {
     // get all Engineers
     @Get('/get')
     async getEngineerPerson() {
-    return await this.engineerService.findEngineers();
+    //return await this.engineerService.findEngineers();
+    const engineer = await this.engineerService.findEngineers();
+    if(engineer.length!==0){
+        return   engineer
+      }
+      else {
+        return [{message:null}]
+      }
     }
 
     // get by id
