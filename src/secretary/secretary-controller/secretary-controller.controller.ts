@@ -9,7 +9,14 @@ export class SecretaryControllerController {
     // get all Secretaries
     @Get('/get')
     async getSecretaryPerson() {
-    return await this.secretaryService.findSecretary();
+    //return await this.secretaryService.findSecretary();
+    const secretary = await this.secretaryService.findSecretary();
+    if(secretary.length!==0){
+        return   secretary
+      }
+      else {
+        return [{message:null}]
+      }
     }
 
     // get by id

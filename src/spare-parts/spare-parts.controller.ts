@@ -14,20 +14,48 @@ export class SparePartsController {
 
     @Get('/FindTicket')
     async listSpareParts() {
-      return await this.sparePartsService.find();
+      //return await this.sparePartsService.find();
+      const findAllTickets = await this.sparePartsService.find();
+      if(findAllTickets.length!==0){
+        return   findAllTickets
+      }
+      else {
+        return [{message:null}]
+      }
       }
   @Get('/FindTicket/:id')
   async listSparePartsId(@Param('id') id: string) {
-    return await this.sparePartsService.findId(id);
+    //return await this.sparePartsService.findId(id);
+    const findTicket = await this.sparePartsService.findId(id);
+    if(findTicket.length!==0){
+      return   findTicket
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Get('/History')
   async History() {
-    return await this.sparePartsService.findHistory();
+    //return await this.sparePartsService.findHistory();
+    const history = await this.sparePartsService.findHistory();
+    if(history.length!==0){
+      return   history
+    }
+    else {
+      return [{message:null}]
+    }
   }
 
   @Get('/Ticket')
   async listTickets() {
-    return await this.sparePartsService.findTicket();
+    //return await this.sparePartsService.findTicket();
+    const ticket = await this.sparePartsService.findTicket();
+    if(ticket.length!==0){
+      return   ticket
+    }
+    else {
+      return [{message:null}]
+    }
   }
     @Post()
     async createServiceTicket(@Body() body: CreateinventoryDto) {

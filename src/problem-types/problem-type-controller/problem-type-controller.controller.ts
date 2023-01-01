@@ -9,7 +9,14 @@ export class ProblemTypeControllerController {
     // get all problem types
     @Get('/get')
     async getProblemType() {
-    return await this.problemTypeService.findProblemType();
+    //return await this.problemTypeService.findProblemType();
+    const problemType = await this.problemTypeService.findProblemType();
+    if(problemType.length!==0){
+        return   problemType
+      }
+      else {
+        return [{message:null}]
+      }
     }
 
     // get by id

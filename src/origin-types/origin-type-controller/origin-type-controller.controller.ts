@@ -10,7 +10,14 @@ export class OriginTypeControllerController {
     // get all origin types
     @Get('/get')
     async getUserType() {
-    return await this.originTypeService.findOriginType();
+    //return await this.originTypeService.findOriginType();
+    const originType = await this.originTypeService.findOriginType();
+    if(originType.length!==0){
+        return   originType
+      }
+      else {
+        return [{message:null}]
+      }
     }
 
     // get by id

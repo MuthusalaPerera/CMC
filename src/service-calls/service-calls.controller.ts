@@ -47,9 +47,16 @@ export class ServiceCallsController {
   constructor(@Inject('ServiceCalls_Service') private readonly serviceCallsService:ServiceCallsService) {}
 
   @UseInterceptors(ClassSerializerInterceptor)
-  @Get()
+  @Get('s')
    async listCustomer() {
-    return await this.serviceCallsService.find();
+    //return await this.serviceCallsService.find();
+    const customers = await this.serviceCallsService.find();
+    if(customers.length!==0){
+      return   customers
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('list')
@@ -57,8 +64,13 @@ export class ServiceCallsController {
     const user = await this.serviceCallsService.findEquipmentCard();
     const catResponses = user.map(user => classToPlain(new SerilizedUserDropdown(user)))
     console.log(catResponses)
-    return catResponses
-
+    //return catResponses
+    if(catResponses.length!==0){
+      return   catResponses
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/itemlist/:id')
@@ -66,19 +78,43 @@ export class ServiceCallsController {
     const item = await this.serviceCallsService.findEquipmentCardItem(id);
     const catResponses = item.map(item => classToPlain(new SerilizedItemDropdown(item)))
     console.log(catResponses)
-    return catResponses
+    //return catResponses
+    if(catResponses.length!==0){
+      return   catResponses
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Get('drop')
   async getDropDown() {
-    return await this.serviceCallsService.findDropdown();
+    const drop =  await this.serviceCallsService.findDropdown();
+    if(drop.length!==0){
+      return   drop
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Get('origindrop')
    async getOriginDropDown() {
-    return await this.serviceCallsService.findOriginDropDown();
+    const originType = await this.serviceCallsService.findOriginDropDown();
+    if(originType.length!==0){
+      return   originType
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Get('problemTypedrop')
    async getproblemTypeDown() {
-    return await this.serviceCallsService.findproblemTypeDropDown();
+    const problemType = await this.serviceCallsService.findproblemTypeDropDown();
+    if(problemType.length!==0){
+      return   problemType
+    }
+    else {
+      return [{message:null}]
+    }
   }
   // @Get('/:id')
   // async listCustomerId(@Param('id') id: string) {
@@ -86,15 +122,33 @@ export class ServiceCallsController {
   // }
   @Get('service')
   async listServiceCall() {
-    return await this.serviceCallsService.findS();
+    const allServiceCalls = await this.serviceCallsService.findS();
+    if(allServiceCalls.length!==0){
+      return   allServiceCalls
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Get('service/:id')
   async listServiceCallsById(@Param('id')id: string) {
-    return await this.serviceCallsService.findServiceByIdNew(parseInt(id));
+    const serviceCallsById = await this.serviceCallsService.findServiceByIdNew(parseInt(id));
+    if(serviceCallsById.length!==0){
+      return   serviceCallsById
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Get('service-documents')
   async listServiceCallsDocuments() {
-    return await this.serviceCallsService.listServiceCallsDocuments();
+    const serviceDocuments = await this.serviceCallsService.listServiceCallsDocuments();
+    if(serviceDocuments.length!==0){
+      return   serviceDocuments
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Get('a/')
   async index(
@@ -163,7 +217,13 @@ export class ServiceCallsController {
   }
   @Get('/getSolutions')
   async getSolutions() {
-    return await this.serviceCallsService.getSolutions();
+    const getAllSolutions = await this.serviceCallsService.getSolutions();
+    if(getAllSolutions.length!==0){
+      return   getAllSolutions
+    }
+    else {
+      return [{message:null}]
+    }
   }
   @Get('/getFiles/:id')
   async getFiles(@Param('id')id: string) {
